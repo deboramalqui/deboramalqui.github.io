@@ -485,10 +485,14 @@ a.d-item,a.d-li{text-decoration:none;color:inherit}
 [dir="rtl"] .d-menu .d-kbd{margin-left:0;margin-right:auto}
 [dir="rtl"] .d-hold__ring{right:auto;left:10px}
 [dir="rtl"] .d-hold__pop{left:auto;right:0}
-[dir="rtl"] .d-zoombtn{right:auto;left:var(--d-2)}
 [dir="rtl"] .d-lightbox__bar{padding:0 var(--d-4) 0 var(--d-2)}
 /* La mecánica de deslizar, arrastrar y desplazar capturas es siempre de izquierda a derecha; el texto no. */
 .d-gal,.d-gal__view,.d-ba,.d-lightbox__scroll{direction:ltr}
 [dir="rtl"] .d-gal__item figcaption,[dir="rtl"] .d-hint,[dir="rtl"] .d-ba__ends{direction:rtl}
 [dir="rtl"] *{letter-spacing:normal!important}
 [dir="rtl"] .d-table th,[dir="rtl"] .d-badge-attn,[dir="rtl"] .d-label-m,[dir="rtl"] .s-meta .k,[dir="rtl"] .s-note{text-transform:none}
+
+/* galerías de capturas apaisadas: alto parejo, sin huecos entre diapositivas de distinta proporción */
+.d-gal--fit .d-gal__item img{width:100%;height:min(56vw,520px);object-fit:contain;object-position:left top}
+.d-gal.is-static .d-gal__bar,.d-gal.is-static .d-hint{display:none}
+[dir="rtl"] .d-item{text-align:right}

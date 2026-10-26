@@ -25,6 +25,7 @@
     if(prev)prev.addEventListener('click',function(){go(idx()-1)});if(next)next.addEventListener('click',function(){go(idx()+1)});
     v.addEventListener('keydown',function(e){if(e.key==='ArrowRight'){go(idx()+1);e.preventDefault()}else if(e.key==='ArrowLeft'){go(idx()-1);e.preventDefault()}});
     upd();
+    function fit(){g.classList.toggle('is-static',v.scrollWidth<=v.clientWidth+2)}fit();window.addEventListener('resize',fit);window.addEventListener('load',fit);
   });
 
   /* ---------- ampliar: tocar, doble toque, pellizcar, atrás ---------- */

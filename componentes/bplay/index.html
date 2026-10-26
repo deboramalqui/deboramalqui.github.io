@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="en" class="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bplay — Sign-up & onboarding</title>
+<link rel="stylesheet" href="estilos.css">
+<style>
+  /* Bplay dark theme on top of the M2 base. Brand green from the 2022 prototype; the
+     dark palette follows the M2 dark-theme guidance (#121212 surfaces, desaturated primary). */
+  :root{
+    --primary:#4ae08a; --on-primary:#00391a; --secondary:#ffd166; --on-secondary:#3a2a00;
+    --bg:#121212; --surface:#121212; --surface-sw:#2a2a2a; --error:#cf6679; --on-error:#000;
+    --ink:255,255,255; --divider:rgba(255,255,255,.12); --shadow:0,0,0;
+    --snack-act:#4ae08a;
+  }
+  body{background:#0e0e0e}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+  .hero{padding:72px 0 40px}
+  .hero .over{color:var(--primary)}
+  .hero h1{font:300 48px/56px var(--font);letter-spacing:0;margin:12px 0 16px;max-width:820px}
+  .hero .lead{max-width:720px}
+  .meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px 24px;margin-top:32px;padding-top:24px;border-top:1px solid var(--divider)}
+  .meta dt{font:400 10px/16px var(--font);letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.6)}
+  .meta dd{margin:2px 0 0;font:500 14px/20px var(--font);letter-spacing:.1px}
+  section{padding:48px 0;border-top:1px solid var(--divider)}
+  .sec-h{margin-bottom:24px}
+  .sec-h .over{color:var(--primary)}
+  .sec-h h2{font:400 34px/40px var(--font);letter-spacing:.25px;margin:4px 0 8px}
+  .sec-h p{max-width:680px;color:rgba(255,255,255,.6)}
+  .grid{display:grid;gap:24px}
+  .g2{grid-template-columns:1fr 1fr}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  figure{margin:0}
+  figure img{display:block;width:100%;border-radius:4px;background:#1e1e1e}
+  figcaption{margin-top:8px;font:400 12px/16px var(--font);letter-spacing:.4px;color:rgba(255,255,255,.6)}
+  .ba{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}
+  .ba .tag{display:inline-block;margin-bottom:8px;font:500 10px/16px var(--font);letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.6)}
+  .ba .tag.after{color:var(--primary)}
+  /* component sheets */
+  .sheet{background:#1e1e1e;border-radius:4px;padding:24px;display:flex;flex-wrap:wrap;gap:24px;align-items:center}
+  .sheet .lbl{flex-basis:100%;font:400 10px/16px var(--font);letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.6);margin:-4px 0 -8px}
+  .col{display:flex;flex-direction:column;gap:12px;min-width:220px;flex:1}
+  .row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+  .swatch{display:flex;flex-direction:column;gap:0;border-radius:4px;overflow:hidden;min-width:150px;flex:1}
+  .swatch > div{padding:12px 12px;font:400 12px/16px var(--font);letter-spacing:.4px}
+  .sheet .tf--outlined > span{background:#1e1e1e}
+  .note{color:rgba(255,255,255,.6);font:400 14px/20px var(--font);letter-spacing:.25px;max-width:680px}
+  /* phone frames */
+  .phone{width:360px;max-width:100%;height:720px;background:var(--surface);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;position:relative;box-shadow:0 8px 10px -5px rgba(0,0,0,.2),0 16px 24px 2px rgba(0,0,0,.14),0 6px 30px 5px rgba(0,0,0,.12)}
+  .phone .status{height:24px;display:flex;justify-content:space-between;align-items:center;padding:0 16px;font:500 12px/16px var(--font);color:rgba(255,255,255,.87);background:#1e1e1e}
+  .phone .content{flex:1;padding:16px;overflow:hidden;display:flex;flex-direction:column;gap:16px}
+  .phone .bottom{padding:16px;display:flex;gap:8px;justify-content:flex-end}
+  .logo{font:700 22px/24px var(--font);letter-spacing:-.5px;color:var(--primary)}
+  .logo b{color:#fff;font-weight:300}
+  .stepper{display:flex;align-items:center;gap:8px}
+  .stepper i{width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,.24);display:inline-flex;align-items:center;justify-content:center;font:500 12px/16px var(--font);color:#fff}
+  .stepper i.on{background:var(--primary);color:var(--on-primary)}
+  .stepper em{flex:1;height:1px;background:rgba(255,255,255,.24)}
+  .stepper em.on{background:var(--primary)}
+  .tile{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;height:88px;border-radius:4px;background:#1e1e1e;color:rgba(255,255,255,.87);font:500 14px/20px var(--font);letter-spacing:.1px;border:1px solid var(--divider)}
+  .tile.is-selected{border-color:var(--primary);background:color-mix(in srgb,var(--primary) 12%,#1e1e1e);color:var(--primary)}
+  .tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+  .games{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+  .game{aspect-ratio:3/2;border-radius:4px;background:linear-gradient(135deg,#1f3a2b,#143d5a);display:flex;align-items:flex-end;padding:8px;font:500 12px/16px var(--font);color:#fff;position:relative;overflow:hidden}
+  .game.live::before{content:"LIVE";position:absolute;top:8px;left:8px;font:500 10px/16px var(--font);letter-spacing:1.5px;padding:0 6px;border-radius:2px;background:var(--error);color:#000}
+  .coin{width:72px;height:72px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#ffe08a,#f2b705 60%,#b8860b);display:flex;align-items:center;justify-content:center;font:700 28px/1 var(--font);color:#7a4b00;margin:8px auto}
+  .center{text-align:center}
+  @media(max-width:860px){.g2,.g3,.ba{grid-template-columns:1fr}.hero h1{font-size:34px;line-height:40px}.sec-h h2{font-size:24px;line-height:32px}.phone{height:auto;min-height:640px}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="hero"><div class="wrap">
+  <div class="over">Case study · UX/UI design · 2022</div>
+  <h1>Bplay: a sign-up that asks three questions and sets the table before you sit down</h1>
+  <p class="lead body1 med">Onboarding redesign for an online casino and sports-betting platform in Argentina. Interactive prototype and the final screens.</p>
+  <dl class="meta">
+    <div><dt>Client</dt><dd>Bplay (online casino, Argentina)</dd></div>
+    <div><dt>Role</dt><dd>UX/UI Designer</dd></div>
+    <div><dt>When</dt><dd>2022</dd></div>
+    <div><dt>Scope</dt><dd>Sign-up &amp; onboarding, IA, interactive prototype</dd></div>
+  </dl>
+</div></header>
+
+<main id="main">
+
+<section><div class="wrap">
+  <div class="sec-h"><div class="over">01 — The flow</div><h2>Six screens, one promise</h2>
+  <p>The sign-up collects only what the platform needs to personalize the lobby, and uses the wait after registration to say the things a licensed operator must say.</p></div>
+  <div class="grid g3">
+    <figure><img src="img/before-1-landing.jpg" alt="Landing: Jugá donde quieras, with Registrarse and Iniciar sesión"><figcaption>1 · Landing: “Play wherever you are”.</figcaption></figure>
+    <figure><img src="img/before-2-location.jpg" alt="Where will you play from: CABA or Santa Fe"><figcaption>2 · Province (the licence is per province).</figcaption></figure>
+    <figure><img src="img/before-3-games.jpg" alt="What do you like to play: slots, table games, others"><figcaption>3 · Game preferences: slots, live or virtual tables.</figcaption></figure>
+    <figure><img src="img/before-4-username.jpg" alt="Which username do you prefer: nickname and password"><figcaption>4 · Nickname, password, age and terms.</figcaption></figure>
+    <figure><img src="img/before-5-loading.jpg" alt="We are preparing the room for you, progress bar"><figcaption>5 · “Preparing your room”: responsible-gaming messages while it loads.</figcaption></figure>
+    <figure><img src="img/before-6-bonus.jpg" alt="Ready: we give you $500 to try our exclusive games"><figcaption>6 · Welcome bonus and payment methods, then the personalized lobby.</figcaption></figure>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="sec-h"><div class="over">02 — Foundation</div><h2>Dark theme by the book</h2>
+  <p>The first screens used brand green on near-black with ad-hoc spacing. The final design puts them on a dark theme: #121212 surfaces, elevation shown with white overlays, a desaturated primary that passes 4.5:1 on dark surfaces, and text at 87 / 60 / 38 % emphasis.</p></div>
+
+  <div class="sheet">
+    <div class="lbl">Color</div>
+    <div class="swatch"><div style="background:#4ae08a;color:#00391a">Primary #4AE08A</div><div style="background:#00391a;color:#4ae08a">On primary #00391A</div></div>
+    <div class="swatch"><div style="background:#ffd166;color:#3a2a00">Secondary #FFD166</div><div style="background:#3a2a00;color:#ffd166">On secondary</div></div>
+    <div class="swatch"><div style="background:#121212;color:rgba(255,255,255,.87);border:1px solid var(--divider)">Surface #121212</div><div style="background:#1e1e1e;color:rgba(255,255,255,.87)">Surface +01dp (5 % white)</div><div style="background:#2a2a2a;color:rgba(255,255,255,.87)">Surface +08dp (12 % white)</div></div>
+    <div class="swatch"><div style="background:#cf6679;color:#000">Error #CF6679</div><div style="background:#121212;color:rgba(255,255,255,.87);border:1px solid var(--divider)">Text 87 %</div><div style="background:#121212;color:rgba(255,255,255,.6);border:1px solid var(--divider)">Text 60 %</div><div style="background:#121212;color:rgba(255,255,255,.38);border:1px solid var(--divider)">Text 38 %</div></div>
+  </div>
+
+  <div class="sheet" style="margin-top:24px">
+    <div class="lbl">Type scale · Roboto</div>
+    <div class="col">
+      <div class="h4">Headline 4 · 34</div>
+      <div class="h5">Headline 5 · 24</div>
+      <div class="h6">Headline 6 · 20 medium</div>
+      <div class="sub1">Subtitle 1 · 16</div>
+      <div class="body1">Body 1 · 16 — Recordá que contamos con el Programa de Autoexclusión.</div>
+      <div class="body2 med">Body 2 · 14 — Plataforma segura y legal. Podemos pedirte validar tu identidad.</div>
+      <div class="btn-t">Button · 14 medium caps</div>
+      <div class="cap med">Caption · 12</div>
+      <div class="over med">Overline · 10</div>
+    </div>
+  </div>
+
+  <div class="sheet" style="margin-top:24px">
+    <div class="lbl">Elevation · white overlay + shadow</div>
+    <div class="row">
+      <div class="card e0" style="width:120px;height:72px;display:flex;align-items:center;justify-content:center" ><span class="cap med">00dp</span></div>
+      <div class="card e1" style="width:120px;height:72px;display:flex;align-items:center;justify-content:center"><span class="cap med">01dp</span></div>
+      <div class="card e2" style="width:120px;height:72px;display:flex;align-items:center;justify-content:center"><span class="cap med">02dp</span></div>
+      <div class="card e4" style="width:120px;height:72px;display:flex;align-items:center;justify-content:center"><span class="cap med">04dp</span></div>
+      <div class="card e8" style="width:120px;height:72px;display:flex;align-items:center;justify-content:center"><span class="cap med">08dp</span></div>
+      <div class="card e16" style="width:120px;height:72px;display:flex;align-items:center;justify-content:center"><span class="cap med">16dp</span></div>
+      <div class="card e24" style="width:120px;height:72px;display:flex;align-items:center;justify-content:center"><span class="cap med">24dp</span></div>
+    </div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="sec-h"><div class="over">03 — Components</div><h2>Every component, every state</h2>
+  <p>Each component follows one spec: 36dp buttons with 4dp corners, 56dp text fields with floating labels, 48dp touch targets on selection controls, state layers at hover 4 % / focus 12 % / pressed 10 %. Hover, tab through and click them.</p></div>
+
+  <div class="sheet">
+    <div class="lbl">Buttons</div>
+    <div class="row">
+      <button class="btn btn--contained sl">Registrarse</button>
+      <button class="btn btn--contained sl is-hover">Hover</button>
+      <button class="btn btn--contained sl is-focus">Focus</button>
+      <button class="btn btn--contained sl is-press">Pressed</button>
+      <button class="btn btn--contained" disabled>Disabled</button>
+    </div>
+    <div class="row">
+      <button class="btn btn--outlined sl">Iniciar sesión</button>
+      <button class="btn btn--text sl">Conocé el bono</button>
+      <button class="btn btn--contained sl"><svg class="ic" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>Jugar</button>
+      <button class="fab fab--ext sl"><svg class="ic" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>Depositar</button>
+      <button class="fab sl" aria-label="Depositar"><svg class="ic" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+    </div>
+  </div>
+
+  <div class="sheet" style="margin-top:24px">
+    <div class="lbl">Text fields · filled and outlined</div>
+    <div class="col">
+      <label class="tf tf--filled"><input placeholder=" " value="DidiZ22"><span>Nickname</span></label>
+      <div class="helper"><span>Entre 4 y 16 caracteres</span><span>7/16</span></div>
+      <label class="tf tf--filled"><input type="password" placeholder=" " value="••••••••"><span>Contraseña</span><svg class="ic trail" viewBox="0 0 24 24"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></label>
+      <div class="helper"><span>Mínimo 8 caracteres, 1 número y 1 mayúscula</span></div>
+    </div>
+    <div class="col">
+      <label class="tf tf--outlined"><input placeholder=" "><span>Email</span></label>
+      <label class="tf tf--outlined is-error is-filled"><input placeholder=" " value="didi@mail" aria-invalid="true" aria-describedby="e1"><span>Email</span></label>
+      <div class="helper is-error" id="e1"><span>Ingresá un email válido</span></div>
+      <label class="tf tf--outlined is-disabled"><input placeholder=" " value="Santa Fe" disabled><span>Provincia</span></label>
+    </div>
+  </div>
+
+  <div class="sheet" style="margin-top:24px">
+    <div class="lbl">Selection controls</div>
+    <div class="col">
+      <label class="sc"><input type="checkbox" checked><span class="box"><i></i></span>Soy mayor de 18 años</label>
+      <label class="sc"><input type="checkbox"><span class="box"><i></i></span>Acepto los términos y la política de privacidad</label>
+      <label class="sc"><input type="checkbox" disabled><span class="box"><i></i></span>Disabled</label>
+    </div>
+    <div class="col">
+      <label class="sc"><input type="radio" name="prov" checked><span class="rad"><i></i></span>Ciudad de Buenos Aires</label>
+      <label class="sc"><input type="radio" name="prov"><span class="rad"><i></i></span>Santa Fe</label>
+      <label class="sc"><input type="radio" name="prov" disabled><span class="rad"><i></i></span>Otra provincia (próximamente)</label>
+    </div>
+    <div class="col">
+      <label class="sc"><input type="checkbox" role="switch" checked><span class="trk"><i></i></span>Recibir promociones por email</label>
+      <label class="sc"><input type="checkbox" role="switch"><span class="trk"><i></i></span>Límite de depósito semanal</label>
+    </div>
+  </div>
+
+  <div class="sheet" style="margin-top:24px">
+    <div class="lbl">Chips · filter and choice</div>
+    <div class="row">
+      <button class="chip chip--filter is-selected sl"><svg class="ic" viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>Slots</button>
+      <button class="chip chip--filter is-selected sl"><svg class="ic" viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg>Ruleta</button>
+      <button class="chip chip--filter sl">Black Jack</button>
+      <button class="chip chip--filter sl">Póker</button>
+      <button class="chip chip--filter sl">Baccarat</button>
+      <button class="chip chip--outlined sl">Casino en vivo</button>
+      <button class="chip chip--outlined sl">Virtuales</button>
+    </div>
+  </div>
+
+  <div class="sheet" style="margin-top:24px">
+    <div class="lbl">Cards, lists, menu</div>
+    <div class="col" style="max-width:300px">
+      <div class="card e1">
+        <div class="game live card__media" style="aspect-ratio:16/9;background:linear-gradient(135deg,#3b1a4a,#141e3d)">Real Roulette con Laura</div>
+        <div class="card__body"><div class="h6">Real Roulette</div><div class="body2 med">Casino en vivo · mesa desde $100</div></div>
+        <div class="card__actions"><button class="btn btn--text sl">Jugar</button><button class="btn btn--text sl">Favorito</button></div>
+      </div>
+    </div>
+    <div class="col" style="max-width:300px">
+      <ul class="list card e1">
+        <li class="two sl"><span class="lead"><svg class="ic" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/></svg></span><span class="txt"><b>Mercado Pago</b><span>Acreditación inmediata</span></span></li>
+        <li class="two sl"><span class="lead"><svg class="ic" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 15h4"/></svg></span><span class="txt"><b>Tarjeta de débito</b><span>Visa, Mastercard, Cabal</span></span></li>
+        <li class="two sl"><span class="lead"><svg class="ic" viewBox="0 0 24 24"><path d="M4 7h16v10H4z"/><path d="M8 12h8"/></svg></span><span class="txt"><b>Rapipago / Pago Fácil</b><span>Hasta 24 h</span></span></li>
+      </ul>
+    </div>
+    <div class="col" style="max-width:220px">
+      <ul class="menu card e8">
+        <li class="sl">Mi cuenta</li>
+        <li class="sl is-selected">Depositar</li>
+        <li class="sl">Retirar</li>
+        <li class="sl">Autoexclusión</li>
+        <li class="sl">Salir</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sheet" style="margin-top:24px">
+    <div class="lbl">Progress, dialog, snackbar</div>
+    <div class="col">
+      <div class="lin" style="--v:60%"><i></i></div>
+      <div class="lin ind"><i></i></div>
+      <svg class="cir" viewBox="0 0 48 48" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"><circle class="tr" cx="24" cy="24" r="18"/><circle class="vl" cx="24" cy="24" r="18" style="stroke-dashoffset:45"/></svg>
+    </div>
+    <div class="col">
+      <div class="dialog e24" role="dialog" aria-labelledby="d1">
+        <div class="dialog__title" id="d1">¿Activar límite de depósito?</div>
+        <div class="dialog__text">Podés fijar un máximo semanal. Bajarlo aplica al instante; subirlo tarda 24 horas.</div>
+        <div class="dialog__act"><button class="btn btn--text sl">Ahora no</button><button class="btn btn--text sl">Activar</button></div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="snack e6" role="status">Bono de $500 acreditado<button class="btn btn--text sl">Ver</button></div>
+    </div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="sec-h"><div class="over">04 — Before / after</div><h2>The same six steps, final design</h2>
+  <p>Mobile first (the first prototype was desktop). A stepper keeps the three questions in one place, selection controls replace custom pills, the loading screen becomes a determinate progress with the mandatory messages as a list, and the bonus is a snackbar plus a card, not a splash page.</p></div>
+
+  <div class="ba">
+    <div><span class="tag">First prototype</span><figure><img src="img/before-2-location.jpg" alt="First prototype: province screen"></figure></div>
+    <div><span class="tag after">Final design</span>
+      <div class="phone">
+        <div class="status"><span>9:41</span><span>●●● ▮</span></div>
+        <div class="content">
+          <div class="logo">b<b>play</b></div>
+          <div class="stepper"><i class="on">1</i><em></em><i>2</i><em></em><i>3</i></div>
+          <div class="h5">¿Desde dónde vas a jugar?</div>
+          <p class="body2 med">La licencia es por provincia. Por ahora operamos en dos.</p>
+          <div>
+            <label class="sc"><input type="radio" name="p2" checked><span class="rad"><i></i></span>Ciudad de Buenos Aires</label><br>
+            <label class="sc"><input type="radio" name="p2"><span class="rad"><i></i></span>Santa Fe</label>
+          </div>
+          <label class="tf tf--outlined"><input placeholder=" "><span>¿Otra provincia? Contanos cuál</span></label>
+          <p class="cap med">Te avisamos por email cuando abramos ahí.</p>
+        </div>
+        <div class="bottom"><button class="btn btn--text sl">Atrás</button><button class="btn btn--contained sl">Siguiente</button></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ba" style="margin-top:40px">
+    <div><span class="tag">First prototype</span><figure><img src="img/before-3-games.jpg" alt="First prototype: game preference screen"></figure></div>
+    <div><span class="tag after">Final design</span>
+      <div class="phone">
+        <div class="status"><span>9:41</span><span>●●● ▮</span></div>
+        <div class="content">
+          <div class="logo">b<b>play</b></div>
+          <div class="stepper"><i class="on">1</i><em class="on"></em><i class="on">2</i><em></em><i>3</i></div>
+          <div class="h5">¿A qué te gusta jugar?</div>
+          <p class="body2 med">Elegí todo lo que quieras. Arma tu lobby.</p>
+          <div class="tiles">
+            <div class="tile is-selected sl"><svg class="ic" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 12h8M12 8v8"/></svg>Slots</div>
+            <div class="tile sl"><svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/></svg>Paño</div>
+            <div class="tile sl"><svg class="ic" viewBox="0 0 24 24"><path d="M4 12h16M12 4v16"/></svg>Deportes</div>
+          </div>
+          <div class="over med">Casino en vivo</div>
+          <div class="row"><button class="chip chip--filter is-selected sl">Ruleta</button><button class="chip chip--filter sl">Black Jack</button></div>
+          <div class="over med">Virtuales</div>
+          <div class="row"><button class="chip chip--filter sl">Dados</button><button class="chip chip--filter sl">Póker</button><button class="chip chip--filter is-selected sl">Ruleta</button><button class="chip chip--filter sl">Baccarat</button></div>
+        </div>
+        <div class="bottom"><button class="btn btn--text sl">Atrás</button><button class="btn btn--contained sl">Siguiente</button></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ba" style="margin-top:40px">
+    <div><span class="tag">First prototype</span><figure><img src="img/before-5-loading.jpg" alt="First prototype: loading screen"></figure></div>
+    <div><span class="tag after">Final design</span>
+      <div class="phone">
+        <div class="status"><span>9:41</span><span>●●● ▮</span></div>
+        <div class="content center">
+          <div class="logo">b<b>play</b></div>
+          <div class="coin">★</div>
+          <div class="h5">Estamos preparando la sala para vos</div>
+          <div class="lin" style="--v:64%"><i></i></div>
+          <p class="cap med">Paso 3 de 4 · verificando tu edad</p>
+          <ul class="list" style="text-align:left">
+            <li><span class="lead"><svg class="ic" viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/></svg></span><span class="txt"><b>Plataforma segura y legal</b><span>Podemos pedirte validar tu identidad.</span></span></li>
+            <li><span class="lead"><svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2"/></svg></span><span class="txt"><b>Programa de autoexclusión</b><span>Podés pausar tu cuenta cuando quieras.</span></span></li>
+          </ul>
+        </div>
+        <div class="snack e6" style="margin:0 8px 8px" role="status">Bono de bienvenida: $500<button class="btn btn--text sl">Ver</button></div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="sec-h"><div class="over">05 — Accessibility</div><h2>Accessibility, built in</h2></div>
+  <div class="grid g3">
+    <div class="card card--outlined card__body"><div class="h6">Contrast</div><p class="body2 med">Primary on #121212 is 11.0:1; body text at 87 % white is 14.2:1; 60 % white is 7.2:1. The old brand green on black passed, the thin grey captions did not.</p></div>
+    <div class="card card--outlined card__body"><div class="h6">Targets and focus</div><p class="body2 med">Every control sits in a 48dp target. Focus is visible as a 12 % state layer, keyboard order follows the stepper, and the dialog traps focus.</p></div>
+    <div class="card card--outlined card__body"><div class="h6">Motion</div><p class="body2 med">Ripples and the indeterminate bar stop under <code>prefers-reduced-motion</code>. The loading screen is determinate, so a screen reader can announce progress.</p></div>
+  </div>
+</div></section>
+
+</main>
+
+<footer><div class="wrap" style="padding:40px 24px 64px"><p class="cap med">Bplay · UX/UI design, 2022 · Working files; no production data shown.</p></div></footer>
+
+<script>
+  // ripple on .sl hosts (pointer only; keyboard uses the state layer)
+  document.addEventListener('pointerdown',e=>{
+    const h=e.target.closest('.sl'); if(!h) return;
+    const r=h.getBoundingClientRect(), d=Math.max(r.width,r.height)*2;
+    const s=document.createElement('span'); s.className='ripple';
+    s.style.cssText=`width:${d}px;height:${d}px;left:${e.clientX-r.left-d/2}px;top:${e.clientY-r.top-d/2}px`;
+    h.appendChild(s); s.addEventListener('animationend',()=>s.remove());
+  });
+  // tiles toggle
+  document.querySelectorAll('.tile').forEach(t=>{t.tabIndex=0;t.setAttribute('role','checkbox');t.setAttribute('aria-checked',t.classList.contains('is-selected'));
+    const f=()=>{t.classList.toggle('is-selected');t.setAttribute('aria-checked',t.classList.contains('is-selected'))};
+    t.addEventListener('click',f);t.addEventListener('keydown',e=>{if(e.key===' '||e.key==='Enter'){e.preventDefault();f()}})});
+  document.querySelectorAll('.chip--filter').forEach(c=>{c.setAttribute('aria-pressed',c.classList.contains('is-selected'));c.addEventListener('click',()=>{c.classList.toggle('is-selected');c.setAttribute('aria-pressed',c.classList.contains('is-selected'))})});
+</script>
+</body>
+</html>

@@ -104,3 +104,33 @@ a.d-item{text-decoration:none}
 .s-fig--sq{max-width:520px}
 a.d-raili{text-decoration:none}
 [dir="rtl"] .d-item__t{text-align:left}
+
+/* diagrama de trading en HTML */
+.s-flow{display:grid;gap:12px;margin:24px 0}
+.s-flow__row{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));list-style:none;margin:0;padding:0}
+.s-art .s-flow__row{padding:0;max-width:none}
+.s-flow__box{background:var(--d-container);border-left:3px solid var(--c,var(--d-dato));padding:14px 16px;margin:0}
+[dir="rtl"] .s-flow__box{border-left:0;border-right:3px solid var(--c,var(--d-dato))}
+.s-art .s-flow__box{margin:0}
+.s-flow__box b{display:block;font:600 .9375rem/1.4 var(--d-sans);margin-bottom:6px}
+.s-flow__box p{margin:0;font:400 .8125rem/1.5 var(--d-mono);color:var(--d-on-var);max-width:none}
+.s-flow__box--human{background:var(--d-accion-cont,var(--d-container))}
+.s-flow__box--human p{color:var(--d-on)}
+.s-flow__note{font:400 .75rem/1.5 var(--d-mono);color:var(--d-on-var);margin:0;max-width:none}
+/* fechas sin cortes, tarjetas parejas, chips largos */
+td.d-n{white-space:nowrap}
+.s-two--even{align-items:stretch}.s-two--even .d-card{margin-bottom:8px}
+.d-chip-data{max-width:100%;height:auto;min-height:28px;padding-block:4px;line-height:1.4}
+/* celular: la lista de casos y las tablas se apilan */
+@media(max-width:600px){
+ .s-list .d-item{grid-template-columns:auto 1fr}
+ .s-list .d-item__t{grid-column:2;margin-top:2px}
+ .s-tablewrap{overflow:visible}
+ .s-tablewrap .d-table,.s-about .d-table{min-width:0}
+ .s-tablewrap .d-table thead{display:none}
+ .s-tablewrap .d-table tr{display:block;padding:12px 0;border-bottom:1px solid var(--d-outline-var)}
+ .s-tablewrap .d-table td{display:block;border:0;padding:3px 0;white-space:normal}
+ .s-tablewrap .d-table td[data-l]::before{content:attr(data-l);display:block;font:500 .6875rem/1rem var(--d-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--d-dato);margin-top:6px}
+ [dir="rtl"] .s-tablewrap .d-table td{text-align:right}
+}
+@media(min-width:1000px){.s-flow__row:not(.s-flow__row--sup){grid-template-columns:repeat(5,minmax(0,1fr))}}
