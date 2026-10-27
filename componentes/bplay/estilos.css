@@ -1,4 +1,4 @@
-/* Material Design 2 component base — tokens by theme, components by spec.
+/* Component base — tokens by theme, components by spec.
    Spec numbers: 8dp grid, 4dp radius, state layers hover 4 / focus 12 / press 10 / selected 8 / drag 16 %. */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
 

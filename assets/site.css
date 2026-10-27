@@ -176,6 +176,8 @@ td.d-n{white-space:nowrap}
 /* componentes incrustados */
 .s-embed{display:block;width:100%;height:var(--h,1500px);border:1px solid var(--d-outline-var);background:#121212;margin:12px 0 24px}
 @media(max-width:600px){.s-embed{height:var(--hm,2300px)}}
+.s-embed--proto{background:transparent;border:0;margin:8px 0 28px}
+.s-embed--proto{color-scheme:dark}
 
 /* Hoja de reconocimientos: baldosa que abre una hoja modal (sheet) con la lista */
 button.d-tile{font:inherit;color:inherit;text-align:start;border:0;border-top:2px solid var(--d-dato);cursor:pointer;position:relative;width:100%}

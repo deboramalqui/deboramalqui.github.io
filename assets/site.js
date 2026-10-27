@@ -73,3 +73,33 @@
     if(f.contentDocument&&f.contentDocument.readyState==='complete')fit();
   });
 })();
+
+/* Componentes nativos: cada grupo de componentes vive en un shadow root con su propia hoja de estilos, para que no choque con la de la web.
+   Se pueden tocar: ondas en los botones, chips, pestañas, calendario y casillas funcionan como en la app. */
+(function(){
+  var hosts=[].slice.call(document.querySelectorAll('.cmp-host'));
+  if(!hosts.length)return;
+  var fonts={};
+  hosts.forEach(function(h){
+    var f=h.getAttribute('data-fonts');
+    if(f&&!fonts[f]){fonts[f]=1;var l=document.createElement('link');l.rel='stylesheet';l.href='https://fonts.googleapis.com/css2?family='+f+'&display=swap';document.head.appendChild(l)}
+    var t=h.querySelector('template');if(!t||h.shadowRoot)return;
+    var r=h.attachShadow({mode:'open'}),l2=document.createElement('link');l2.rel='stylesheet';l2.href=h.getAttribute('data-css');r.appendChild(l2);r.appendChild(t.content.cloneNode(true));
+    h.setAttribute('dir','ltr');
+    r.addEventListener('pointerdown',function(e){
+      var n=e.target.closest&&e.target.closest('.sl');if(!n||n.disabled)return;
+      var b=n.getBoundingClientRect(),d=Math.max(b.width,b.height)*2,s=document.createElement('span');
+      s.className='ripple';s.style.cssText='width:'+d+'px;height:'+d+'px;left:'+(e.clientX-b.left-d/2)+'px;top:'+(e.clientY-b.top-d/2)+'px';
+      n.appendChild(s);s.addEventListener('animationend',function(){s.remove()});
+    });
+    r.addEventListener('click',function(e){
+      var c=e.target.closest&&e.target.closest('.chip--filter');
+      if(c){c.classList.toggle('is-selected');c.setAttribute('aria-pressed',c.classList.contains('is-selected'));return}
+      var tb=e.target.closest&&e.target.closest('.tab');
+      if(tb){var g=tb.parentNode;[].forEach.call(g.querySelectorAll('.tab'),function(x){x.setAttribute('aria-selected','false')});tb.setAttribute('aria-selected','true');return}
+      var cal=e.target.closest&&e.target.closest('.cal b.dot,.cal b.on');
+      if(cal){var p=cal.parentNode;[].forEach.call(p.querySelectorAll('b.on'),function(x){x.classList.remove('on');x.classList.add('dot')});cal.classList.remove('dot');cal.classList.add('on');return}
+      if(e.target.closest&&e.target.closest('a[href="#"]'))e.preventDefault();
+    });
+  });
+})();
