@@ -176,3 +176,34 @@ td.d-n{white-space:nowrap}
 /* componentes incrustados */
 .s-embed{display:block;width:100%;height:var(--h,1500px);border:1px solid var(--d-outline-var);background:#121212;margin:12px 0 24px}
 @media(max-width:600px){.s-embed{height:var(--hm,2300px)}}
+
+/* Hoja de reconocimientos: baldosa que abre una hoja modal (sheet) con la lista */
+button.d-tile{font:inherit;color:inherit;text-align:start;border:0;border-top:2px solid var(--d-dato);cursor:pointer;position:relative;width:100%}
+.s-rtile__go{position:absolute;top:var(--d-3);right:var(--d-3);width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:var(--d-high);color:var(--d-on-var);font-size:.875rem;line-height:1}
+
+.s-sheet{border:0;padding:0;background:var(--d-high);color:var(--d-on);border-radius:28px;width:min(560px,calc(100vw - 32px));max-height:min(82vh,700px);box-shadow:var(--d-e3);overflow:hidden;margin:auto}
+.s-sheet[open]{display:flex;flex-direction:column;animation:s-sheet-in .24s cubic-bezier(.2,0,0,1)}
+.s-sheet::backdrop{background:rgba(5,10,20,.55)}
+.s-sheet__grab{display:none;width:32px;height:4px;border-radius:2px;background:var(--d-outline);margin:10px auto 0;flex:none;touch-action:none}
+.s-sheet__bar{display:flex;align-items:center;gap:var(--d-3);padding:var(--d-4) var(--d-4) var(--d-3) var(--d-5);flex:none}
+.s-sheet__bar h2{margin:0;font:600 1.5rem/2rem var(--d-sans);flex:1}
+.s-sheet__done{font:500 .875rem/1.25rem var(--d-sans);color:var(--d-accion);background:transparent;border:0;border-radius:var(--d-r-full);padding:10px 16px;min-height:48px;cursor:pointer}
+.s-sheet__done:hover{background:color-mix(in srgb,var(--d-accion) 10%,transparent)}
+.s-sheet__sub{margin:0;padding:0 var(--d-5) var(--d-3);color:var(--d-on-var);font:400 .875rem/1.25rem var(--d-sans);flex:none}
+.s-sheet__list{list-style:none;margin:0;padding:0 var(--d-5) var(--d-5);overflow:auto;overscroll-behavior:contain}
+.s-sheet__list li{display:flex;justify-content:space-between;gap:var(--d-4);padding:var(--d-3) 0;border-top:1px solid var(--d-outline-var)}
+.s-sheet__list b{display:block;font:500 1rem/1.5rem var(--d-sans)}
+.s-sheet__list small{display:block;color:var(--d-on-var);font:400 .875rem/1.25rem var(--d-sans)}
+.s-sheet__list .y{font:500 .8125rem/1.5rem var(--d-mono);color:var(--d-on-var);flex:none}
+.s-sheet__list h3{margin:var(--d-4) 0 0;padding:var(--d-2) 0;font:500 .75rem/1rem var(--d-mono);letter-spacing:.06em;color:var(--d-dato)}
+.s-sheet__chips{display:flex;flex-wrap:wrap;gap:8px;padding:var(--d-2) 0 var(--d-3)}
+.s-sheet__chips span{background:var(--d-low);border-radius:8px;padding:6px 12px;font:400 .875rem/1.25rem var(--d-sans)}
+@keyframes s-sheet-in{from{opacity:0;transform:translateY(16px) scale(.98)}to{opacity:1;transform:none}}
+@media(max-width:640px){
+  .s-sheet{width:100%;max-width:none;margin:auto 0 0;border-radius:28px 28px 0 0;max-height:86vh}
+  .s-sheet__grab{display:block}
+  .s-sheet[open]{animation-name:s-sheet-up}
+}
+@keyframes s-sheet-up{from{transform:translateY(100%)}to{transform:none}}
+@media(prefers-reduced-motion:reduce){.s-sheet[open]{animation:none}}
+body.s-lock{overflow:hidden}

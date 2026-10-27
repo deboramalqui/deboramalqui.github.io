@@ -33,3 +33,43 @@
     show(0);
   });
 })();
+
+/* Hojas modales de reconocimientos: <dialog> nativo (foco atrapado, Esc cierra); se cierra también con el fondo, "Listo" o arrastrando hacia abajo */
+(function(){
+  if(!document.querySelector('dialog.s-sheet'))return;
+  function lock(on){document.body.classList.toggle('s-lock',on)}
+  document.addEventListener('click',function(e){
+    var t=e.target.closest('[data-sheet]');
+    if(t){var d=document.getElementById(t.getAttribute('data-sheet'));if(d&&d.showModal){d.showModal();lock(true)}return}
+    var c=e.target.closest('[data-close]');if(c){var dd=c.closest('dialog');if(dd)dd.close();return}
+    if(e.target.tagName==='DIALOG'&&e.target.classList.contains('s-sheet')){var r=e.target.getBoundingClientRect();if(e.clientY<r.top||e.clientY>r.bottom||e.clientX<r.left||e.clientX>r.right)e.target.close()}
+  });
+  document.querySelectorAll('dialog.s-sheet').forEach(function(d){
+    d.addEventListener('close',function(){lock(false)});
+    var g=d.querySelector('.s-sheet__grab'),y0=null;
+    if(g){
+      g.addEventListener('touchstart',function(e){y0=e.touches[0].clientY},{passive:true});
+      g.addEventListener('touchmove',function(e){if(y0===null)return;var dy=e.touches[0].clientY-y0;if(dy>0)d.style.transform='translateY('+dy+'px)'},{passive:true});
+      g.addEventListener('touchend',function(e){var dy=e.changedTouches[0].clientY-y0;y0=null;d.style.transform='';if(dy>80)d.close()});
+    }
+  });
+})();
+
+/* Componentes incrustados: el iframe toma el alto real de su contenido (las medidas fijas de CSS quedan como respaldo sin JS) */
+(function(){
+  document.querySelectorAll('iframe.s-embed').forEach(function(f){
+    function fit(){
+      try{
+        var d=f.contentDocument;if(!d||!d.body)return;
+        var h=Math.ceil(d.body.getBoundingClientRect().height+d.body.getBoundingClientRect().top);
+        if(h>200)f.style.height=h+'px';
+      }catch(e){}
+    }
+    f.addEventListener('load',function(){
+      fit();
+      try{if('ResizeObserver' in window)new ResizeObserver(fit).observe(f.contentDocument.body)}catch(e){}
+      try{f.contentWindow.addEventListener('resize',fit)}catch(e){}
+    });
+    if(f.contentDocument&&f.contentDocument.readyState==='complete')fit();
+  });
+})();
