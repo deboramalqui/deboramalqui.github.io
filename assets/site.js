@@ -103,3 +103,18 @@
     });
   });
 })();
+
+/* Monitor: pestañas que cambian la página mostrada en la pantalla; la pantalla se desplaza sola, con teclado o rueda */
+(function(){
+  document.querySelectorAll('.s-mon').forEach(function(m){
+    var tabs=[].slice.call(m.querySelectorAll('.s-mon__tabs button')),imgs=[].slice.call(m.querySelectorAll('.s-mon__screen img')),caps=[].slice.call(m.querySelectorAll('.s-mon__cap')),scr=m.querySelector('.s-mon__screen');
+    function show(i){
+      tabs.forEach(function(t,k){t.setAttribute('aria-selected',k===i?'true':'false');t.tabIndex=k===i?0:-1});
+      imgs.forEach(function(im,k){im.hidden=k!==i;if(k===i&&im.dataset.src){im.src=im.dataset.src;delete im.dataset.src}});
+      caps.forEach(function(c,k){c.classList.toggle('is-on',k===i)});
+      if(scr)scr.scrollTop=0;
+    }
+    tabs.forEach(function(t,k){t.addEventListener('click',function(){show(k)});t.addEventListener('keydown',function(e){var n=e.key==='ArrowRight'?k+1:e.key==='ArrowLeft'?k-1:-1;if(n<0||n>=tabs.length)return;e.preventDefault();show(n);tabs[n].focus()})});
+    show(0);
+  });
+})();
