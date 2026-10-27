@@ -160,7 +160,12 @@ body{font-family:var(--font);color:#e8ecf4;-webkit-font-smoothing:antialiased}
 .px{display:grid;grid-template-columns:minmax(0,auto) minmax(260px,1fr);gap:40px;align-items:start;justify-content:center;padding:20px 12px 28px;max-width:960px;margin:0 auto}
 .px__stage{display:flex;justify-content:center}
 .px__scale{width:calc(var(--w) * var(--s,1));height:calc(var(--h) * var(--s,1))}
-.px__scale>.phone{transform:scale(var(--s,1));transform-origin:0 0}
+.px__scale>.phone,.px__scale>.desk{transform:scale(var(--s,1));transform-origin:0 0}
+.px--wide{grid-template-columns:1fr;max-width:1304px;gap:24px}
+.px--wide .px__panel{display:grid;grid-template-columns:minmax(220px,1fr) 2fr;gap:12px 32px;align-items:start}
+.px--wide .px__title{grid-column:1/-1}
+.px--wide .px__steps{grid-row:span 3}
+.px--wide .px__what{min-height:44px}
 .px__panel{display:flex;flex-direction:column;gap:16px;min-width:0}
 .px__title{font:500 11px/16px var(--font);letter-spacing:1.6px;text-transform:uppercase;color:#9fb0c8;margin:0}
 .px__steps{list-style:none;margin:0;padding:0;display:grid;gap:2px}
@@ -178,7 +183,7 @@ body{font-family:var(--font);color:#e8ecf4;-webkit-font-smoothing:antialiased}
 .px__btn--main:hover{filter:brightness(1.08);background:var(--accent)}
 .px__hint{font:400 12px/18px var(--font);color:#8d9bb0;margin:0}
 .px__live{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
-@media(max-width:760px){.px{grid-template-columns:1fr;gap:20px}.px__stage{justify-content:center}}
+@media(max-width:760px){.px{grid-template-columns:1fr;gap:20px}.px__stage{justify-content:center}.px--wide .px__panel{grid-template-columns:1fr}.px--wide .px__steps{grid-row:auto}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head><body>
@@ -328,7 +333,7 @@ body{font-family:var(--font);color:#e8ecf4;-webkit-font-smoothing:antialiased}
 <script>
 (function(){
   var q=new URLSearchParams(location.search), L=(q.get('l')||document.documentElement.lang||'es').slice(0,2);
-  var UI={"es": {"flow": "El flujo", "play": "Ver el flujo", "pause": "Pausar", "replay": "Reiniciar", "prev": "Anterior", "next": "Siguiente", "hint": "Tocá la pantalla del teléfono: todo lo que parece un control, funciona. O mirá el flujo solo."}, "en": {"flow": "The flow", "play": "Watch the flow", "pause": "Pause", "replay": "Restart", "prev": "Previous", "next": "Next", "hint": "Tap the phone: whatever looks like a control works. Or just watch the flow."}, "he": {"flow": "הזרימה", "play": "צפו בזרימה", "pause": "השהיה", "replay": "התחלה מחדש", "prev": "הקודם", "next": "הבא", "hint": "אפשר ללחוץ על הטלפון: כל מה שנראה כמו כפתור עובד. או לצפות בזרימה."}}; var T=UI[L]||UI.es; if(L==='he'){document.documentElement.dir='rtl'}
+  var UI={"es": {"flow": "El flujo", "play": "Ver el flujo", "pause": "Pausar", "replay": "Reiniciar", "prev": "Anterior", "next": "Siguiente", "hint": "Tocá la pantalla: todo lo que parece un control, funciona. O mirá el flujo solo."}, "en": {"flow": "The flow", "play": "Watch the flow", "pause": "Pause", "replay": "Restart", "prev": "Previous", "next": "Next", "hint": "Tap the screen: whatever looks like a control works. Or just watch the flow."}, "he": {"flow": "הזרימה", "play": "צפו בזרימה", "pause": "השהיה", "replay": "התחלה מחדש", "prev": "הקודם", "next": "הבא", "hint": "אפשר ללחוץ על המסך: כל מה שנראה כמו כפתור עובד. או לצפות בזרימה."}}; var T=UI[L]||UI.es; if(L==='he'){document.documentElement.dir='rtl'}
   var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
   document.querySelectorAll('[data-t]').forEach(function(e){e.textContent=T[e.getAttribute('data-t')]});
   var STEPS=window.PROTO_STEPS, cur=0, auto=false, token=0, timers=[];

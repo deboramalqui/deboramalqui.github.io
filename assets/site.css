@@ -211,21 +211,22 @@ button.d-tile{font:inherit;color:inherit;text-align:start;border:0;border-top:2p
 body.s-lock{overflow:hidden}
 
 /* ---- imágenes: nunca una caja más alta que la imagen (sin franjas oscuras) ---- */
-.d-gal--fit .d-gal__item img{height:auto;object-fit:fill}
+.d-gal--fit .d-gal__item img{height:auto;object-fit:fill;background:transparent}
+.d-gal__view{align-items:flex-start}
 .d-gal__item img,.s-fig img{background:transparent}
+.s-fig img{border:0}
 
-/* ---- mosaico: todas las piezas juntas, con la misma calle entre ellas ---- */
-.s-mosaic{display:grid;gap:12px;grid-template-columns:repeat(2,minmax(0,1fr));margin:24px 0 8px}
-.s-mosaic--3{grid-template-columns:repeat(3,minmax(0,1fr))}
-.s-mosaic__item{margin:0;position:relative;min-width:0}
-.s-mosaic__item img{display:block;width:100%;height:100%;object-fit:cover;border:1px solid var(--d-outline-var)}
-.s-mosaic__item--tall{grid-row:span 2}
-.s-mosaic__item--wide{grid-column:span 2}
+/* ---- mosaico: todas las piezas juntas, enteras (sin recortes), con la misma calle entre ellas ---- */
+.s-mosaic{columns:2;column-gap:12px;margin:24px 0 8px}
+.s-mosaic--3{columns:3}
+.s-mosaic__item{margin:0 0 12px;position:relative;break-inside:avoid;display:block}
+.s-mosaic__item img{display:block;width:100%;height:auto}
 .s-mosaic__item figcaption{position:absolute;inset:auto 0 0 0;padding:28px 12px 10px;font:400 .75rem/1rem var(--d-mono);color:#fff;background:linear-gradient(transparent,rgba(5,10,20,.72));opacity:0;transition:opacity var(--d-dur-s3) var(--d-ease)}
 .s-mosaic__item:hover figcaption,.s-mosaic__item:focus-within figcaption{opacity:1}
 .s-mosaic__item[data-zoom]{cursor:zoom-in}
 .s-mosaic+.d-hint{margin-top:8px}
-@media(max-width:600px){.s-mosaic,.s-mosaic--3{grid-template-columns:1fr}.s-mosaic__item--tall,.s-mosaic__item--wide{grid-row:auto;grid-column:auto}.s-mosaic__item img{height:auto}.s-mosaic__item figcaption{position:static;opacity:1;background:none;color:var(--d-on-var);padding:8px 0 0}}
+@media(max-width:600px){.s-mosaic,.s-mosaic--3{columns:1}.s-mosaic__item figcaption{position:static;opacity:1;background:none;color:var(--d-on-var);padding:8px 0 0}}
+@media(min-width:601px) and (max-width:900px){.s-mosaic--3{columns:2}}
 
 /* ---- monitor: una web dentro de una pantalla que se desplaza ---- */
 .s-mon{margin:24px 0 28px;direction:ltr}

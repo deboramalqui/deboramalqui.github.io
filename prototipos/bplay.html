@@ -1,10 +1,9 @@
 <!doctype html>
 <html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Bplay · prototipo del registro</title><link rel="stylesheet" href="../componentes/bplay/estilos.css">
+<title>Bplay · prototipo del registro</title><link rel="stylesheet" href="../componentes/bplay/estilos.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600;700&display=swap">
 <style>:root{--accent:#4ae08a;--on-accent:#00391a}</style>
 <style>
-  /* Bplay dark theme on top of the M2 base. Brand green from the 2022 prototype; the
-     dark palette follows the M2 dark-theme guidance (#121212 surfaces, desaturated primary). */
+  
   :root{
     --primary:#4ae08a; --on-primary:#00391a; --secondary:#ffd166; --on-secondary:#3a2a00;
     --bg:#121212; --surface:#121212; --surface-sw:#2a2a2a; --error:#cf6679; --on-error:#000;
@@ -34,7 +33,7 @@
   .ba{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}
   .ba .tag{display:inline-block;margin-bottom:8px;font:500 10px/16px var(--font);letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.6)}
   .ba .tag.after{color:var(--primary)}
-  /* component sheets */
+  
   .sheet{background:#1e1e1e;border-radius:4px;padding:24px;display:flex;flex-wrap:wrap;gap:24px;align-items:center}
   .sheet .lbl{flex-basis:100%;font:400 10px/16px var(--font);letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.6);margin:-4px 0 -8px}
   .col{display:flex;flex-direction:column;gap:12px;min-width:220px;flex:1}
@@ -43,7 +42,7 @@
   .swatch > div{padding:12px 12px;font:400 12px/16px var(--font);letter-spacing:.4px}
   .sheet .tf--outlined > span{background:#1e1e1e}
   .note{color:rgba(255,255,255,.6);font:400 14px/20px var(--font);letter-spacing:.25px;max-width:680px}
-  /* phone frames */
+  
   .phone{width:360px;max-width:100%;height:720px;background:var(--surface);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;position:relative;box-shadow:0 8px 10px -5px rgba(0,0,0,.2),0 16px 24px 2px rgba(0,0,0,.14),0 6px 30px 5px rgba(0,0,0,.12)}
   .phone .status{height:24px;display:flex;justify-content:space-between;align-items:center;padding:0 16px;font:500 12px/16px var(--font);color:rgba(255,255,255,.87);background:#1e1e1e}
   .phone .content{flex:1;padding:16px;overflow:hidden;display:flex;flex-direction:column;gap:16px}
@@ -64,6 +63,125 @@
   .coin{width:72px;height:72px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#ffe08a,#f2b705 60%,#b8860b);display:flex;align-items:center;justify-content:center;font:700 28px/1 var(--font);color:#7a4b00;margin:8px auto}
   .center{text-align:center}
   @media(max-width:860px){.g2,.g3,.ba{grid-template-columns:1fr}.hero h1{font-size:34px;line-height:40px}.sec-h h2{font-size:24px;line-height:32px}.phone{height:auto;min-height:640px}}
+
+.desk{position:relative;width:1280px;height:720px;background:#121212;overflow:hidden;border-radius:6px;outline:6px solid #090909;box-shadow:0 20px 50px rgba(0,0,0,.5);color:#fff;font-family:var(--font)}
+.desk,.desk *{-webkit-font-smoothing:antialiased}
+.desk .pscr{position:absolute;inset:0;overflow:hidden}
+.desk .abs{position:absolute}
+.desk .disp{font-family:'Montserrat',var(--font)}
+.desk img{display:block;user-select:none;-webkit-user-drag:none}
+.desk .tile{position:absolute;object-fit:cover;border-radius:18px}
+.desk button,.desk a{font-family:inherit}
+.desk a{color:inherit;text-decoration:none}
+.desk a.s1__more{color:#00db6d}
+.desk :focus-visible{outline:2px solid #fff;outline-offset:2px}
+.bk{position:absolute;width:46px;height:46px;border-radius:50%;background:#3a3a3a;border:0;color:#7d7d7d;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0}
+.bk:hover{background:#464646}
+.chev{display:inline-block;height:1em;width:1.6em;vertical-align:-.1em}
+/* 1 · inicio */
+.s1__nav{position:absolute;left:0;top:0;width:1280px;height:95px;background:#292728}
+.s1__menu{position:absolute;left:538px;top:44px;display:flex;gap:17px;font:400 11px/16px var(--font);letter-spacing:.3px;text-transform:uppercase;color:#d8d8d8}
+.s1__menu a.on{font-weight:700;color:#fff}
+.s1__menu a:hover{color:#fff}
+.s1__reg{position:absolute;left:816px;top:36px;height:40px;padding:0;border:0;background:none;color:#00db6d;font:700 16px/40px var(--font);letter-spacing:.2px;text-transform:uppercase;cursor:pointer}
+.s1__reg:hover,.s1__reg.is-hover{color:#5cf0a0}
+.s1__login{position:absolute;left:957px;top:22px;width:215px;height:55px;border:0;border-radius:28px;background:#00dd61;color:#143d26;font:700 15px/55px var(--font);letter-spacing:.2px;text-transform:uppercase;cursor:pointer}
+.s1__login:hover{filter:brightness(1.06)}
+.s1__h1{position:absolute;left:0;width:1280px;top:168px;text-align:center;font:700 66px/72px 'Montserrat',var(--font);letter-spacing:1px}
+.s1__h2{position:absolute;left:0;width:1280px;top:243px;text-align:center;font:300 60px/72px 'Montserrat',var(--font);letter-spacing:.5px}
+.dots{position:absolute;left:548px;top:336px;display:flex;gap:6px}
+.dots i{width:12px;height:12px;border-radius:50%;border:2px solid #fff;box-sizing:border-box;display:block}
+.dots i.on{background:#fff}
+.dots em{width:20px;display:block}
+.s1__more{position:absolute;left:1150px;top:606px;color:#00db6d;font:500 21px/26px var(--font);letter-spacing:.2px;text-transform:uppercase;text-align:right;line-height:26px}
+.s1__more .chev{display:block;margin:4px 0 0 auto;width:44px;height:30px}
+/* 2 · provincia */
+.s2__logo{position:absolute;left:577px;top:42px;width:128px}
+.s2__h{position:absolute;left:0;width:1280px;top:197px;text-align:center;font:700 31px/40px 'Montserrat',var(--font);letter-spacing:.2px}
+.pill{position:absolute;height:37px;padding:0 24px;border:2px solid #39d47c;border-radius:20px;background:transparent;color:#39d47c;font:500 16px/33px var(--font);letter-spacing:.3px;cursor:pointer}
+.pill:hover{background:rgba(57,212,124,.12)}
+.pill[aria-pressed=true]{background:#00dd61;border-color:#00dd61;color:#143d26}
+.s2__p{position:absolute;left:413px;top:395px;width:370px;font:700 14px/16px var(--font);letter-spacing:.1px;color:#c9c9c9;margin:0}
+.s2__q{position:absolute;left:413px;top:479px;font:400 13px/16px var(--font);color:#d0d0d0}
+.s2__in{position:absolute;left:413px;top:505px;width:219px;height:37px;border:1px solid #8a8a8a;border-radius:4px;background:transparent;color:#fff;font:italic 400 10px/35px var(--font);padding:0 10px;outline:0}
+.s2__in::placeholder{color:#bdbdbd}
+.s2__in:focus{border-color:#39d47c}
+.s2__send{position:absolute;left:413px;top:568px;border:0;background:none;color:#d6d6d6;font:700 15px/24px var(--font);padding:0;cursor:pointer}
+.s2__send:hover{color:#fff}
+.s2__help{position:absolute;left:663px;top:650px;display:flex;align-items:center;gap:14px;font:400 13px/24px var(--font);color:#d6d6d6}
+.s2__help svg{width:22px;height:22px;fill:#fff}
+/* 3 · preferencias */
+.s3{overflow-y:auto!important;scrollbar-width:thin;scrollbar-color:#555 #121212}
+.s3__wrap{position:relative;width:1280px;height:826px}
+.s3__tabs{position:absolute;left:0;top:0;width:1280px;height:258px}
+.s3__tab{position:absolute;border:0;background:none;color:#fff;cursor:pointer;padding:0;font:700 28px/32px 'Montserrat',var(--font);letter-spacing:1.5px;text-transform:uppercase}
+.s3__tab .bx{display:block;margin:0 auto;width:146px;height:146px;border-radius:18px;background:#353535;position:relative;transition:transform .2s}
+.s3__tab .bx img{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%)}
+.s3__tab .lb{display:block;margin-top:22px}
+.s3__tab:hover .bx{transform:translateY(-3px)}
+.s3__tab[aria-selected=false] .bx--sm{width:82px;height:82px;margin-top:64px}
+.s3__tab[aria-selected=true] .bx{width:178px;height:183px;border-radius:18px 18px 0 0;transform:none}
+.s3__tab[aria-selected=true] .lb{margin-top:0}
+.s3__tab[aria-selected=true]{display:flex;flex-direction:column-reverse}
+.s3__panel{position:absolute;left:0;top:258px;width:1280px;height:442px;background:#353535}
+.s3__sec{position:absolute;left:0;width:1280px;text-align:center;font:700 26px/32px 'Montserrat',var(--font);letter-spacing:.3px}
+.s3__row{position:absolute;left:0;width:1280px;display:flex;justify-content:center;gap:16px}
+.sq{width:146px;height:146px;border:1.5px solid #e9e9e9;border-radius:18px;background:transparent;color:#fff;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:10px 0 0;font:400 19px/24px 'Montserrat',var(--font);letter-spacing:.2px;transition:background .15s,border-color .15s}
+.sq img{width:92px;height:92px;object-fit:contain;display:block;margin-bottom:0}
+.sq img.ph{border-radius:14px;object-fit:cover}
+.sq:hover{background:rgba(255,255,255,.08)}
+.sq[aria-pressed=true]{background:#4b4b4b;border-color:#4b4b4b}
+.s3__go{position:absolute;left:1008px;top:736px;width:154px;height:54px;border:0;border-radius:27px;background:#00dd61;color:#143d26;font:700 15px/54px var(--font);letter-spacing:.4px;text-transform:uppercase;cursor:pointer}
+.s3__go:hover{filter:brightness(1.06)}
+/* 4 · usuario */
+.s4__h{position:absolute;left:152px;top:120px;font:700 34px/44px 'Montserrat',var(--font);letter-spacing:.2px}
+.s4__sub{position:absolute;left:218px;top:185px;font:700 16px/20px var(--font);color:#c3c3c3}
+.fld{position:absolute;left:222px;width:218px;height:40px}
+.fld input{width:100%;height:100%;border:1.5px solid #d2d2d2;border-radius:8px;background:transparent;color:#fff;font:700 12px/20px var(--font);padding:0 40px 0 12px;outline:0;box-sizing:border-box}
+.fld input::placeholder{color:#fff;opacity:1}
+.fld input:focus{border-color:#39d47c}
+.fld.is-ok input{border-color:#39d47c}
+.fld.is-error input{border-color:#ff6b6b}
+.fld .eye{position:absolute;right:6px;top:4px;width:32px;height:32px;border:0;background:none;color:#ddd;cursor:pointer;padding:0;display:flex;align-items:center;justify-content:center}
+.fld .eye svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.s4__hint{position:absolute;left:223px;top:365px;width:195px;font:400 8px/11px var(--font);color:#d0d0d0;margin:0}
+.s4__hint.is-error{color:#ff8a8a}
+.ck{position:absolute;left:223px;display:flex;align-items:center;gap:6px;font:400 10px/14px var(--font);color:#e6e6e6;cursor:pointer;user-select:none}
+.ck input{position:absolute;opacity:0;width:1px;height:1px}
+.ck i{width:14px;height:14px;border:1.5px solid #e6e6e6;border-radius:2px;display:block;box-sizing:border-box;position:relative;background:transparent}
+.ck input:checked+i{background:#00dd61;border-color:#00dd61}
+.ck input:checked+i::after{content:"";position:absolute;left:4px;top:1px;width:3px;height:7px;border:solid #143d26;border-width:0 2px 2px 0;transform:rotate(45deg)}
+.ck input:focus-visible+i{outline:2px solid #fff;outline-offset:2px}
+.ck u{text-decoration:none;color:#9a9a9a}
+.s4__btn{position:absolute;left:245px;top:535px;width:188px;height:57px;border:2px solid #0d8d3c;border-radius:29px;background:transparent;color:#23844c;font:700 16px/53px var(--font);letter-spacing:1px;text-transform:uppercase;cursor:default;transition:background .2s,color .2s,border-color .2s}
+.s4__btn:not([disabled]){background:#00dd61;border-color:#00dd61;color:#fff;cursor:pointer}
+.s4__btn:not([disabled]):hover{filter:brightness(1.06)}
+/* 5 · preparando */
+.s5__h{position:absolute;left:0;width:1280px;top:170px;text-align:center;font:700 38px/48px 'Montserrat',var(--font);letter-spacing:.2px}
+.s5__m{position:absolute;left:240px;width:800px;top:243px;text-align:center;font:400 15px/17px var(--font);color:#d0d0d0;margin:0;min-height:34px}
+.s5__bar{position:absolute;left:257px;top:300px;width:760px;height:25px;border-radius:13px;background:#292929;box-shadow:inset 0 0 0 1px #363636;overflow:hidden}
+.s5__bar i{position:absolute;left:3px;top:3px;bottom:3px;width:calc((100% - 6px) * var(--v,0) / 100);border-radius:10px;background:linear-gradient(#3ee27f,#1fc866);box-shadow:0 0 0 1px #3a7e55 inset;transition:width .12s linear}
+.s5__coin{position:absolute;left:566px;top:446px;width:148px;animation:bob 2.4s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+/* 6 · listo */
+.s6__logo{position:absolute;left:42px;top:18px;width:136px}
+.s6__h{position:absolute;left:155px;top:130px;font:700 52px/60px 'Montserrat',var(--font);letter-spacing:1px}
+.s6__g{position:absolute;left:153px;top:198px;font:700 30px/34px 'Montserrat',var(--font);letter-spacing:.2px;color:#00dd61;margin:0}
+.s6__bono{position:absolute;left:158px;top:354px;display:flex;align-items:center;gap:14px;border:0;background:none;color:#fff;font:700 15px/28px var(--font);padding:0;cursor:pointer}
+.s6__bono i{width:28px;height:28px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center}
+.s6__bono i svg{width:12px;height:12px;fill:none;stroke:#222;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.s6__bono:hover i{background:#00dd61}
+.s6__dep{position:absolute;left:153px;top:430px;font:600 22px/28px 'Montserrat',var(--font);letter-spacing:.2px}
+.s6__pay{position:absolute;left:159px;top:466px;display:grid;grid-template-columns:repeat(5,86px);gap:13px;list-style:none;margin:0;padding:0}
+.s6__pay li{width:86px;height:46px;border-radius:8px;overflow:hidden;background:#fff}
+.s6__pay img{width:100%;height:100%;object-fit:cover}
+.s6__coins{position:absolute;left:878px;top:172px;width:219px;opacity:0;transform:translateY(-30px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.8,.3,1.2)}
+.s6__coins.in{opacity:1;transform:none}
+.s6__play{position:absolute;left:855px;top:456px;border:0;background:none;color:#00dd61;font:400 56px/60px var(--font);letter-spacing:.5px;text-transform:uppercase;cursor:pointer;display:flex;align-items:center;gap:32px;padding:0}
+.s6__play .chev{width:60px;height:40px}
+.s6__play:hover{color:#5cf0a0}
+.s6__done{position:absolute;left:0;width:1280px;top:640px;text-align:center;font:400 14px/20px var(--font);color:#8f8f8f;opacity:0;transition:opacity .3s}
+.s6__done.in{opacity:1}
 </style>
 <style>
 *{box-sizing:border-box}
@@ -73,7 +191,12 @@ body{font-family:var(--font);color:#e8ecf4;-webkit-font-smoothing:antialiased}
 .px{display:grid;grid-template-columns:minmax(0,auto) minmax(260px,1fr);gap:40px;align-items:start;justify-content:center;padding:20px 12px 28px;max-width:960px;margin:0 auto}
 .px__stage{display:flex;justify-content:center}
 .px__scale{width:calc(var(--w) * var(--s,1));height:calc(var(--h) * var(--s,1))}
-.px__scale>.phone{transform:scale(var(--s,1));transform-origin:0 0}
+.px__scale>.phone,.px__scale>.desk{transform:scale(var(--s,1));transform-origin:0 0}
+.px--wide{grid-template-columns:1fr;max-width:1304px;gap:24px}
+.px--wide .px__panel{display:grid;grid-template-columns:minmax(220px,1fr) 2fr;gap:12px 32px;align-items:start}
+.px--wide .px__title{grid-column:1/-1}
+.px--wide .px__steps{grid-row:span 3}
+.px--wide .px__what{min-height:44px}
 .px__panel{display:flex;flex-direction:column;gap:16px;min-width:0}
 .px__title{font:500 11px/16px var(--font);letter-spacing:1.6px;text-transform:uppercase;color:#9fb0c8;margin:0}
 .px__steps{list-style:none;margin:0;padding:0;display:grid;gap:2px}
@@ -91,117 +214,152 @@ body{font-family:var(--font);color:#e8ecf4;-webkit-font-smoothing:antialiased}
 .px__btn--main:hover{filter:brightness(1.08);background:var(--accent)}
 .px__hint{font:400 12px/18px var(--font);color:#8d9bb0;margin:0}
 .px__live{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
-@media(max-width:760px){.px{grid-template-columns:1fr;gap:20px}.px__stage{justify-content:center}}
+@media(max-width:760px){.px{grid-template-columns:1fr;gap:20px}.px__stage{justify-content:center}.px--wide .px__panel{grid-template-columns:1fr}.px--wide .px__steps{grid-row:auto}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head><body>
 
-<div class="px">
- <div class="px__stage"><div class="px__scale" style="--w:360px;--h:720px">
-  <div class="phone dark" id="phone" dir="ltr" style="width:360px;height:720px">
-   <div class="status"><span>9:41</span><span aria-hidden="true">●●● ▮</span></div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+<symbol id="chev3" viewBox="0 0 60 40"><path d="M4 5l15 15L4 35" fill="none" stroke="#00dd61" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 5l15 15-15 15" fill="none" stroke="#19a553" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><path d="M40 5l15 15-15 15" fill="none" stroke="#136f3b" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</defs></svg>
+<div class="px px--wide">
+ <div class="px__stage"><div class="px__scale" style="--w:1280px;--h:720px">
+  <div class="desk" id="desk" dir="ltr">
 
-   <section class="pscr" aria-label="Inicio">
-    <div class="content" style="justify-content:space-between">
-     <div style="display:flex;flex-direction:column;gap:16px">
-      <div class="logo">b<b>play</b></div>
-      <div class="h4" style="margin-top:36px">Jugá donde quieras</div>
-      <p class="body2 med">Slots, ruleta y blackjack en vivo. Registrate en un minuto y armamos el lobby a tu medida.</p>
-      <div class="tiles" aria-hidden="true" style="margin-top:12px"><div class="tile"><svg class="ic" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 12h8M12 8v8"/></svg>Slots</div><div class="tile"><svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/></svg>Ruleta</div><div class="tile"><svg class="ic" viewBox="0 0 24 24"><path d="M5 5h14v14H5zM9 9h2M13 13h2"/></svg>Black Jack</div></div>
+   <section class="pscr s1" aria-label="Inicio">
+    <header class="s1__nav">
+     <img class="abs" src="../assets/img/bplay-proto-logo.webp" alt="bplay" style="left:42px;top:20px;width:136px">
+     <nav class="s1__menu" aria-label="Secundaria"><a href="#" onclick="return false">Políticas</a><a href="#" onclick="return false">Contacto</a><a href="#" class="on" onclick="return false">Blog</a></nav>
+     <button type="button" class="s1__reg" id="reg" data-do="next">Registrarse</button>
+     <button type="button" class="s1__login">Iniciar sesión</button>
+    </header>
+    <img class="tile" src="../assets/img/bplay-proto-s1-lucky6.webp" alt="" style="left:0;top:108px;width:163px;height:282px;border-radius:0 18px 18px 0">
+    <img class="tile" src="../assets/img/bplay-proto-s1-dealer.webp" alt="" style="left:0;top:428px;width:163px;height:272px;border-radius:0 18px 18px 0">
+    <div class="s1__h1 disp">JUGÁ</div>
+    <div class="s1__h2 disp">donde quieras</div>
+    <div class="dots" aria-hidden="true"><i class="on"></i><i></i><em></em><i></i><i></i><em></em><i></i><i></i></div>
+    <img class="tile" src="../assets/img/bplay-proto-s1-mariachi.webp" alt="" style="left:190px;top:405px;width:406px;height:340px">
+    <img class="tile" src="../assets/img/bplay-proto-s1-wolf.webp" alt="" style="left:620px;top:405px;width:222px;height:221px">
+    <img class="tile" src="../assets/img/bplay-proto-s1-bingo.webp" alt="" style="left:866px;top:405px;width:222px;height:221px">
+    <img class="tile" src="../assets/img/bplay-proto-s1-wizard.webp" alt="" style="left:620px;top:655px;width:222px;height:100px;object-position:top">
+    <img class="tile" src="../assets/img/bplay-proto-s1-horses.webp" alt="" style="left:866px;top:655px;width:222px;height:100px;object-position:top">
+    <a class="s1__more" href="#" onclick="return false">Juegos<svg class="chev" aria-hidden="true"><use href="#chev3"/></svg></a>
+   </section>
+
+   <section class="pscr s2" aria-label="Provincia" hidden>
+    <img class="tile" src="../assets/img/bplay-proto-s2-roulette.webp" alt="" style="left:0;top:0;width:140px;height:295px;border-radius:0 18px 18px 0">
+    <img class="tile" src="../assets/img/bplay-proto-s2-gu.webp" alt="" style="left:0;top:315px;width:140px;height:335px;border-radius:0 18px 18px 0">
+    <img class="tile" src="../assets/img/bplay-proto-s2-mariachi.webp" alt="" style="left:0;top:668px;width:145px;height:80px;object-position:top;border-radius:0 18px 18px 0">
+    <img class="tile" src="../assets/img/bplay-proto-s2-firestrike.webp" alt="" style="left:158px;top:-57px;width:197px;height:197px">
+    <img class="tile" src="../assets/img/bplay-proto-s2-firestrike.webp" alt="" style="left:158px;top:168px;width:197px;height:197px">
+    <img class="tile" src="../assets/img/bplay-proto-s2-firestrike.webp" alt="" style="left:158px;top:392px;width:197px;height:197px">
+    <img class="tile" src="../assets/img/bplay-proto-s2-firestrike.webp" alt="" style="left:158px;top:615px;width:197px;height:197px">
+    <img class="tile" src="../assets/img/bplay-proto-s2-atlantis.webp" alt="" style="left:921px;top:-57px;width:197px;height:197px">
+    <img class="tile" src="../assets/img/bplay-proto-s2-atlantis.webp" alt="" style="left:921px;top:168px;width:197px;height:197px">
+    <img class="tile" src="../assets/img/bplay-proto-s2-atlantis.webp" alt="" style="left:921px;top:392px;width:197px;height:197px">
+    <img class="tile" src="../assets/img/bplay-proto-s2-atlantis.webp" alt="" style="left:921px;top:615px;width:197px;height:197px">
+    <img class="tile" src="../assets/img/bplay-proto-s2-joker.webp" alt="" style="left:1135px;top:0;width:145px;height:295px;border-radius:18px 0 0 18px">
+    <img class="tile" src="../assets/img/bplay-proto-s2-blackjack.webp" alt="" style="left:1135px;top:315px;width:145px;height:335px;border-radius:18px 0 0 18px">
+    <img class="tile" src="../assets/img/bplay-proto-s2-fishin.webp" alt="" style="left:1135px;top:668px;width:145px;height:80px;object-position:top;border-radius:18px 0 0 18px">
+    <button type="button" class="bk" data-do="prev" aria-label="Volver" style="left:390px;top:45px"><svg width="14" height="22" viewBox="0 0 14 22" aria-hidden="true"><path d="M11 2L3 11l8 9" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    <img class="s2__logo" src="../assets/img/bplay-proto-logo.webp" alt="bplay">
+    <h2 class="s2__h disp">¿Desde dónde vas a jugar?</h2>
+    <div role="group" aria-label="Provincia">
+     <button type="button" class="pill" data-prov="CABA" aria-pressed="false" style="left:486px;top:275px">CABA</button>
+     <button type="button" class="pill" data-prov="Santa Fe" aria-pressed="false" style="left:661px;top:275px">Santa Fe</button>
+    </div>
+    <p class="s2__p">Por el momento contamos con legislación en Provincia de Santa Fe y Ciudad de Buenos Aires. Esperamos próximamente poder sumar otras provincias para juegos de Casino Online.</p>
+    <label class="s2__q" for="otra">Cuéntanos ¿Desde dónde nos visitas?</label>
+    <input class="s2__in" id="otra" placeholder="Cuentanos un poco sobre vos y de dónde sos" autocomplete="off">
+    <button type="button" class="s2__send" id="send">Enviar</button>
+    <div class="s2__help">¿Necesitás ayuda?<svg viewBox="0 0 24 24" aria-label="Teléfono"><path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25c1.1.37 2.3.57 3.6.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg><svg viewBox="0 0 24 24" aria-label="Correo"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5z"/></svg></div>
+   </section>
+
+   <section class="pscr s3" aria-label="Preferencias de juego" hidden>
+    <div class="s3__wrap">
+     <div class="s3__tabs" role="tablist" aria-label="Tipo de juego">
+      <button type="button" class="s3__tab" role="tab" aria-selected="false" data-tab="slots" style="left:357px;top:22px;width:146px"><span class="bx"><img src="../assets/img/bplay-proto-ic-slots.webp" alt="" style="width:118px"></span><span class="lb">Slots</span></button>
+      <button type="button" class="s3__tab" role="tab" aria-selected="true" data-tab="pano" style="left:557px;top:44px;width:178px;height:214px"><span class="bx"><img src="../assets/img/bplay-proto-ic-pano.webp" alt="" style="width:112px"></span><span class="lb">Paño</span></button>
+      <button type="button" class="s3__tab" role="tab" aria-selected="false" data-tab="otros" style="left:762px;top:22px;width:146px"><span class="bx bx--sm"><svg width="70" height="30" viewBox="0 0 70 30" aria-hidden="true" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%)"><path d="M4 15h58M48 3l14 12-14 12" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="lb">Otros</span></button>
      </div>
-     <div style="display:grid;gap:8px"><button class="btn btn--contained btn--lg sl" data-do="next" style="width:100%">Registrarse</button><button class="btn btn--outlined btn--lg sl" style="width:100%">Iniciar sesión</button><p class="cap med" style="text-align:center;margin-top:4px">+18 · Jugá responsablemente</p></div>
-    </div>
-   </section>
-
-   <section class="pscr" aria-label="Provincia" hidden>
-    <div class="content">
-     <div class="logo">b<b>play</b></div>
-     <div class="stepper" aria-label="Paso 1 de 3"><i class="on">1</i><em></em><i>2</i><em></em><i>3</i></div>
-     <div class="h5">¿Desde dónde vas a jugar?</div>
-     <p class="body2 med">La licencia es por provincia. Por ahora operamos en dos.</p>
-     <div role="radiogroup" aria-label="Provincia">
-      <label class="sc"><input type="radio" name="prov" value="CABA"><span class="rad"><i></i></span>Ciudad de Buenos Aires</label><br>
-      <label class="sc"><input type="radio" name="prov" value="Santa Fe"><span class="rad"><i></i></span>Santa Fe</label>
+     <div class="s3__panel" role="tabpanel" id="pano">
+      <div class="s3__sec disp" style="top:30px">Casino en vivo</div>
+      <div class="s3__row" style="top:78px">
+       <button type="button" class="sq" data-pref="Ruleta en vivo" aria-pressed="false"><img src="../assets/img/bplay-proto-ic-ruleta.webp" alt="">Ruleta</button>
+       <button type="button" class="sq" data-pref="Black Jack en vivo" aria-pressed="false"><img src="../assets/img/bplay-proto-ic-blackjack.webp" alt="">Black Jack</button>
+      </div>
+      <div class="s3__sec disp" style="top:278px">Virtuales</div>
+      <div class="s3__row" style="top:326px">
+       <button type="button" class="sq" data-pref="Dados" aria-pressed="false"><img src="../assets/img/bplay-proto-ic-dados.webp" alt="">Dados</button>
+       <button type="button" class="sq" data-pref="Pocker" aria-pressed="false"><img src="../assets/img/bplay-proto-ic-pocker.webp" alt="">Pocker</button>
+       <button type="button" class="sq" data-pref="Ruleta virtual" aria-pressed="false"><img src="../assets/img/bplay-proto-ic-ruleta.webp" alt="">Ruleta</button>
+       <button type="button" class="sq" data-pref="Black Jack virtual" aria-pressed="false"><img src="../assets/img/bplay-proto-ic-blackjack.webp" alt="">Black Jack</button>
+       <button type="button" class="sq" data-pref="Baccarat" aria-pressed="false"><img src="../assets/img/bplay-proto-ic-baccarat.webp" alt="">Baccarat</button>
+      </div>
      </div>
-     <label class="tf tf--outlined"><input placeholder=" " id="otra"><span>¿Otra provincia? Contanos cuál</span></label>
-     <p class="cap med">Te avisamos por email cuando abramos ahí.</p>
-    </div>
-    <div class="bottom"><button class="btn btn--text sl" data-do="prev">Atrás</button><button class="btn btn--contained sl" id="b1" data-do="next" disabled>Siguiente</button></div>
-   </section>
-
-   <section class="pscr" aria-label="Preferencias de juego" hidden>
-    <div class="content">
-     <div class="logo">b<b>play</b></div>
-     <div class="stepper" aria-label="Paso 2 de 3"><i class="on">1</i><em class="on"></em><i class="on">2</i><em></em><i>3</i></div>
-     <div class="h5">¿A qué te gusta jugar?</div>
-     <p class="body2 med">Elegí todo lo que quieras. Armamos tu lobby con eso.</p>
-     <div class="tiles">
-      <button type="button" class="tile sl" data-pref="Slots" aria-pressed="false"><svg class="ic" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 12h8M12 8v8"/></svg>Slots</button>
-      <button type="button" class="tile sl" data-pref="Paño" aria-pressed="false"><svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/></svg>Paño</button>
-      <button type="button" class="tile sl" data-pref="Deportes" aria-pressed="false"><svg class="ic" viewBox="0 0 24 24"><path d="M4 12h16M12 4v16"/></svg>Deportes</button>
+     <div class="s3__panel" role="tabpanel" id="slots" hidden>
+      <div class="s3__sec disp" style="top:30px">Slots</div>
+      <div class="s3__row" style="top:78px">
+       <button type="button" class="sq" data-pref="Fire Strike 2" aria-pressed="false"><img class="ph" src="../assets/img/bplay-proto-s2-firestrike.webp" alt="">Fire Strike 2</button>
+       <button type="button" class="sq" data-pref="Atlantis" aria-pressed="false"><img class="ph" src="../assets/img/bplay-proto-s2-atlantis.webp" alt="">Atlantis</button>
+       <button type="button" class="sq" data-pref="Wolf Gold" aria-pressed="false"><img class="ph" src="../assets/img/bplay-proto-s1-wolf.webp" alt="">Wolf Gold</button>
+       <button type="button" class="sq" data-pref="Bingo Trucks" aria-pressed="false"><img class="ph" src="../assets/img/bplay-proto-s1-bingo.webp" alt="">Bingo Trucks</button>
+      </div>
      </div>
-     <div class="over med">Casino en vivo</div>
-     <div class="row"><button type="button" class="chip chip--filter sl" data-pref="Ruleta en vivo" aria-pressed="false">Ruleta</button><button type="button" class="chip chip--filter sl" data-pref="Black Jack en vivo" aria-pressed="false">Black Jack</button></div>
-     <div class="over med">Virtuales</div>
-     <div class="row"><button type="button" class="chip chip--filter sl" data-pref="Dados" aria-pressed="false">Dados</button><button type="button" class="chip chip--filter sl" data-pref="Póker" aria-pressed="false">Póker</button><button type="button" class="chip chip--filter sl" data-pref="Ruleta virtual" aria-pressed="false">Ruleta</button><button type="button" class="chip chip--filter sl" data-pref="Baccarat" aria-pressed="false">Baccarat</button></div>
-    </div>
-    <div class="bottom"><button class="btn btn--text sl" data-do="prev">Atrás</button><button class="btn btn--contained sl" data-do="next">Siguiente</button></div>
-   </section>
-
-   <section class="pscr" aria-label="Crear cuenta" hidden>
-    <div class="content">
-     <div class="logo">b<b>play</b></div>
-     <div class="stepper" aria-label="Paso 3 de 3"><i class="on">1</i><em class="on"></em><i class="on">2</i><em class="on"></em><i class="on">3</i></div>
-     <div class="h5">¿Qué usuario preferís?</div>
-     <label class="tf tf--filled" id="fnick"><input placeholder=" " id="nick" autocomplete="off" maxlength="16"><span>Nickname</span></label>
-     <div class="helper" id="hnick"><span>Entre 4 y 16 caracteres</span><span id="cnick">0/16</span></div>
-     <label class="tf tf--filled" id="fpass"><input type="password" placeholder=" " id="pass" autocomplete="off"><span>Contraseña</span><button type="button" class="trail iconbtn" id="eye" aria-label="Mostrar contraseña" style="top:4px;right:0;width:48px;height:48px;border:0;background:none;color:inherit"><svg class="ic" viewBox="0 0 24 24"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></button></label>
-     <div class="helper" id="hpass"><span>Mínimo 8 caracteres, 1 número y 1 mayúscula</span></div>
-     <label class="sc"><input type="checkbox" id="c18"><span class="box"><i></i></span>Soy mayor de 18 años</label>
-     <label class="sc"><input type="checkbox" id="cterms"><span class="box"><i></i></span>Acepto los términos y la política de privacidad</label>
-    </div>
-    <div class="bottom"><button class="btn btn--text sl" data-do="prev">Atrás</button><button class="btn btn--contained sl" id="b3" disabled>Crear cuenta</button></div>
-   </section>
-
-   <section class="pscr" aria-label="Preparando la sala" hidden>
-    <div class="content center">
-     <div class="logo">b<b>play</b></div>
-     <div class="coin" aria-hidden="true">★</div>
-     <div class="h5">Estamos preparando la sala para vos</div>
-     <div class="lin" id="lin" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" style="--v:0%"><i></i></div>
-     <p class="cap med" id="ltxt">Paso 1 de 4 · verificando tu edad</p>
-     <ul class="list" style="text-align:left" id="legal">
-      <li data-i="0"><span class="lead"><svg class="ic" viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/></svg></span><span class="txt"><b>Plataforma segura y legal</b><span>Podemos pedirte validar tu identidad.</span></span></li>
-      <li data-i="1"><span class="lead"><svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2"/></svg></span><span class="txt"><b>Programa de autoexclusión</b><span>Podés pausar tu cuenta cuando quieras.</span></span></li>
-      <li data-i="2"><span class="lead"><svg class="ic" viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg></span><span class="txt"><b>Reglamento de torneos y promociones</b><span>Escrito de la forma más clara posible.</span></span></li>
-     </ul>
+     <div class="s3__panel" role="tabpanel" id="otros" hidden>
+      <div class="s3__sec disp" style="top:30px">Otros</div>
+      <div class="s3__row" style="top:78px">
+       <button type="button" class="sq" data-pref="Lucky 6" aria-pressed="false"><img class="ph" src="../assets/img/bplay-proto-s1-lucky6.webp" alt="" style="object-position:top">Lucky 6</button>
+       <button type="button" class="sq" data-pref="Mega Ruleta" aria-pressed="false"><img class="ph" src="../assets/img/bplay-proto-s2-roulette.webp" alt="">Mega Ruleta</button>
+      </div>
+     </div>
+     <button type="button" class="s3__go" id="seguir" data-do="next">Seguir</button>
     </div>
    </section>
 
-   <section class="pscr" aria-label="Bono de bienvenida" hidden>
-    <div class="content">
-     <div class="logo">b<b>play</b></div>
-     <div class="h4" style="margin-top:8px">¡Listo!</div>
-     <div class="h5" style="color:var(--primary)">Te regalamos $500 para conocer nuestros juegos</div>
-     <div class="over med" style="margin-top:8px">Tus medios de pago</div>
-     <ul class="list card e1" style="padding:0">
-      <li class="two"><span class="lead"><svg class="ic" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/></svg></span><span class="txt"><b>Mercado Pago</b><span>Acreditación inmediata</span></span></li>
-      <li class="two"><span class="lead"><svg class="ic" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 15h4"/></svg></span><span class="txt"><b>Tarjeta de débito</b><span>Visa, Mastercard, Cabal</span></span></li>
-      <li class="two"><span class="lead"><svg class="ic" viewBox="0 0 24 24"><path d="M4 7h16v10H4z"/><path d="M8 12h8"/></svg></span><span class="txt"><b>Rapipago / Pago Fácil</b><span>Hasta 24 h</span></span></li>
-     </ul>
-    </div>
-    <div class="bottom"><button class="btn btn--contained btn--lg sl" data-do="next" style="width:100%">Jugar</button></div>
+   <section class="pscr s4" aria-label="Usuario y contraseña" hidden>
+    <img class="tile" src="../assets/img/bplay-proto-s4-goldroulette.webp" alt="" style="left:764px;top:-40px;width:301px;height:170px;object-position:bottom">
+    <img class="tile" src="../assets/img/bplay-proto-s4-dealer.webp" alt="" style="left:680px;top:165px;width:395px;height:375px">
+    <img class="tile" src="../assets/img/bplay-proto-s4-dealer2.webp" alt="" style="left:764px;top:565px;width:301px;height:200px;object-position:top">
+    <img class="tile" src="../assets/img/bplay-proto-s4-dave.webp" alt="" style="left:1103px;top:-27px;width:177px;height:195px;border-radius:18px 0 0 18px">
+    <img class="tile" src="../assets/img/bplay-proto-s4-dave.webp" alt="" style="left:1103px;top:195px;width:177px;height:195px;border-radius:18px 0 0 18px">
+    <img class="tile" src="../assets/img/bplay-proto-s4-dave.webp" alt="" style="left:1103px;top:418px;width:177px;height:195px;border-radius:18px 0 0 18px">
+    <img class="tile" src="../assets/img/bplay-proto-s4-dave.webp" alt="" style="left:1103px;top:640px;width:177px;height:195px;border-radius:18px 0 0 18px">
+    <button type="button" class="bk" data-do="prev" aria-label="Volver" style="left:130px;top:45px"><svg width="14" height="22" viewBox="0 0 14 22" aria-hidden="true"><path d="M11 2L3 11l8 9" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    <img class="s2__logo" src="../assets/img/bplay-proto-logo.webp" alt="bplay">
+    <h2 class="s4__h disp">¿Qué usuario prefieres?</h2>
+    <div class="s4__sub">Elige un nickname y una contraseña</div>
+    <div class="fld" id="fnick" style="top:250px"><input id="nick" placeholder="Nickname" aria-label="Nickname" autocomplete="off" maxlength="16"></div>
+    <div class="fld" id="fpass" style="top:320px"><input id="pass" type="password" placeholder="Contraseña" aria-label="Contraseña" autocomplete="off" aria-describedby="hpass"><button type="button" class="eye" id="eye" aria-label="Mostrar contraseña"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></button></div>
+    <p class="s4__hint" id="hpass">Debe tener al menos 8 caracteres, 1 mayúscula y 1 número. No puede tener 3 dígitos consecutivos iguales.</p>
+    <label class="ck" style="top:432px"><input type="checkbox" id="c18"><i></i>Soy mayor de 18 años</label>
+    <label class="ck" style="top:455px"><input type="checkbox" id="cterms"><i></i><span>Acepto las <u>políticas de privacidad</u></span></label>
+    <button type="button" class="s4__btn" id="ingresar" disabled>Ingresar</button>
    </section>
 
-   <section class="pscr" aria-label="Lobby" hidden>
-    <div class="content" style="gap:12px">
-     <div style="display:flex;justify-content:space-between;align-items:center"><div class="logo">b<b>play</b></div><span class="chip chip--outlined" aria-label="Saldo">$ 500</span></div>
-     <div class="h6">Especiales para vos</div>
-     <p class="cap med" id="lobbyWhy">Armado con lo que elegiste.</p>
-     <div id="lobby" style="display:grid;grid-template-columns:1fr 1fr;gap:8px"></div>
-    </div>
-    <div class="snack e6" id="snack" style="margin:0 8px 8px" role="status">Bono de $500 acreditado<button class="btn btn--text sl" type="button" id="snackx">Ver</button></div>
+   <section class="pscr s5" aria-label="Preparando la sala" hidden>
+    <h2 class="s5__h disp">Estamos preparando la sala para vos</h2>
+    <p class="s5__m" id="s5msg" aria-live="polite"></p>
+    <div class="s5__bar" id="bar" role="progressbar" aria-label="Preparando la sala" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" style="--v:0"><i></i></div>
+    <img class="s5__coin" src="../assets/img/bplay-proto-coin.webp" alt="">
    </section>
+
+   <section class="pscr s6" aria-label="Bono de bienvenida" hidden>
+    <img class="s6__logo" src="../assets/img/bplay-proto-logo.webp" alt="bplay">
+    <h2 class="s6__h disp">LISTO!</h2>
+    <p class="s6__g disp">Te regalamos $500<br>para conocer<br>todos nuestros juegos<br>exclusivos</p>
+    <button type="button" class="s6__bono" id="bono">Conoce el bono<i><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 1l5 5-5 5"/></svg></i></button>
+    <div class="s6__dep disp">También podrás hacer tus depósitos</div>
+    <ul class="s6__pay" aria-label="Medios de pago">
+     <li><img src="../assets/img/bplay-proto-pay-mercadopago.webp" alt="Mercado Pago"></li><li><img src="../assets/img/bplay-proto-pay-cabal.webp" alt="Cabal"></li><li><img src="../assets/img/bplay-proto-pay-cobroexpress.webp" alt="Cobro Express"></li><li><img src="../assets/img/bplay-proto-pay-pagomiscuentas.webp" alt="Pago Mis Cuentas"></li><li><img src="../assets/img/bplay-proto-pay-pagofacil.webp" alt="Pago Fácil"></li>
+     <li><img src="../assets/img/bplay-proto-pay-provincianet.webp" alt="Provincia NET"></li><li><img src="../assets/img/bplay-proto-pay-rapipago.webp" alt="Rapipago"></li><li><img src="../assets/img/bplay-proto-pay-visa.webp" alt="Visa"></li><li><img src="../assets/img/bplay-proto-pay-link.webp" alt="Link"></li><li><img src="../assets/img/bplay-proto-pay-debin.webp" alt="Debin"></li>
+     <li><img src="../assets/img/bplay-proto-pay-mastercard.webp" alt="Mastercard"></li><li><img src="../assets/img/bplay-proto-pay-mlogo.webp" alt="Casino Melincué"></li><li><img src="../assets/img/bplay-proto-pay-sflogo.webp" alt="Casino Santa Fe"></li><li><img src="../assets/img/bplay-proto-pay-totalcoin.webp" alt="Totalcoin"></li><li><img src="../assets/img/bplay-proto-pay-transfer.webp" alt="Transferencia bancaria"></li>
+    </ul>
+    <img class="s6__coins" id="coins" src="../assets/img/bplay-proto-coins.webp" alt="">
+    <button type="button" class="s6__play" id="jugar">Jugar<svg class="chev" aria-hidden="true"><use href="#chev3"/></svg></button>
+    <p class="s6__done" id="s6done">Fin del registro: «Jugar» vuelve al inicio.</p>
+   </section>
+
   </div>
  </div></div>
 
@@ -223,75 +381,73 @@ body{font-family:var(--font);color:#e8ecf4;-webkit-font-smoothing:antialiased}
 <script>
 (function(){
   var $=function(s,r){return (r||document).querySelector(s)},$$=function(s,r){return [].slice.call((r||document).querySelectorAll(s))};
-  var prefs=[];
-  var scr=$$('.pscr');
-  /* botones de navegación dentro del teléfono */
-  document.addEventListener('click',function(e){var b=e.target.closest('[data-do]');if(!b||b.disabled)return;if(e.isTrusted&&window.PROTO.isAuto())window.PROTO.stopAuto();b.getAttribute('data-do')==='next'?window.PROTO.next():window.PROTO.prev()});
-  /* ripple */
-  document.addEventListener('pointerdown',function(e){var h=e.target.closest('.sl');if(!h||h.disabled)return;var r=h.getBoundingClientRect(),d=Math.max(r.width,r.height)*2,s=document.createElement('span');s.className='ripple';s.style.cssText='width:'+d+'px;height:'+d+'px;left:'+(e.clientX-r.left-d/2)+'px;top:'+(e.clientY-r.top-d/2)+'px';h.appendChild(s);s.addEventListener('animationend',function(){s.remove()})});
-  /* 1 · provincia */
-  var radios=$$('input[name=prov]'),b1=$('#b1');
-  function prov(){var v=radios.some(function(r){return r.checked})||$('#otra').value.trim().length>2;b1.disabled=!v}
-  radios.forEach(function(r){r.addEventListener('change',prov)});$('#otra').addEventListener('input',prov);
-  /* 2 · preferencias */
-  function renderPrefs(){$$('[data-pref]').forEach(function(t){var on=prefs.indexOf(t.getAttribute('data-pref'))>-1;t.setAttribute('aria-pressed',on);t.classList.toggle('is-selected',on)})}
-  $$('[data-pref]').forEach(function(t){t.addEventListener('click',function(e){var k=t.getAttribute('data-pref'),i=prefs.indexOf(k);if(i>-1)prefs.splice(i,1);else prefs.push(k);renderPrefs();if(e.isTrusted&&window.PROTO.isAuto())window.PROTO.stopAuto()})});
-  /* 3 · cuenta con validación en vivo */
-  var nick=$('#nick'),pass=$('#pass'),c18=$('#c18'),ct=$('#cterms'),b3=$('#b3'),touched={n:false,p:false};
-  function vNick(){var v=nick.value;return v.length>=4&&v.length<=16}
-  function vPass(){var v=pass.value;return v.length>=8&&/\d/.test(v)&&/[A-ZÁÉÍÓÚÑ]/.test(v)}
+  var st={prov:null,prefs:[]};
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function userClick(e){if(e.isTrusted&&window.PROTO.isAuto())window.PROTO.stopAuto();return e.isTrusted}
+  /* navegación desde la pantalla (Registrarse, volver, Seguir) */
+  document.addEventListener('click',function(e){var b=e.target.closest('[data-do]');if(!b||b.disabled)return;userClick(e);b.getAttribute('data-do')==='next'?window.PROTO.next():window.PROTO.prev()});
+  /* 2 · provincia: elegir una continúa */
+  var pills=$$('[data-prov]'),provT=0;
+  function renderProv(){pills.forEach(function(p){p.setAttribute('aria-pressed',p.getAttribute('data-prov')===st.prov)})}
+  pills.forEach(function(p){p.addEventListener('click',function(e){st.prov=p.getAttribute('data-prov');renderProv();if(userClick(e)){clearTimeout(provT);provT=setTimeout(function(){if(window.PROTO.cur()===1)window.PROTO.next()},reduce?200:550)}})});
+  $('#send').addEventListener('click',function(e){var v=$('#otra').value.trim();if(!v)return;st.prov=v;renderProv();if(userClick(e))window.PROTO.next()});
+  $('#otra').addEventListener('keydown',function(e){if(e.key==='Enter')$('#send').click()});
+  /* 3 · pestañas y preferencias */
+  var tabs=$$('.s3__tab'),panels=$$('.s3__panel');
+  function selTab(k){tabs.forEach(function(t){var on=t.getAttribute('data-tab')===k;t.setAttribute('aria-selected',on);if(on){t.style.top='44px';t.style.width='178px';t.style.height='214px';t.style.left=({slots:'341px',pano:'557px',otros:'746px'})[k]}else{t.style.top='22px';t.style.width='146px';t.style.height='';t.style.left=({slots:'357px',pano:'573px',otros:'762px'})[t.getAttribute('data-tab')]}});panels.forEach(function(p){p.hidden=p.id!==k})}
+  tabs.forEach(function(t){t.addEventListener('click',function(e){userClick(e);selTab(t.getAttribute('data-tab'))})});
+  function renderPrefs(){$$('[data-pref]').forEach(function(t){t.setAttribute('aria-pressed',st.prefs.indexOf(t.getAttribute('data-pref'))>-1)})}
+  $$('[data-pref]').forEach(function(t){t.addEventListener('click',function(e){var k=t.getAttribute('data-pref'),i=st.prefs.indexOf(k);if(i>-1)st.prefs.splice(i,1);else st.prefs.push(k);renderPrefs();userClick(e)})});
+  /* 4 · usuario y contraseña con validación en vivo */
+  var nick=$('#nick'),pass=$('#pass'),c18=$('#c18'),ct=$('#cterms'),btn=$('#ingresar'),touched={n:false,p:false};
+  function vNick(){return nick.value.trim().length>=4}
+  function vPass(){var v=pass.value;return v.length>=8&&/[A-ZÁÉÍÓÚÑ]/.test(v)&&/\d/.test(v)&&!/(.)\1\1/.test(v)}
   function check(){
-    $('#cnick').textContent=nick.value.length+'/16';
-    var ne=touched.n&&!vNick(),pe=touched.p&&!vPass();
-    $('#fnick').classList.toggle('is-error',ne);$('#hnick').classList.toggle('is-error',ne);$('#hnick').firstChild.textContent=ne?'Usá entre 4 y 16 caracteres':'Entre 4 y 16 caracteres';
-    $('#fpass').classList.toggle('is-error',pe);$('#hpass').classList.toggle('is-error',pe);
-    b3.disabled=!(vNick()&&vPass()&&c18.checked&&ct.checked);
+    $('#fnick').classList.toggle('is-ok',vNick());$('#fnick').classList.toggle('is-error',touched.n&&!vNick()&&nick.value.length>0);
+    var pe=touched.p&&!vPass()&&pass.value.length>0;
+    $('#fpass').classList.toggle('is-ok',vPass());$('#fpass').classList.toggle('is-error',pe);$('#hpass').classList.toggle('is-error',pe);
+    btn.disabled=!(vNick()&&vPass()&&c18.checked&&ct.checked);
   }
   nick.addEventListener('input',function(){touched.n=true;check()});pass.addEventListener('input',function(){touched.p=true;check()});
   c18.addEventListener('change',check);ct.addEventListener('change',check);
   $('#eye').addEventListener('click',function(){var s=pass.type==='password';pass.type=s?'text':'password';this.setAttribute('aria-label',s?'Ocultar contraseña':'Mostrar contraseña')});
-  b3.addEventListener('click',function(e){if(!e.isTrusted)return;if(window.PROTO.isAuto())window.PROTO.stopAuto();window.PROTO.next()});
-  /* 4 · carga determinada, con los mensajes legales en secuencia */
-  var lt=0,lin=$('#lin'),ltxt=$('#ltxt'),legal=$$('#legal li'),stepsTxt=['verificando tu edad','validando tu cuenta','armando tu lobby','casi listo'];
-  function loading(fromAuto){
-    clearInterval(lt);var p=0,t0=Date.now(),dur=(matchMedia('(prefers-reduced-motion: reduce)').matches?1200:6200);
-    function paint(){lin.style.setProperty('--v',p+'%');lin.setAttribute('aria-valuenow',Math.round(p));var k=Math.min(3,Math.floor(p/26));ltxt.textContent='Paso '+(k+1)+' de 4 · '+stepsTxt[k];legal.forEach(function(li,i){li.style.opacity=(Math.floor(p/34)===i||p>=100&&i===2)?1:.45})}
+  btn.addEventListener('click',function(e){if(btn.disabled)return;if(userClick(e))window.PROTO.next()});
+  /* 5 · barra que carga mientras pasan los mensajes de juego responsable */
+  var MSG=['Recuerda que contamos con el Programa de Autoexclusión que te protege en caso que voluntariamente decidas autoexcluirte de concurrir a salas de juego.','Esta es una plataforma Segura y Legal. Recuerda que para retirar tu premio te pediremos validar tu identidad subiendo algunos documentos.','Juego Seguro, Legal y Divertido. ¡Llegamos para encender el juego!'];
+  var lt=0,bar=$('#bar'),msg=$('#s5msg');
+  function loading(){
+    clearInterval(lt);var t0=Date.now(),dur=reduce?1200:3400,last=-1;
+    function paint(){var p=Math.min(100,(Date.now()-t0)/dur*100);bar.style.setProperty('--v',p);bar.setAttribute('aria-valuenow',Math.round(p));var k=Math.min(2,Math.floor(p/34));if(k!==last){last=k;msg.textContent=MSG[k]}return p}
     paint();
-    lt=setInterval(function(){p=Math.min(100,(Date.now()-t0)/dur*100);paint();if(p>=100){clearInterval(lt);setTimeout(function(){if(window.PROTO.cur()===4)window.PROTO.go(5,window.PROTO.isAuto())},500)}},60);
+    lt=setInterval(function(){if(paint()>=100){clearInterval(lt);setTimeout(function(){if(window.PROTO.cur()===4)window.PROTO.go(5,window.PROTO.isAuto())},reduce?100:450)}},50);
   }
-  /* 6 · lobby armado con lo elegido */
-  var catalog={'Slots':['Atlantis Gold','Fire Strike'],'Paño':['Real Roulette','Blackjack Club'],'Deportes':['Fútbol en vivo','Tenis'],'Ruleta en vivo':['Roulette Laura'],'Black Jack en vivo':['Blackjack VIP'],'Dados':['Dados Rápidos'],'Póker':['Póker 3 cartas'],'Ruleta virtual':['Ruleta Turbo'],'Baccarat':['Baccarat Pro']};
-  var hues=[150,200,265,320,35,175];
-  function lobby(){
-    var chosen=prefs.length?prefs:['Slots','Ruleta en vivo','Black Jack en vivo'],cards=[];
-    chosen.forEach(function(k){(catalog[k]||[]).forEach(function(n){cards.push([n,k])})});cards=cards.slice(0,6);
-    $('#lobby').innerHTML=cards.map(function(c,i){return '<div class="card e1" style="overflow:hidden"><div style="height:74px;background:linear-gradient(135deg,hsl('+hues[i%6]+',55%,26%),hsl('+(hues[i%6]+40)+',60%,16%))"></div><div style="padding:8px 10px"><div class="sub2" style="line-height:18px">'+c[0]+'</div><div class="cap med">'+c[1]+'</div></div></div>'}).join('');
-    $('#lobbyWhy').textContent=prefs.length?('Armado con lo que elegiste: '+prefs.slice(0,3).join(', ')+(prefs.length>3?'…':'')+'.'):'Armado con lo más jugado. Elegí tus preferencias en el paso 2 y se personaliza.';
-    var s=$('#snack');s.style.opacity=1;setTimeout(function(){s.style.transition='opacity .4s';s.style.opacity=0},3800);
-  }
-  $('#snackx').addEventListener('click',function(){$('#snack').style.opacity=0});
+  /* 6 · monedas que entran y «Jugar» que vuelve al inicio */
+  var ct6=0;
+  function bonus(){var c=$('#coins');c.classList.remove('in');$('#s6done').classList.remove('in');clearTimeout(ct6);ct6=setTimeout(function(){c.classList.add('in')},reduce?0:500)}
+  $('#jugar').addEventListener('click',function(e){userClick(e);window.PROTO_RESET();window.PROTO.go(0)});
+  $('#bono').addEventListener('click',function(e){userClick(e);$('#s6done').classList.add('in');$('#s6done').textContent='Bono de $500: se acredita al entrar. El detalle queda en «Promociones».'});
   window.PROTO_RESET=function(){
-    prefs=[];renderPrefs();radios.forEach(function(r){r.checked=false});$('#otra').value='';nick.value='';pass.value='';pass.type='password';c18.checked=false;ct.checked=false;touched={n:false,p:false};prov();check();clearInterval(lt);$('#snack').style.opacity=1;$('#snack').style.transition='none';
+    st={prov:null,prefs:[]};renderProv();renderPrefs();selTab('pano');$('.s3').scrollTop=0;$('#otra').value='';
+    nick.value='';pass.value='';pass.type='password';c18.checked=false;ct.checked=false;touched={n:false,p:false};check();
+    clearInterval(lt);bar.style.setProperty('--v',0);msg.textContent=MSG[0];$('#coins').classList.remove('in');$('#s6done').classList.remove('in');$('#reg').classList.remove('is-hover');
   };
-  function type(el,txt,ok,wait){return (async function(){for(var i=0;i<txt.length;i++){if(!ok())return;el.value=txt.slice(0,i+1);el.dispatchEvent(new Event('input'));await wait(70)}})()}
-  async function click(el,ok,wait,ms){if(!ok())return;el.click();await wait(ms||450)}
+  function type(el,txt,ok,wait){return (async function(){for(var i=0;i<txt.length;i++){if(!ok())return;el.value=txt.slice(0,i+1);el.dispatchEvent(new Event('input'));await wait(60)}})()}
+  async function press(el,ok,wait,ms){if(!ok())return;el.click();await wait(ms||500)}
   window.PROTO_STEPS=[
-   {name:'Inicio',what:'Una sola promesa y un botón: «Jugá donde quieras». Sin formulario todavía.',hold:2600},
-   {name:'Provincia',what:'La licencia es por provincia, así que es lo primero que se pregunta. Si la persona está en otra, deja su provincia y se le avisa cuando abra.',enter:function(){prov()},demo:async function(ok,wait){await wait(900);if(ok()){$$('input[name=prov]')[1].click();}await wait(1100);}},
-   {name:'Preferencias',what:'Tres bloques y se elige todo lo que se quiera. No es una encuesta: cada elección arma el lobby final.',demo:async function(ok,wait){await wait(700);for(var k of ['Slots','Ruleta en vivo','Baccarat']){var el=$('[data-pref="'+k+'"]');await click(el,ok,wait,650)}await wait(900)}},
-   {name:'Usuario y contraseña',what:'Validación mientras se escribe: el error aparece cuando hace falta y dice cómo arreglarlo. El botón se activa solo cuando todo está bien.',demo:async function(ok,wait){await wait(500);await type(nick,'didi_play',ok,wait);await wait(350);await type(pass,'Secreta2022',ok,wait);await wait(350);if(ok()){c18.click();await wait(300)}if(ok()){ct.click();await wait(900)}}},
-   {name:'Preparando la sala',what:'La espera no es vacía: mientras carga, aparecen uno por uno el programa de autoexclusión, el reglamento y la validación de identidad que un operador con licencia debe comunicar.',enter:loading,demo:async function(ok,wait){await wait(7200)}},
-   {name:'Bono de bienvenida',what:'El regalo y los medios de pago llegan al final, cuando la persona ya está adentro, y la primera acción siguiente es «Jugar», no otro formulario.',hold:3200},
-   {name:'Lobby a tu medida',what:'El lobby ya viene armado con lo que se eligió en el paso 2. El onboarding terminó y no se pidió nada que no se usara.',enter:lobby,hold:4200}
+   {name:'Inicio',what:'La home de bplay en escritorio: «Jugá donde quieras», los juegos a la vista y dos accesos arriba. El registro empieza en «Registrarse».',demo:async function(ok,wait){await wait(1600);if(ok())$('#reg').classList.add('is-hover');await wait(900);$('#reg').classList.remove('is-hover')}},
+   {name:'¿Desde dónde vas a jugar?',what:'La licencia es por jurisdicción: CABA o Santa Fe. Elegir una continúa. Quien está en otra provincia la deja escrita y se le avisa cuando abra.',demo:async function(ok,wait){await wait(1000);await press($('[data-prov="Santa Fe"]'),ok,wait,1100)}},
+   {name:'Preferencias',what:'Tres pestañas (Slots, Paño, Otros) y casilleros que se marcan de a varios. Lo elegido arma el lobby final; «Seguir» está al final del scroll.',enter:function(){$('.s3').scrollTop=0},demo:async function(ok,wait){await wait(700);await press($('[data-pref="Ruleta en vivo"]'),ok,wait,600);await press($('[data-pref="Baccarat"]'),ok,wait,700);if(ok()){$('.s3').scrollTo({top:200,behavior:reduce?'auto':'smooth'})}await wait(1100)}},
+   {name:'¿Qué usuario prefieres?',what:'Nickname y contraseña con las reglas a la vista; el botón «Ingresar» se enciende recién cuando todo está bien, incluidas la edad y las políticas.',demo:async function(ok,wait){await wait(500);await type(nick,'Didi2022',ok,wait);await wait(300);await type(pass,'Secreta2022',ok,wait);await wait(300);await press(c18,ok,wait,350);await press(ct,ok,wait,1100)}},
+   {name:'Preparando la sala',what:'La espera no es vacía: mientras la barra carga pasan los mensajes de juego responsable que un operador con licencia tiene que comunicar.',enter:loading,demo:async function(ok,wait){await wait(reduce?1500:4000)}},
+   {name:'Listo',what:'El regalo de bienvenida y los medios de depósito llegan al final, cuando la persona ya está adentro. La acción siguiente es «Jugar», no otro formulario.',enter:bonus,hold:4200}
   ];
-  /* arranque: estado inicial del primer paso */
-  prov();check();
+  renderProv();renderPrefs();check();msg.textContent=MSG[0];
 })();
 </script>
 <script>
 (function(){
   var q=new URLSearchParams(location.search), L=(q.get('l')||document.documentElement.lang||'es').slice(0,2);
-  var UI={"es": {"flow": "El flujo", "play": "Ver el flujo", "pause": "Pausar", "replay": "Reiniciar", "prev": "Anterior", "next": "Siguiente", "hint": "Tocá la pantalla del teléfono: todo lo que parece un control, funciona. O mirá el flujo solo."}, "en": {"flow": "The flow", "play": "Watch the flow", "pause": "Pause", "replay": "Restart", "prev": "Previous", "next": "Next", "hint": "Tap the phone: whatever looks like a control works. Or just watch the flow."}, "he": {"flow": "הזרימה", "play": "צפו בזרימה", "pause": "השהיה", "replay": "התחלה מחדש", "prev": "הקודם", "next": "הבא", "hint": "אפשר ללחוץ על הטלפון: כל מה שנראה כמו כפתור עובד. או לצפות בזרימה."}}; var T=UI[L]||UI.es; if(L==='he'){document.documentElement.dir='rtl'}
+  var UI={"es": {"flow": "El flujo", "play": "Ver el flujo", "pause": "Pausar", "replay": "Reiniciar", "prev": "Anterior", "next": "Siguiente", "hint": "Tocá la pantalla: todo lo que parece un control, funciona. O mirá el flujo solo."}, "en": {"flow": "The flow", "play": "Watch the flow", "pause": "Pause", "replay": "Restart", "prev": "Previous", "next": "Next", "hint": "Tap the screen: whatever looks like a control works. Or just watch the flow."}, "he": {"flow": "הזרימה", "play": "צפו בזרימה", "pause": "השהיה", "replay": "התחלה מחדש", "prev": "הקודם", "next": "הבא", "hint": "אפשר ללחוץ על המסך: כל מה שנראה כמו כפתור עובד. או לצפות בזרימה."}}; var T=UI[L]||UI.es; if(L==='he'){document.documentElement.dir='rtl'}
   var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
   document.querySelectorAll('[data-t]').forEach(function(e){e.textContent=T[e.getAttribute('data-t')]});
   var STEPS=window.PROTO_STEPS, cur=0, auto=false, token=0, timers=[];
