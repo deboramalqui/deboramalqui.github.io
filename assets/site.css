@@ -275,3 +275,5 @@ body.s-lock{overflow:hidden}
 .s-form__ok{color:var(--d-dato)}
 .s-form__err{color:var(--d-atencion)}
 .s-form button[disabled]{opacity:.6;cursor:progress}
+
+.s-form__ok{font:500 1.125rem/1.75rem var(--d-sans);padding:16px 20px;border-inline-start:4px solid var(--d-dato);background:var(--d-low);color:var(--d-on);outline:0}
