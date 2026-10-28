@@ -133,7 +133,7 @@
     var d={};new FormData(f).forEach(function(v,k){d[k]=v});btn.disabled=true;
     fetch(f.getAttribute('data-ajax'),{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(d)})
       .then(function(r){return r.json().catch(function(){return{}})}).then(function(j){
-        if(j&&(j.success===true||j.success==='true')){f.reset();ok.hidden=false;ok.setAttribute('tabindex','-1');ok.focus();ok.scrollIntoView({block:'center'})}else{er.hidden=false}
+        if(j&&(j.success===true||j.success==='true')){f.reset();ok.hidden=false}else{er.hidden=false}
       }).catch(function(){er.hidden=false}).then(function(){btn.disabled=false});
   });
 })();
