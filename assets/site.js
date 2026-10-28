@@ -133,7 +133,19 @@
     var d={};new FormData(f).forEach(function(v,k){d[k]=v});btn.disabled=true;
     fetch(f.getAttribute('data-ajax'),{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(d)})
       .then(function(r){return r.json().catch(function(){return{}})}).then(function(j){
-        if(j&&(j.success===true||j.success==='true')){f.reset();ok.hidden=false}else{er.hidden=false}
+        if(j&&(j.success===true||j.success==='true')){f.reset();ok.hidden=false;ok.setAttribute('tabindex','-1');ok.focus();ok.scrollIntoView({block:'center'})}else{er.hidden=false}
       }).catch(function(){er.hidden=false}).then(function(){btn.disabled=false});
+  });
+})();
+
+
+/* Enlaces que abren en una ventana emergente (data-popup="nombre,ancho,alto"): si el navegador la bloquea o se usa Ctrl/Cmd, abre en una pestaña nueva */
+(function(){
+  document.addEventListener('click',function(e){
+    var a=e.target.closest('a[data-popup]');if(!a||e.ctrlKey||e.metaKey||e.shiftKey||e.button)return;
+    var p=a.getAttribute('data-popup').split(','),w=+p[1]||1200,h=+p[2]||800,sw=screen.availWidth||w,sh=screen.availHeight||h;
+    w=Math.min(w,sw-40);h=Math.min(h,sh-60);
+    var win=window.open(a.href,p[0],'popup=yes,width='+w+',height='+h+',left='+Math.round((sw-w)/2)+',top='+Math.round((sh-h)/2)+',resizable=yes,scrollbars=yes');
+    if(win){e.preventDefault();try{win.opener=null;win.focus()}catch(x){}}
   });
 })();
