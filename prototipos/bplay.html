@@ -184,6 +184,9 @@
 .s6__play:hover{color:#5cf0a0}
 .s6__done{position:absolute;left:0;width:1280px;top:640px;text-align:center;font:400 14px/20px var(--font);color:#8f8f8f;opacity:0;transition:opacity .3s}
 .s6__done.in{opacity:1}
+.s7{background:#111;overflow:hidden}
+.s7__shot{position:absolute;left:0;top:0;width:1280px;height:720px;display:block;user-select:none;-webkit-user-drag:none}
+.s7__bal{position:absolute;left:830px;top:98px;font:500 28px/40px var(--font);color:#00dd61;letter-spacing:.3px;font-variant-numeric:tabular-nums}
 </style>
 <style>
 *{box-sizing:border-box}
@@ -365,7 +368,12 @@ body{font-family:var(--font);color:#e8ecf4;-webkit-font-smoothing:antialiased}
     </ul>
     <img class="s6__coins" id="coins" src="../assets/img/bplay-proto-coins.webp" alt="">
     <button type="button" class="s6__play" id="jugar">Jugar<svg class="chev" aria-hidden="true"><use href="#chev3"/></svg></button>
-    <p class="s6__done" id="s6done">Fin del registro: «Jugar» vuelve al inicio.</p>
+    <p class="s6__done" id="s6done">Fin del registro: «Jugar» abre la pantalla de juegos.</p>
+   </section>
+
+   <section class="pscr s7" aria-label="Pantalla de juegos" hidden>
+    <img class="s7__shot" src="../assets/img/bplay-lobby.webp" alt="Pantalla de juegos de Bplay: Especiales para vos con Gold Roulette, Real Roulette, Sweet Bonanza y One Blackjack, con Depositar y el saldo arriba">
+    <span class="s7__bal" id="saldo" aria-live="polite">$0</span>
    </section>
 
   </div>
@@ -432,9 +440,9 @@ body{font-family:var(--font);color:#e8ecf4;-webkit-font-smoothing:antialiased}
   /* 6 · monedas que entran y «Jugar» que vuelve al inicio */
   var ct6=0;
   var credRaf=0;
-  function credit(){var n=$('#cred');cancelAnimationFrame(credRaf);if(reduce){n.textContent='500';return}n.textContent='0';var t0=0;(function f(t){if(!t0)t0=t;var p=Math.min(1,(t-t0)/1300);n.textContent=Math.round(500*(1-Math.pow(1-p,3)));if(p<1)credRaf=requestAnimationFrame(f)})(performance.now())}
-  function bonus(){credit();var c=$('#coins');c.classList.remove('in');$('#s6done').classList.remove('in');clearTimeout(ct6);ct6=setTimeout(function(){c.classList.add('in')},reduce?0:500)}
-  $('#jugar').addEventListener('click',function(e){userClick(e);window.PROTO_RESET();window.PROTO.go(0)});
+  function credit(){var n=$('#saldo');cancelAnimationFrame(credRaf);if(reduce){n.textContent='$500';return}n.textContent='$0';var t0=0;(function f(t){if(!t0)t0=t;var p=Math.min(1,(t-t0)/1300);n.textContent='$'+Math.round(500*(1-Math.pow(1-p,3)));if(p<1)credRaf=requestAnimationFrame(f)})(performance.now())}
+  function bonus(){var c=$('#coins');c.classList.remove('in');$('#s6done').classList.remove('in');clearTimeout(ct6);ct6=setTimeout(function(){c.classList.add('in')},reduce?0:500)}
+  $('#jugar').addEventListener('click',function(e){userClick(e);window.PROTO.next()});
   $('#bono').addEventListener('click',function(e){userClick(e);$('#s6done').classList.add('in');$('#s6done').textContent='Bono de $500: se acredita al entrar. El detalle queda en «Promociones».'});
   window.PROTO_RESET=function(){
     st={prov:null,prefs:[]};renderProv();renderPrefs();selTab('pano');$('.s3').scrollTop=0;$('#otra').value='';
@@ -449,7 +457,8 @@ body{font-family:var(--font);color:#e8ecf4;-webkit-font-smoothing:antialiased}
    {name:'Preferencias',what:'Tres pestañas (Slots, Paño, Otros) y casilleros que se marcan de a varios. Lo elegido arma el lobby final; «Seguir» está al final del scroll.',enter:function(){$('.s3').scrollTop=0},demo:async function(ok,wait){await wait(700);await press($('[data-pref="Ruleta en vivo"]'),ok,wait,600);await press($('[data-pref="Baccarat"]'),ok,wait,700);if(ok()){$('.s3').scrollTo({top:200,behavior:reduce?'auto':'smooth'})}await wait(900);await window.PROTO.pointer($('#seguir'),ok);await wait(300)}},
    {name:'¿Qué usuario prefieres?',what:'Nickname y contraseña con las reglas a la vista; el botón «Ingresar» se enciende recién cuando todo está bien, incluidas la edad y las políticas.',demo:async function(ok,wait){await wait(500);await type(nick,'Didi2022',ok,wait);await wait(300);await type(pass,'Secreta2022',ok,wait);await wait(300);await press(c18,ok,wait,350);await press(ct,ok,wait,700);await window.PROTO.pointer(btn,ok);await wait(400)}},
    {name:'Preparando la sala',what:'La espera no es vacía: mientras la barra carga pasan los mensajes de juego responsable que un operador con licencia tiene que comunicar.',enter:loading,demo:async function(ok,wait){await wait(reduce?1500:4000)}},
-   {name:'Listo',what:'El regalo de bienvenida y los medios de depósito llegan al final, cuando la persona ya está adentro. La acción siguiente es «Jugar», no otro formulario.',enter:bonus,hold:4200}
+   {name:'Listo',what:'El regalo de bienvenida y los medios de depósito llegan al final, cuando la persona ya está adentro. La acción siguiente es «Jugar», no otro formulario.',enter:bonus,hold:4200},
+   {name:'Pantalla de juegos',what:'Al tocar «Jugar» se abre la pantalla de juegos: el saldo de $500 ya está acreditado arriba, con los juegos especiales a mano.',enter:credit,hold:3800}
   ];
   renderProv();renderPrefs();check();msg.textContent=MSG[0];
 })();
