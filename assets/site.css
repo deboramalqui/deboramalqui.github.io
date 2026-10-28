@@ -397,3 +397,19 @@ body.s-lock{overflow:hidden}
 [dir="rtl"] .s-book .d-hint{direction:rtl}
 @media(prefers-reduced-motion:reduce){.s-book__leaf,.s-book__book{transition:none}}
 @media(max-width:600px){.s-book__book.is-closed{transform:translateX(-25%) scale(1.3)}.s-book__book.is-end{transform:translateX(25%) scale(1.3)}.s-book__stage{padding:28px 0}}
+
+/* Sobre mí · tarjeta "Just for fun, brands" (elevación 3, el rosa de acción para la palabra) */
+.s-fun{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:20px 32px;margin:32px 0 8px;padding:30px 34px;border-radius:var(--d-r-d-lg);background:var(--d-container);box-shadow:var(--d-e3),0 18px 40px -18px rgba(0,0,0,.6);color:var(--d-on);text-decoration:none;transition:transform var(--d-dur-m2) var(--d-ease),box-shadow var(--d-dur-m2) var(--d-ease)}
+.s-fun:hover{transform:translateY(-4px);box-shadow:var(--d-e3),0 26px 50px -18px rgba(0,0,0,.7)}
+.s-fun:focus-visible{outline:none;box-shadow:var(--d-focus),var(--d-e3)}
+.s-fun__txt{min-width:0}
+.s-fun__k{display:block;font:500 .8125rem/1 var(--d-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--d-on-var)}
+.s-fun__t{display:block;font:800 clamp(2.75rem,8vw,4.5rem)/.95 var(--d-sans);letter-spacing:-.035em;margin:12px 0 10px;color:var(--d-accion)}
+.s-fun__s{display:block;color:var(--d-on-var);font:400 1rem/1.45 var(--d-sans)}
+.s-fun__logos{display:flex;align-items:center;padding-inline-start:18px}
+.s-fun__logos i{flex:none;width:84px;height:84px;margin-inline-start:-18px;border-radius:18px;background:var(--b);display:grid;place-items:center;box-shadow:var(--d-e2),0 0 0 1px rgba(255,255,255,.08);transform:rotate(var(--r));transition:transform var(--d-dur-m2) var(--d-ease)}
+.s-fun__logos img{max-width:72%;max-height:72%;object-fit:contain}
+.s-fun:hover .s-fun__logos i{transform:rotate(0) translateY(-6px)}
+.s-fun:hover .s-fun__logos i:nth-child(2){transition-delay:30ms}.s-fun:hover .s-fun__logos i:nth-child(3){transition-delay:60ms}.s-fun:hover .s-fun__logos i:nth-child(4){transition-delay:90ms}.s-fun:hover .s-fun__logos i:nth-child(5){transition-delay:120ms}
+@media(max-width:640px){.s-fun{grid-template-columns:minmax(0,1fr);padding:24px 22px}.s-fun__logos i{width:62px;height:62px;border-radius:14px;margin-inline-start:-12px}.s-fun__logos{padding-inline-start:12px}}
+@media(prefers-reduced-motion:reduce){.s-fun,.s-fun__logos i{transition:none}.s-fun:hover{transform:none}}
