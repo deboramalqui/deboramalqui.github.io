@@ -146,14 +146,28 @@
 
   <div class="sheet">
     <div class="lbl">Buttons · every state, forced and labeled</div>
-    <div class="states" role="table" aria-label="Button states">
-      <div class="h"></div><div class="h">Enabled</div><div class="h">Hover<small>layer 8 %</small></div><div class="h">Focus<small>layer 12 % + ring</small></div><div class="h">Pressed<small>layer 12 % + elevation</small></div><div class="h">Disabled</div>
-      <div class="rl">Contained</div>
-      <button class="btn btn--contained sl">Registrarse</button><button class="btn btn--contained sl is-hover">Registrarse</button><button class="btn btn--contained sl is-focus">Registrarse</button><button class="btn btn--contained sl is-press">Registrarse</button><button class="btn btn--contained" disabled>Registrarse</button>
-      <div class="rl">Outlined</div>
-      <button class="btn btn--outlined sl">Iniciar sesión</button><button class="btn btn--outlined sl is-hover">Iniciar sesión</button><button class="btn btn--outlined sl is-focus">Iniciar sesión</button><button class="btn btn--outlined sl is-press">Iniciar sesión</button><button class="btn btn--outlined" disabled>Iniciar sesión</button>
-      <div class="rl">Text</div>
-      <button class="btn btn--text sl">Conocé el bono</button><button class="btn btn--text sl is-hover">Conocé el bono</button><button class="btn btn--text sl is-focus">Conocé el bono</button><button class="btn btn--text sl is-press">Conocé el bono</button><button class="btn btn--text" disabled>Conocé el bono</button>
+    <div class="brows">
+      <div class="brow"><div class="rl">Contained</div><div class="cells">
+        <div class="cell"><button class="btn btn--contained sl">Registrarse</button><span class="cap"><b>Enabled</b></span></div>
+        <div class="cell"><button class="btn btn--contained sl is-hover">Registrarse</button><span class="cap"><b>Hover</b><small>layer 8 %</small></span></div>
+        <div class="cell"><button class="btn btn--contained sl is-focus">Registrarse</button><span class="cap"><b>Focus</b><small>layer 12 % + ring</small></span></div>
+        <div class="cell"><button class="btn btn--contained sl is-press">Registrarse</button><span class="cap"><b>Pressed</b><small>layer 12 % + elevation</small></span></div>
+        <div class="cell"><button class="btn btn--contained" disabled>Registrarse</button><span class="cap"><b>Disabled</b></span></div>
+      </div></div>
+      <div class="brow"><div class="rl">Outlined</div><div class="cells">
+        <div class="cell"><button class="btn btn--outlined sl">Iniciar sesión</button><span class="cap"><b>Enabled</b></span></div>
+        <div class="cell"><button class="btn btn--outlined sl is-hover">Iniciar sesión</button><span class="cap"><b>Hover</b><small>layer 8 %</small></span></div>
+        <div class="cell"><button class="btn btn--outlined sl is-focus">Iniciar sesión</button><span class="cap"><b>Focus</b><small>layer 12 % + ring</small></span></div>
+        <div class="cell"><button class="btn btn--outlined sl is-press">Iniciar sesión</button><span class="cap"><b>Pressed</b><small>layer 12 % + elevation</small></span></div>
+        <div class="cell"><button class="btn btn--outlined" disabled>Iniciar sesión</button><span class="cap"><b>Disabled</b></span></div>
+      </div></div>
+      <div class="brow"><div class="rl">Text</div><div class="cells">
+        <div class="cell"><button class="btn btn--text sl">Conocé el bono</button><span class="cap"><b>Enabled</b></span></div>
+        <div class="cell"><button class="btn btn--text sl is-hover">Conocé el bono</button><span class="cap"><b>Hover</b><small>layer 8 %</small></span></div>
+        <div class="cell"><button class="btn btn--text sl is-focus">Conocé el bono</button><span class="cap"><b>Focus</b><small>layer 12 % + ring</small></span></div>
+        <div class="cell"><button class="btn btn--text sl is-press">Conocé el bono</button><span class="cap"><b>Pressed</b><small>layer 12 % + elevation</small></span></div>
+        <div class="cell"><button class="btn btn--text" disabled>Conocé el bono</button><span class="cap"><b>Disabled</b></span></div>
+      </div></div>
     </div>
     <div class="row" style="margin-top:24px">
       <button class="btn btn--contained sl"><svg class="ic" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>Jugar</button>
