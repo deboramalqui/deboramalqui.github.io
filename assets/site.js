@@ -118,3 +118,22 @@
     show(0);
   });
 })();
+
+/* Formulario de contacto: envío sin salir de la página; sin JS el formulario se envía igual por su acción */
+(function(){
+  var f=document.querySelector('form.s-form');if(!f||!window.fetch)return;
+  var ok=f.querySelector('.s-form__ok'),er=f.querySelector('.s-form__err'),btn=f.querySelector('button[type=submit]');
+  function flag(el,bad){var w=el.closest('.d-field');if(w)w.classList.toggle('is-error',bad);el.setAttribute('aria-invalid',bad?'true':'false')}
+  f.addEventListener('submit',function(e){
+    e.preventDefault();ok.hidden=true;er.hidden=true;
+    var els=[].slice.call(f.querySelectorAll('input[required],textarea[required]')),bad=false;
+    els.forEach(function(x){var v=!x.value.trim()||(x.type==='email'&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(x.value));flag(x,v);if(v&&!bad){bad=true;x.focus()}});
+    if(bad){er.hidden=false;return}
+    if(f.querySelector('[name=_honey]').value)return;
+    var d={};new FormData(f).forEach(function(v,k){d[k]=v});btn.disabled=true;
+    fetch(f.getAttribute('data-ajax'),{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(d)})
+      .then(function(r){return r.json().catch(function(){return{}})}).then(function(j){
+        if(j&&(j.success===true||j.success==='true')){f.reset();ok.hidden=false}else{er.hidden=false}
+      }).catch(function(){er.hidden=false}).then(function(){btn.disabled=false});
+  });
+})();
