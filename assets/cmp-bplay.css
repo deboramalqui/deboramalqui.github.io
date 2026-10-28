@@ -52,9 +52,11 @@ h1,h2,h3,h4,h5,h6,p{margin:0}
 /* state layer + ripple host */
 .sl{position:relative;overflow:hidden;cursor:pointer;-webkit-tap-highlight-color:transparent;outline:0}
 .sl::before{content:"";position:absolute;inset:0;background:currentColor;opacity:0;transition:opacity 15ms linear;pointer-events:none;border-radius:inherit}
-.sl:hover::before,.sl.is-hover::before{opacity:.04}
+.sl:hover::before,.sl.is-hover::before{opacity:.08}
 .sl:focus-visible::before,.sl.is-focus::before{opacity:.12}
-.sl:active::before,.sl.is-press::before{opacity:.10}
+.sl:active::before,.sl.is-press::before{opacity:.12}
+.sl:focus-visible,.sl.is-focus{outline:2px solid var(--primary);outline-offset:3px}
+.btn--contained.sl:focus-visible,.btn--contained.sl.is-focus{outline-color:#fff}
 .sl.is-selected::before{opacity:.08}
 .ripple{position:absolute;border-radius:50%;background:currentColor;opacity:.16;transform:scale(0);animation:rip .45s cubic-bezier(.4,0,.2,1) forwards;pointer-events:none}
 @keyframes rip{to{transform:scale(1);opacity:0}}
@@ -65,7 +67,11 @@ h1,h2,h3,h4,h5,h6,p{margin:0}
 .btn--contained{background:var(--primary);color:var(--on-primary);box-shadow:0 3px 1px -2px rgba(var(--shadow),.2),0 2px 2px 0 rgba(var(--shadow),.14),0 1px 5px 0 rgba(var(--shadow),.12)}
 .btn--contained:hover{box-shadow:0 2px 4px -1px rgba(var(--shadow),.2),0 4px 5px 0 rgba(var(--shadow),.14),0 1px 10px 0 rgba(var(--shadow),.12)}
 .btn--contained:active{box-shadow:0 5px 5px -3px rgba(var(--shadow),.2),0 8px 10px 1px rgba(var(--shadow),.14),0 3px 14px 2px rgba(var(--shadow),.12)}
+.btn--contained.is-hover{box-shadow:0 2px 4px -1px rgba(var(--shadow),.2),0 4px 5px 0 rgba(var(--shadow),.14),0 1px 10px 0 rgba(var(--shadow),.12)}
+.btn--contained.is-press{box-shadow:0 5px 5px -3px rgba(var(--shadow),.2),0 8px 10px 1px rgba(var(--shadow),.14),0 3px 14px 2px rgba(var(--shadow),.12);transform:translateY(1px)}
 .btn--outlined{border:1px solid var(--divider);padding:0 15px}
+.btn--outlined:hover,.btn--outlined.is-hover,.btn--outlined.is-focus,.btn--outlined:focus-visible{border-color:var(--primary)}
+.btn--outlined.is-press,.btn--outlined:active{border-color:var(--primary);background:rgba(74,224,138,.08)}
 .btn--text{padding:0 8px}
 .btn--lg{height:48px;padding:0 24px}
 .btn[disabled],.btn.is-disabled{pointer-events:none;color:rgba(var(--ink),var(--dis));box-shadow:none}
@@ -88,12 +94,18 @@ h1,h2,h3,h4,h5,h6,p{margin:0}
 .tf input:focus+span,.tf input:not(:placeholder-shown)+span,.tf.is-filled > span,.tf select+span{transform:translateY(-10px) scale(.75)}
 .tf--filled{background:rgba(var(--ink),.06);border-radius:4px 4px 0 0;border-bottom:1px solid rgba(var(--ink),.42);transition:border-color 150ms,background 150ms}
 .tf--filled:hover{background:rgba(var(--ink),.09)}
+.tf--filled.is-hover{background:rgba(var(--ink),.09)}
+.tf--filled.is-focus{background:rgba(var(--ink),.12);border-bottom:2px solid var(--primary);margin-bottom:-1px}
 .tf--filled:focus-within{background:rgba(var(--ink),.12);border-bottom:2px solid var(--primary);margin-bottom:-1px}
 .tf--outlined{border:1px solid rgba(var(--ink),.38);border-radius:4px}
 .tf--outlined input,.tf--outlined select{padding:16px}
 .tf--outlined > span{left:12px;top:16px;padding:0 4px}
 .tf--outlined input:focus+span,.tf--outlined input:not(:placeholder-shown)+span,.tf--outlined.is-filled > span,.tf--outlined select+label{transform:translateY(-25px) scale(.75);background:var(--surface)}
 .tf--outlined:hover{border-color:rgba(var(--ink),.87)}
+.tf--outlined.is-hover{border-color:rgba(var(--ink),.87)}
+.tf--outlined.is-focus{border:2px solid var(--primary);margin:-1px}
+.tf.is-focus > span{color:var(--primary);transform:translateY(-10px) scale(.75)}
+.tf--outlined.is-focus > span{transform:translateY(-25px) scale(.75);background:var(--surface)}
 .tf--outlined:focus-within{border:2px solid var(--primary);margin:-1px}
 .tf:focus-within > span{color:var(--primary)}
 .tf.is-error{border-color:var(--error)!important}
@@ -109,8 +121,9 @@ h1,h2,h3,h4,h5,h6,p{margin:0}
 .sc input{position:absolute;opacity:0;width:1px;height:1px}
 .sc .box,.sc .rad,.sc .trk{position:relative;display:inline-flex;align-items:center;justify-content:center;flex:none;width:40px;height:40px;border-radius:50%;color:rgba(var(--ink),.6)}
 .sc .box::before,.sc .rad::before,.sc .trk::before{content:"";position:absolute;inset:0;border-radius:50%;background:currentColor;opacity:0;transition:opacity 15ms}
-.sc:hover .box::before,.sc:hover .rad::before,.sc:hover .trk::before{opacity:.04}
-.sc input:focus-visible~.box::before,.sc input:focus-visible~.rad::before,.sc input:focus-visible~.trk::before{opacity:.12}
+.sc:hover .box::before,.sc:hover .rad::before,.sc:hover .trk::before,.sc.is-hover .box::before,.sc.is-hover .rad::before,.sc.is-hover .trk::before{opacity:.08}
+.sc input:focus-visible~.box::before,.sc input:focus-visible~.rad::before,.sc input:focus-visible~.trk::before,.sc.is-focus .box::before,.sc.is-focus .rad::before,.sc.is-focus .trk::before{opacity:.12}
+.sc input:focus-visible~.box,.sc input:focus-visible~.rad,.sc input:focus-visible~.trk,.sc.is-focus .box,.sc.is-focus .rad,.sc.is-focus .trk{outline:2px solid var(--primary);outline-offset:0}
 .sc .box i{width:18px;height:18px;border:2px solid currentColor;border-radius:2px;display:block;position:relative}
 .sc input:checked~.box{color:var(--primary)}
 .sc input:checked~.box i{background:var(--primary);border-color:var(--primary)}
@@ -191,6 +204,16 @@ h1,h2,h3,h4,h5,h6,p{margin:0}
 .badge{display:inline-flex;align-items:center;justify-content:center;min-width:20px;height:20px;padding:0 6px;border-radius:10px;background:var(--error);color:var(--on-error);font:500 12px/16px var(--font);letter-spacing:.4px}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .skip{position:absolute;left:8px;top:-48px;background:var(--primary);color:var(--on-primary);padding:12px 16px;border-radius:4px;z-index:99}.skip:focus{top:8px}
+
+/* tabla de estados: cada estado forzado con su clase y rotulado */
+.states{display:grid;grid-template-columns:104px repeat(5,minmax(0,1fr));gap:16px 12px;align-items:center;margin-top:8px}
+.states .h{font:500 10px/16px var(--font);letter-spacing:1.5px;text-transform:uppercase;color:rgba(var(--ink),.6)}
+.states .h small{display:block;font:400 11px/14px var(--font);letter-spacing:.2px;text-transform:none;color:rgba(var(--ink),.5)}
+.states .rl{font:500 12px/16px var(--font);color:rgba(var(--ink),.6)}
+.states--tf{grid-template-columns:repeat(3,minmax(0,1fr))}
+.states--tf .cell{display:grid;gap:6px}
+.states--tf .cap{color:rgba(var(--ink),.6)}
+@media (max-width:760px){.states{grid-template-columns:repeat(2,minmax(0,1fr))}.states .rl{grid-column:1/-1}.states>.h{display:none}.states .btn{justify-self:start}}
 
 
   /* Bplay dark theme on top of the M2 base. Brand green from the 2022 prototype; the

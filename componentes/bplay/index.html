@@ -142,16 +142,23 @@
 
 <section><div class="wrap">
   <div class="sec-h"><div class="over">03 — Components</div><h2>Every component, every state</h2>
-  <p>Each component follows one spec: 36dp buttons with 4dp corners, 56dp text fields with floating labels, 48dp touch targets on selection controls, state layers at hover 4 % / focus 12 % / pressed 10 %. Hover, tab through and click them.</p></div>
+  <p>Each component follows one spec: 36dp buttons with 4dp corners, 56dp text fields with floating labels, 48dp touch targets on selection controls, state layers at hover 8 % / focus 12 % / pressed 12 %, a visible focus ring and a change of elevation when pressed. Hover, tab through and click them.</p></div>
 
   <div class="sheet">
-    <div class="lbl">Buttons</div>
-    <div class="row">
-      <button class="btn btn--contained sl">Registrarse</button>
-      <button class="btn btn--contained sl is-hover">Hover</button>
-      <button class="btn btn--contained sl is-focus">Focus</button>
-      <button class="btn btn--contained sl is-press">Pressed</button>
-      <button class="btn btn--contained" disabled>Disabled</button>
+    <div class="lbl">Buttons · every state, forced and labeled</div>
+    <div class="states" role="table" aria-label="Button states">
+      <div class="h"></div><div class="h">Enabled</div><div class="h">Hover<small>layer 8 %</small></div><div class="h">Focus<small>layer 12 % + ring</small></div><div class="h">Pressed<small>layer 12 % + elevation</small></div><div class="h">Disabled</div>
+      <div class="rl">Contained</div>
+      <button class="btn btn--contained sl">Registrarse</button><button class="btn btn--contained sl is-hover">Registrarse</button><button class="btn btn--contained sl is-focus">Registrarse</button><button class="btn btn--contained sl is-press">Registrarse</button><button class="btn btn--contained" disabled>Registrarse</button>
+      <div class="rl">Outlined</div>
+      <button class="btn btn--outlined sl">Iniciar sesión</button><button class="btn btn--outlined sl is-hover">Iniciar sesión</button><button class="btn btn--outlined sl is-focus">Iniciar sesión</button><button class="btn btn--outlined sl is-press">Iniciar sesión</button><button class="btn btn--outlined" disabled>Iniciar sesión</button>
+      <div class="rl">Text</div>
+      <button class="btn btn--text sl">Conocé el bono</button><button class="btn btn--text sl is-hover">Conocé el bono</button><button class="btn btn--text sl is-focus">Conocé el bono</button><button class="btn btn--text sl is-press">Conocé el bono</button><button class="btn btn--text" disabled>Conocé el bono</button>
+    </div>
+    <div class="row" style="margin-top:24px">
+      <button class="btn btn--contained sl"><svg class="ic" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>Jugar</button>
+      <button class="fab fab--ext sl"><svg class="ic" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>Depositar</button>
+      <button class="fab sl" aria-label="Depositar"><svg class="ic" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
     </div>
     <div class="row">
       <button class="btn btn--outlined sl">Iniciar sesión</button>
@@ -167,7 +174,7 @@
     <div class="col">
       <label class="tf tf--filled"><input placeholder=" " value="DidiZ22"><span>Nickname</span></label>
       <div class="helper"><span>Entre 4 y 16 caracteres</span><span>7/16</span></div>
-      <label class="tf tf--filled"><input type="password" placeholder=" " value="••••••••"><span>Contraseña</span><svg class="ic trail" viewBox="0 0 24 24"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></label>
+      <label class="tf tf--filled"><input type="text" placeholder=" " value="••••••••" readonly autocomplete="off" data-lpignore="true" data-1p-ignore data-form-type="other"><span>Contraseña</span><svg class="ic trail" viewBox="0 0 24 24"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></label>
       <div class="helper"><span>Mínimo 8 caracteres, 1 número y 1 mayúscula</span></div>
     </div>
     <div class="col">
@@ -175,6 +182,21 @@
       <label class="tf tf--outlined is-error is-filled"><input placeholder=" " value="didi@mail" aria-invalid="true" aria-describedby="e1"><span>Email</span></label>
       <div class="helper is-error" id="e1"><span>Ingresá un email válido</span></div>
       <label class="tf tf--outlined is-disabled"><input placeholder=" " value="Santa Fe" disabled><span>Provincia</span></label>
+    </div>
+  </div>
+
+  <div class="sheet" style="margin-top:24px">
+    <div class="lbl">Text fields · every state, forced and labeled</div>
+    <div class="states states--tf">
+      <div class="cell"><label class="tf tf--filled"><input placeholder=" " autocomplete="off"><span>Nickname</span></label><span class="cap">Enabled</span></div>
+      <div class="cell"><label class="tf tf--filled is-hover"><input placeholder=" " autocomplete="off"><span>Nickname</span></label><span class="cap">Hover · fill 9 %</span></div>
+      <div class="cell"><label class="tf tf--filled is-focus"><input placeholder=" " autocomplete="off"><span>Nickname</span></label><span class="cap">Focus · 2 dp bar, fill 12 %</span></div>
+      <div class="cell"><label class="tf tf--filled is-filled"><input placeholder=" " value="DidiZ22" autocomplete="off"><span>Nickname</span></label><span class="cap">Filled</span></div>
+      <div class="cell"><label class="tf tf--filled is-error is-filled"><input placeholder=" " value="Did" aria-invalid="true" autocomplete="off"><span>Nickname</span></label><span class="cap" style="color:var(--error)">Error · Mínimo 4 caracteres</span></div>
+      <div class="cell"><label class="tf tf--filled is-disabled is-filled"><input placeholder=" " value="DidiZ22" disabled><span>Nickname</span></label><span class="cap">Disabled</span></div>
+      <div class="cell"><label class="tf tf--outlined"><input placeholder=" " autocomplete="off"><span>Email</span></label><span class="cap">Enabled</span></div>
+      <div class="cell"><label class="tf tf--outlined is-hover"><input placeholder=" " autocomplete="off"><span>Email</span></label><span class="cap">Hover · border 87 %</span></div>
+      <div class="cell"><label class="tf tf--outlined is-focus"><input placeholder=" " autocomplete="off"><span>Email</span></label><span class="cap">Focus · 2 dp primary border</span></div>
     </div>
   </div>
 

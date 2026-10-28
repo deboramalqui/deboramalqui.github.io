@@ -264,7 +264,7 @@ body.s-lock{overflow:hidden}
 .s-journey{list-style:none;margin:0;padding:0;border-inline-start:2px solid var(--d-outline-var)}.s-journey li{display:grid;grid-template-columns:64px 1fr;gap:10px;padding:0 0 14px 14px;position:relative}.s-journey li::before{content:"";position:absolute;inset-inline-start:-7px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--d-accion)}.s-journey b{font:600 .85rem/1.4 var(--d-mono);color:var(--d-on-var)}.s-journey span{font-size:.95rem;line-height:1.5}
 
 /* video en el caso */
-.s-video{flex:1 1 320px}
+.s-video{max-width:720px}
 .s-video video{display:block;width:100%;height:auto;background:#000;border-radius:4px}
 
 /* Formulario de contacto */
