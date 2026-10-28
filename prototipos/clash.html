@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Clash · prototipo del onboarding</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&display=swap">
+<title>Clash · el onboarding, de 2021 al diseñado</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&display=swap">
 <style>:root{--accent:#e8112d;--on-accent:#ffffff}</style>
 <style>
 :root{--font:'Montserrat',-apple-system,"Segoe UI",Roboto,sans-serif;--red:#e8112d;--org:#f68b1f}
@@ -105,13 +105,15 @@
 .hfoot .btn{width:100%}
 .soon{list-style:none;margin:0;padding:0 20px}.soon li{display:grid;grid-template-columns:36px 1fr auto;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid #ededf0;font:600 12.5px/17px var(--font)}.soon li small{display:block;font:500 11px/15px var(--font);color:#6e6e73}.soon i{width:36px;height:36px;border-radius:10px;background:var(--b)}.soon b{font:800 13px/1 var(--font);color:var(--red)}
 .hfoot{position:absolute;left:0;right:0;bottom:0;padding:12px 24px 32px;background:linear-gradient(rgba(255,255,255,0),#fff 40%)}
-.toast{position:absolute;left:20px;right:20px;bottom:104px;background:#1d1d1f;color:#fff;border-radius:12px;padding:12px 14px;font:500 13px/18px var(--font);opacity:0;transform:translateY(8px);transition:.25s;pointer-events:none;z-index:4}
+.toast{position:absolute;left:20px;right:20px;bottom:104px;z-index:3;background:#1d1d1f;color:#fff;border-radius:12px;padding:12px 14px;font:500 13px/18px var(--font);opacity:0;transform:translateY(8px);transition:.25s;pointer-events:none;z-index:4}
 .toast.is-on{opacity:1;transform:none}
 /* 2021 · capturas con zonas activas */
 .shot{position:absolute;inset:0;width:375px;height:812px;object-fit:cover;display:block}
 .hs{all:unset;position:absolute;cursor:pointer;border-radius:14px;transition:box-shadow .2s}
 .hs:hover,.hs:focus-visible{box-shadow:inset 0 0 0 2px rgba(255,255,255,.75),0 0 0 2px rgba(232,17,45,.5)}
 .hs.is-hl{box-shadow:0 0 0 3px #fff,0 0 0 7px rgba(232,17,45,.65)}
+.codes span{position:absolute;top:360px;width:51px;height:56px;display:flex;align-items:center;justify-content:center;font:700 28px/1 var(--font);color:#e8112d}
+.code-go{position:absolute;left:23px;top:692px;width:329px;height:66px;border-radius:33px}
 </style>
 <style>
 *{box-sizing:border-box}
@@ -169,25 +171,7 @@ body{font-family:var(--font);color:#e8ecf4;-webkit-font-smoothing:antialiased}
 <div class="px">
  <div class="px__stage"><div class="px__scale" style="--w:393px;--h:830px">
   <div class="device" dir="ltr"><div class="screen" id="screen">
-
-   <section class="pscr s1" aria-label="Bienvenida">
-    <div class="status"><span>9:41</span><svg aria-hidden="true"><use href="#sysbar"/></svg></div>
-    <svg class="logo" aria-label="Clash"><use href="#clashlogo"/></svg>
-    <h1>Todos tus beneficios juntos en una misma app.</h1>
-    <p>Tu banco, la prepaga, la universidad y la compañía de teléfono, en un solo lugar.</p>
-    <button type="button" class="btn btn--white cta" data-do="next">Empezar</button>
-    <p class="more">¿Necesitás saber más? <button type="button" class="link" id="more">Mirá cómo funciona</button></p>
-    <p class="foot1">¿Ya tenés cuenta en Clash? <button type="button" class="link" id="login">Ingresá</button></p>
-    <div class="scrim" id="scrim"></div>
-    <div class="how" id="how" role="dialog" aria-label="Cómo funciona" aria-hidden="true">
-     <h2>Cómo funciona</h2>
-     <p class="sub">Vinculá tus cuentas y servicios, todo desde una sola app.</p>
-     <ol><li><b>1</b><span>Elegí tus servicios: el banco, la prepaga, la universidad, la compañía de teléfono.</span></li><li><b>2</b><span>Contanos qué te interesa: supermercados, salidas, vehículos, ropa, tecnología.</span></li><li><b>3</b><span>Clash busca y junta los beneficios que ya tenés, y te avisa cuando aparece uno nuevo.</span></li></ol>
-     <button type="button" class="btn btn--red" id="howok">Entendido</button>
-    </div>
-    <i class="homebar" aria-hidden="true"></i>
-   </section>
-
+<section class="pscr" aria-label="clash."><img class="shot" src="../assets/img/clash-2021-1.webp" alt="" width="750" height="1624"><button type="button" class="hs" data-hs="next" style="left:140px;top:556px;width:95px;height:36px" aria-label="Pasar a la pantalla siguiente"></button><button type="button" class="hs" data-hs="login" style="left:23px;top:626px;width:329px;height:66px" aria-label="Ingresar"></button><button type="button" class="hs" data-hs="jump3" style="left:23px;top:700px;width:329px;height:68px" aria-label="Registrarme"></button></section><section class="pscr" aria-label="compará." hidden><img class="shot" src="../assets/img/clash-2021-2.webp" alt="" width="750" height="1624"><button type="button" class="hs" data-hs="next" style="left:140px;top:556px;width:95px;height:36px" aria-label="Pasar a la pantalla siguiente"></button><button type="button" class="hs" data-hs="login" style="left:23px;top:626px;width:329px;height:66px" aria-label="Ingresar"></button><button type="button" class="hs" data-hs="jump3" style="left:23px;top:700px;width:329px;height:68px" aria-label="Registrarme"></button></section><section class="pscr" aria-label="ahorrá." hidden><img class="shot" src="../assets/img/clash-2021-3.webp" alt="" width="750" height="1624"><button type="button" class="hs" data-hs="next" style="left:140px;top:556px;width:95px;height:36px" aria-label="Registrarme"></button><button type="button" class="hs" data-hs="login" style="left:23px;top:626px;width:329px;height:66px" aria-label="Ingresar"></button><button type="button" class="hs" data-hs="next" style="left:23px;top:700px;width:329px;height:68px" aria-label="Registrarme"></button></section><section class="pscr" aria-label="Crea tu usuario" hidden><img class="shot" src="../assets/img/clash-2021-4.webp" alt="" width="750" height="1624"><button type="button" class="hs" data-hs="next" style="left:30px;top:160px;width:315px;height:500px" aria-label="Completar el formulario"></button><button type="button" class="hs" data-hs="next" style="left:23px;top:714px;width:329px;height:66px" aria-label="Siguiente"></button></section><section class="pscr" aria-label="Crea tu usuario, completo" hidden><img class="shot" src="../assets/img/clash-2021-5.webp" alt="" width="750" height="1624"><button type="button" class="hs" data-hs="next" style="left:23px;top:654px;width:329px;height:66px" aria-label="Siguiente"></button></section><section class="pscr" aria-label="Validación de e-mail" hidden><img class="shot" src="../assets/img/clash-2021-6.webp" alt="" width="750" height="1624"><button type="button" class="hs" data-hs="code" style="left:40px;top:355px;width:295px;height:70px" aria-label="Escribir el código"></button><div class="codes" id="codes" aria-hidden="true"><span style="left:47px"></span><span style="left:123px"></span><span style="left:199px"></span><span style="left:275px"></span></div><button type="button" class="btn btn--red code-go" id="code-go" hidden>Continuar</button></section>
    <section class="pscr s2" aria-label="Seleccioná tus servicios" hidden>
     <div class="status status--dark"><span>9:41</span><svg aria-hidden="true"><use href="#sysbar"/></svg></div>
     <div class="stepbar"><span>Paso 1 de 2</span><span class="prog" aria-hidden="true"><i class="on"></i><i></i></span></div>
@@ -240,6 +224,8 @@ body{font-family:var(--font);color:#e8ecf4;-webkit-font-smoothing:antialiased}
     <i class="homebar" aria-hidden="true" style="color:#1d1d1f"></i>
    </section>
 
+
+   <div class="toast" id="toast21" role="status"></div>
   </div></div>
  </div></div>
  <div class="px__panel">
@@ -254,6 +240,32 @@ body{font-family:var(--font);color:#e8ecf4;-webkit-font-smoothing:antialiased}
 <script>
 (function(){
   var $=function(s,r){return (r||document).querySelector(s)},$$=function(s,r){return [].slice.call((r||document).querySelectorAll(s))};
+  var tt=0;function toast(m){var t=$('#toast21');t.textContent=m;t.classList.add('is-on');clearTimeout(tt);tt=setTimeout(function(){t.classList.remove('is-on')},2200)}
+  function userClick(e){if(e.isTrusted&&window.PROTO.isAuto())window.PROTO.stopAuto();return e.isTrusted}
+  var ct=[];function clearCode(){ct.forEach(clearTimeout);ct=[];$$('#codes span').forEach(function(s){s.textContent=''});$('#code-go').hidden=true}
+  function fillCode(){clearCode();'4812'.split('').forEach(function(d,k){ct.push(setTimeout(function(){$$('#codes span')[k].textContent=d;if(k===3)$('#code-go').hidden=false},220*(k+1)))})}
+  $('#code-go').addEventListener('click',function(e){userClick(e);window.PROTO.next()});
+  document.addEventListener('click',function(e){var b=e.target.closest('[data-hs]');if(!b)return;userClick(e);var a=b.getAttribute('data-hs');
+    if(a==='next')window.PROTO.next();else if(a==='jump3')window.PROTO.go(3);else if(a==='reset'){window.PROTO.go(0)}
+    else if(a==='login')toast('Ingresar: para quien ya tiene cuenta. Seguimos por el registro.');
+    else if(a==='code')fillCode();
+    else if(a==='toast')toast('Recién acá la app pide los bancos y las prepagas, uno por uno.')});
+  function unhl(){$$('.hs.is-hl').forEach(function(h){h.classList.remove('is-hl')})}
+  function hl(i,sel){var s=$$('.pscr')[i];var h=sel?$(sel,s):null;if(h)h.classList.add('is-hl')}
+  window.PROTO_RESET=function(){unhl();clearCode();$('#toast21').classList.remove('is-on')};
+  function step(name,what,sel,ms){return {name:name,what:what,enter:unhl,demo:async function(ok,wait){await wait(ms||1500);if(!ok())return;hl(window.PROTO.cur(),sel);await wait(900)}}}
+  window.PROTO_STEPS=[
+   step('clash.','Tres pantallas de promesa, con puntos para pasar de una a otra: clash, compará, ahorrá. Ingresar y Registrarme están desde la primera.','[data-hs="next"]',1700),
+   step('compará.','«Con Clash nunca más vas a dejar pasar una oportunidad de ahorrar. Ahora todas tus compras son más inteligentes».','[data-hs="next"]',1500),
+   step('ahorrá.','«Registrate, agregá tus membresías y ahorrá todos los días». Hasta acá la app no sabe nada de la persona.','[data-hs="next"]:last-child',1500),
+   step('Crea tu usuario','Seis campos antes de ver nada: nombre, apellido, e-mail, fecha de nacimiento, sexo y contraseña.','[data-hs="next"]',1500),
+   step('Formulario completo','Con todo cargado, Siguiente.','[data-hs="next"]',1200),
+   {name:'Validación de e-mail',what:'Un código de cuatro dígitos que llega por correo. Al escribirlo se habilita Continuar y, recién ahí, empieza el onboarding que diseñé.',enter:function(){unhl();clearCode()},demo:async function(ok,wait){await wait(1200);if(!ok())return;fillCode();await wait(1800)}}
+  ];
+})();
+
+(function(){
+  var $=function(s,r){return (r||document).querySelector(s)},$$=function(s,r){return [].slice.call((r||document).querySelectorAll(s))};
   var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
   var SVC=[
    ['Bancos','banco',[['Banco Municipal','#d8215c'],['Banco Nación','#1b4f9c'],['Macro','#0b2a5b'],['Santander','#ec0000'],['HSBC','#db0011'],['Banco Santa Fe','#00954f'],['Galicia','#f5831f']]],
@@ -266,13 +278,7 @@ body{font-family:var(--font);color:#e8ecf4;-webkit-font-smoothing:antialiased}
   function userClick(e){if(e.isTrusted&&window.PROTO.isAuto())window.PROTO.stopAuto();return e.isTrusted}
   document.addEventListener('click',function(e){var b=e.target.closest('[data-do]');if(!b||b.disabled)return;userClick(e);b.getAttribute('data-do')==='next'?window.PROTO.next():window.PROTO.prev()});
   /* 1 · cómo funciona (la versión B del A/B, la específica) */
-  var how=$('#how'),scrim=$('#scrim');
-  function openHow(on){how.classList.toggle('is-on',on);scrim.classList.toggle('is-on',on);how.setAttribute('aria-hidden',on?'false':'true')}
-  $('#more').addEventListener('click',function(e){userClick(e);openHow(true)});
-  $('#howok').addEventListener('click',function(e){userClick(e);openHow(false)});
-  scrim.addEventListener('click',function(e){userClick(e);openHow(false)});
-  $('#login').addEventListener('click',function(e){userClick(e);toast1('Ingresar: para quien ya tiene cuenta. Acá seguimos con el registro.')});
-  var tt1=0;function toast1(m){var t=$('#toast');t.textContent=m}
+  function openHow(on){}
   /* 2 · servicios */
   var list=$('#svclist');
   list.innerHTML=SVC.map(function(g,gi){return '<div class="grp" data-g="'+gi+'"><h3>'+g[0]+'</h3><div class="tiles">'+g[2].map(function(s){return '<button type="button" class="tile" data-svc="'+s[0]+'" style="--b:'+s[1]+'" aria-pressed="false"><span>'+s[0]+'</span><i class="chk" aria-hidden="true"><svg viewBox="0 0 20 20"><use href="#i-check"/></svg></i></button>'}).join('')+'<button type="button" class="tile tile--ask" data-ask="'+gi+'" aria-pressed="false"><span>¿No ves tu '+g[1]+'?<br>Solicitalo</span></button></div></div>'}).join('');
@@ -303,7 +309,7 @@ body{font-family:var(--font);color:#e8ecf4;-webkit-font-smoothing:antialiased}
   function searching(){clearTimeout(t4);clearTimeout(t4b);s4.classList.remove('is-done');$('#s4msg').textContent='Estamos buscando los mejores beneficios para vos';
     var n=hotList().length*7+st.svc.length*3;
     t4=setTimeout(function(){s4.classList.add('is-done');$('#s4msg').textContent='Encontramos '+n+' beneficios para vos'},reduce?400:1700);
-    t4b=setTimeout(function(){if(window.PROTO.cur()===3)window.PROTO.go(4,window.PROTO.isAuto())},reduce?900:2900)}
+    t4b=setTimeout(function(){if(window.PROTO.cur()===8)window.PROTO.go(9,window.PROTO.isAuto())},reduce?900:2900)}
   /* 5 · la home llega armada con lo que la persona eligió */
   function color(k){for(var i=0;i<SVC.length;i++)for(var j=0;j<SVC[i][2].length;j++)if(SVC[i][2][j][0]===k)return SVC[i][2][j][1];return '#444'}
   function renderHome(){
@@ -317,18 +323,18 @@ body{font-family:var(--font);color:#e8ecf4;-webkit-font-smoothing:antialiased}
   var hs=$('#hsearch'),tt=0;
   function toast(m){var t=$('#toast');t.textContent=m;t.classList.add('is-on');clearTimeout(tt);tt=setTimeout(function(){t.classList.remove('is-on')},2200)}
   $('#lupa').addEventListener('click',function(e){userClick(e);var on=!hs.classList.contains('is-on');hs.classList.toggle('is-on',on);$('#lupa').setAttribute('aria-expanded',on?'true':'false');if(on)$('#hq').focus()});
-  $('#explorar').addEventListener('click',function(e){userClick(e);toast('Explorar: recorrer todos los beneficios, por rubro y por membresía. La lupa es para quien ya sabe qué busca.')});
+  $('#explorar').addEventListener('click',function(e){userClick(e);toast('A partir de este clic ya empezás a navegar la app: el onboarding que diseñé terminó. Espero que tu experiencia haya sido seamless.')});
   $('#gestionar').addEventListener('click',function(e){userClick(e);toast('Gestionar: agregar o quitar membresías, y pedir las que faltan.')});
   $('#menu').addEventListener('click',function(e){userClick(e);window.PROTO_RESET();window.PROTO.go(0)});
-  window.PROTO_RESET=function(){st={svc:[],ask:[],rub:[]};renderSvc();renderRub();q.value='';filter();list.scrollTop=0;openHow(false);clearTimeout(t4);clearTimeout(t4b);s4.classList.remove('is-done');hs.classList.remove('is-on');$('#lupa').setAttribute('aria-expanded','false');$('#hq').value='';$('#toast').classList.remove('is-on')};
+  var reset21=window.PROTO_RESET;
+  window.PROTO_RESET=function(){if(reset21)reset21();st={svc:[],ask:[],rub:[]};renderSvc();renderRub();q.value='';filter();list.scrollTop=0;openHow(false);clearTimeout(t4);clearTimeout(t4b);s4.classList.remove('is-done');hs.classList.remove('is-on');$('#lupa').setAttribute('aria-expanded','false');$('#hq').value='';$('#toast').classList.remove('is-on')};
   function show(el){list.scrollTop=Math.max(0,el.offsetTop-list.offsetTop-150)}
-  window.PROTO_STEPS=[
-   {name:'Bienvenida',what:'La promesa en una frase y un solo botón. «Cómo funciona» queda a mano para quien quiere entender antes de empezar: es la versión B del A/B, la específica.',demo:async function(ok,wait){await wait(1500);if(!ok())return;openHow(true);await wait(2800);if(!ok())return;openHow(false);await wait(700)}},
+  window.PROTO_STEPS=(window.PROTO_STEPS||[]).concat([
    {name:'Tus servicios',what:'Paso 1 de 2: bancos, prepagas, universidades y telefonía, con buscador y un «¿no ves tu banco? Solicitalo». La marca en cada tarjeta y el contador responden a lo que pidieron en las pruebas: feedback notorio y poder verificar.',enter:function(){list.scrollTop=0},demo:async function(ok,wait){await wait(900);var picks=['Macro','Santander','Esencial','Movistar'];for(var i=0;i<picks.length;i++){if(!ok())return;var t=$('[data-svc="'+picks[i]+'"]');show(t);await wait(450);if(!ok())return;t.click();await wait(650)}await wait(700)}},
    {name:'Tus intereses',what:'Paso 2 de 2: los rubros como chips. «Ninguno de los anteriores» existe para que nadie se quede trabado: la home se arma igual.',demo:async function(ok,wait){await wait(800);var picks=['auto','resto','super'];for(var i=0;i<picks.length;i++){if(!ok())return;$('[data-rub="'+picks[i]+'"]').click();await wait(600)}await wait(700)}},
    {name:'Buscando',what:'La espera no es un vacío: dice qué está haciendo la app y, al final, cuántos beneficios encontró.',enter:searching,demo:async function(ok,wait){await wait(reduce?1200:3100)}},
    {name:'Home',what:'La home llega armada: las membresías elegidas y «lo más HOT» de cada rubro. Arriba, la lupa; abajo, «Explorar beneficios»: las dos formas de llegar a un beneficio, porque en las pruebas pidieron las dos.',enter:renderHome,hold:5200}
-  ];
+  ]);
   renderSvc();renderRub();
 })();
 </script>

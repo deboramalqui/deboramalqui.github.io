@@ -149,3 +149,24 @@
     if(win){e.preventDefault();try{win.opener=null;win.focus()}catch(x){}}
   });
 })();
+
+/* Cuaderno: las hojas giran en 3D; se pasa tocando la hoja, con las flechas o con el teclado */
+(function(){
+  document.querySelectorAll('.s-book').forEach(function(b){
+    var book=b.querySelector('.s-book__book'),leaves=[].slice.call(b.querySelectorAll('.s-book__leaf')),dots=[].slice.call(b.querySelectorAll('.s-book__dots i')),
+        count=b.querySelector('.s-book__count'),prev=b.querySelector('[data-bk="prev"]'),next=b.querySelector('[data-bk="next"]'),n=leaves.length,i=0;
+    function show(k){
+      i=Math.max(0,Math.min(n,k));
+      leaves.forEach(function(l,j){var f=j<i;l.classList.toggle('is-flipped',f);l.style.transform='translateZ('+((f?j+1:n-j)*0.5)+'px)'+(f?' rotateY(-180deg)':'');l.setAttribute('aria-pressed',f?'true':'false')});
+      book.classList.toggle('is-closed',i===0);book.classList.toggle('is-end',i===n);
+      dots.forEach(function(d,j){d.classList.toggle('is-on',j<=i)});
+      if(count)count.textContent=(i+1)+' / '+(n+1);
+      if(prev)prev.disabled=i===0;if(next)next.disabled=i===n;
+    }
+    leaves.forEach(function(l,j){l.addEventListener('click',function(){show(j<i?j:j+1)})});
+    if(prev)prev.addEventListener('click',function(){show(i-1)});
+    if(next)next.addEventListener('click',function(){show(i+1)});
+    b.addEventListener('keydown',function(e){if(e.key==='ArrowRight'){show(i+1);e.preventDefault()}else if(e.key==='ArrowLeft'){show(i-1);e.preventDefault()}});
+    show(0);
+  });
+})();
