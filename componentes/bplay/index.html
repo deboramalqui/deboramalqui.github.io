@@ -160,13 +160,6 @@
       <button class="fab fab--ext sl"><svg class="ic" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>Depositar</button>
       <button class="fab sl" aria-label="Depositar"><svg class="ic" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
     </div>
-    <div class="row">
-      <button class="btn btn--outlined sl">Iniciar sesión</button>
-      <button class="btn btn--text sl">Conocé el bono</button>
-      <button class="btn btn--contained sl"><svg class="ic" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>Jugar</button>
-      <button class="fab fab--ext sl"><svg class="ic" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>Depositar</button>
-      <button class="fab sl" aria-label="Depositar"><svg class="ic" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
-    </div>
   </div>
 
   <div class="sheet" style="margin-top:24px">
@@ -201,7 +194,17 @@
   </div>
 
   <div class="sheet" style="margin-top:24px">
-    <div class="lbl">Selection controls</div>
+    <div class="lbl">Selection controls · every state, forced and labeled</div>
+    <div class="states states--tf">
+      <div class="cell"><label class="sc"><input type="checkbox" tabindex="-1"><span class="box"><i></i></span>Enabled</label></div>
+      <div class="cell"><label class="sc is-hover"><input type="checkbox" tabindex="-1"><span class="box"><i></i></span>Hover · layer 8 %</label></div>
+      <div class="cell"><label class="sc is-focus"><input type="checkbox" tabindex="-1"><span class="box"><i></i></span>Focus · layer 12 % + ring</label></div>
+      <div class="cell"><label class="sc"><input type="checkbox" checked tabindex="-1"><span class="box"><i></i></span>Checked</label></div>
+      <div class="cell"><label class="sc is-hover"><input type="radio" name="st1" checked tabindex="-1"><span class="rad"><i></i></span>Radio · hover</label></div>
+      <div class="cell"><label class="sc is-focus"><input type="checkbox" role="switch" checked tabindex="-1"><span class="trk"><i></i></span>Switch · focus</label></div>
+    </div>
+    <div style="height:16px"></div>
+    <div class="lbl">Selection controls · live</div>
     <div class="col">
       <label class="sc"><input type="checkbox" checked><span class="box"><i></i></span>Soy mayor de 18 años</label>
       <label class="sc"><input type="checkbox"><span class="box"><i></i></span>Acepto los términos y la política de privacidad</label>

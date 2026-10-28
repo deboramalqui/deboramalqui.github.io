@@ -158,7 +158,13 @@
 html,body{margin:0;background:transparent;color-scheme:dark}
 body{font-family:var(--font);color:#e8ecf4;-webkit-font-smoothing:antialiased}
 .px{display:grid;grid-template-columns:minmax(0,auto) minmax(260px,1fr);gap:40px;align-items:start;justify-content:center;padding:20px 12px 28px;max-width:960px;margin:0 auto}
-.px__stage{display:flex;justify-content:center}
+.px__stage{display:flex;justify-content:center;position:relative}
+.px__ptr{position:absolute;left:0;top:0;width:30px;height:30px;margin:-15px 0 0 -15px;border-radius:50%;background:rgba(255,255,255,.28);border:2px solid #fff;box-shadow:0 2px 12px rgba(0,0,0,.5);pointer-events:none;z-index:60;opacity:0;transition:left .6s cubic-bezier(.4,0,.2,1),top .6s cubic-bezier(.4,0,.2,1),opacity .2s}
+.px__ptr.is-on{opacity:1}
+.px__ptr::after{content:"";position:absolute;inset:-2px;border-radius:50%;border:2px solid #fff;opacity:0}
+.px__ptr.is-tap{transform:scale(.8);transition:left .6s cubic-bezier(.4,0,.2,1),top .6s cubic-bezier(.4,0,.2,1),opacity .2s,transform .12s}
+.px__ptr.is-tap::after{animation:pxring .4s ease-out}
+@keyframes pxring{from{opacity:.9;transform:scale(1)}to{opacity:0;transform:scale(2.2)}}
 .px__scale{width:calc(var(--w) * var(--s,1));height:calc(var(--h) * var(--s,1))}
 .px__scale>.phone,.px__scale>.desk{transform:scale(var(--s,1));transform-origin:0 0}
 .px--wide{grid-template-columns:1fr;max-width:1304px;gap:24px}
@@ -350,7 +356,16 @@ body{font-family:var(--font);color:#e8ecf4;-webkit-font-smoothing:antialiased}
     what.textContent=STEPS[i].what; live.textContent=(i+1)+' / '+STEPS.length+' · '+STEPS[i].name;
     if(STEPS[i].enter)STEPS[i].enter(!!fromAuto);
   }
-  function stop(){auto=false;token++;clearTimers();playBtn.textContent=T.play;playBtn.setAttribute('aria-pressed','false')}
+  var stageEl=document.querySelector('.px__stage'),ptr=document.createElement('div');ptr.className='px__ptr';ptr.setAttribute('aria-hidden','true');if(stageEl)stageEl.appendChild(ptr);
+  function hidePtr(){ptr.classList.remove('is-on','is-tap')}
+  function pointer(el,ok){return new Promise(function(res){
+    if(reduce||!el||!stageEl||(ok&&!ok())){res();return}
+    var s=stageEl.getBoundingClientRect(),r=el.getBoundingClientRect(),x=r.left+r.width/2-s.left,y=r.top+r.height/2-s.top;
+    if(!ptr.classList.contains('is-on')){ptr.style.transition='none';ptr.style.left=(x+70)+'px';ptr.style.top=(y+90)+'px';void ptr.offsetWidth;ptr.style.transition='';ptr.classList.add('is-on')}
+    ptr.style.left=x+'px';ptr.style.top=y+'px';
+    wait(700).then(function(){if(ok&&!ok()){res();return}ptr.classList.remove('is-tap');void ptr.offsetWidth;ptr.classList.add('is-tap');return wait(220)}).then(function(){ptr.classList.remove('is-tap');res()})
+  })}
+  function stop(){auto=false;token++;clearTimers();hidePtr();playBtn.textContent=T.play;playBtn.setAttribute('aria-pressed','false')}
   async function play(){
     if(auto){stop();return}
     auto=true;var my=++token;playBtn.textContent=T.pause;playBtn.setAttribute('aria-pressed','true');
@@ -360,14 +375,14 @@ body{font-family:var(--font);color:#e8ecf4;-webkit-font-smoothing:antialiased}
       if(STEPS[i].demo){await STEPS[i].demo(function(){return my===token},wait)}
       else await wait(STEPS[i].hold||2600);
     }
-    if(my===token){stop()}
+    if(my===token){hidePtr();stop()}
   }
   list.addEventListener('click',function(e){var b=e.target.closest('[data-go]');if(b)go(+b.getAttribute('data-go'))});
   document.getElementById('prev').addEventListener('click',function(){go(cur-1)});
   document.getElementById('next').addEventListener('click',function(){go(cur+1)});
   document.getElementById('replay').addEventListener('click',function(){stop();window.PROTO_RESET&&window.PROTO_RESET();go(0)});
   playBtn.addEventListener('click',play);
-  window.PROTO={go:function(i,f){go(i,f===true)},next:function(){go(cur+1)},prev:function(){go(cur-1)},cur:function(){return cur},isAuto:function(){return auto},stopAuto:stop,wait:wait};
+  window.PROTO={go:function(i,f){go(i,f===true)},next:function(){go(cur+1)},prev:function(){go(cur-1)},cur:function(){return cur},isAuto:function(){return auto},stopAuto:stop,wait:wait,pointer:pointer};
   /* escala del teléfono al ancho disponible, sin deformarlo */
   var sc=document.querySelector('.px__scale');
   function fit(){var w=parseFloat(getComputedStyle(sc).getPropertyValue('--w'));var avail=Math.min(document.documentElement.clientWidth-24,w);sc.style.setProperty('--s',Math.min(1,avail/w));

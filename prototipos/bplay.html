@@ -143,6 +143,8 @@
 .fld.is-ok input{border-color:#39d47c}
 .fld.is-error input{border-color:#ff6b6b}
 .fld .eye{position:absolute;right:6px;top:4px;width:32px;height:32px;border:0;background:none;color:#ddd;cursor:pointer;padding:0;display:flex;align-items:center;justify-content:center}
+.fld input.mask{-webkit-text-security:disc;text-security:disc}
+.fld input.mask.show{-webkit-text-security:none;text-security:none}
 .fld .eye svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .s4__hint{position:absolute;left:223px;top:365px;width:195px;font:400 8px/11px var(--font);color:#d0d0d0;margin:0}
 .s4__hint.is-error{color:#ff8a8a}
@@ -189,7 +191,13 @@
 html,body{margin:0;background:transparent;color-scheme:dark}
 body{font-family:var(--font);color:#e8ecf4;-webkit-font-smoothing:antialiased}
 .px{display:grid;grid-template-columns:minmax(0,auto) minmax(260px,1fr);gap:40px;align-items:start;justify-content:center;padding:20px 12px 28px;max-width:960px;margin:0 auto}
-.px__stage{display:flex;justify-content:center}
+.px__stage{display:flex;justify-content:center;position:relative}
+.px__ptr{position:absolute;left:0;top:0;width:30px;height:30px;margin:-15px 0 0 -15px;border-radius:50%;background:rgba(255,255,255,.28);border:2px solid #fff;box-shadow:0 2px 12px rgba(0,0,0,.5);pointer-events:none;z-index:60;opacity:0;transition:left .6s cubic-bezier(.4,0,.2,1),top .6s cubic-bezier(.4,0,.2,1),opacity .2s}
+.px__ptr.is-on{opacity:1}
+.px__ptr::after{content:"";position:absolute;inset:-2px;border-radius:50%;border:2px solid #fff;opacity:0}
+.px__ptr.is-tap{transform:scale(.8);transition:left .6s cubic-bezier(.4,0,.2,1),top .6s cubic-bezier(.4,0,.2,1),opacity .2s,transform .12s}
+.px__ptr.is-tap::after{animation:pxring .4s ease-out}
+@keyframes pxring{from{opacity:.9;transform:scale(1)}to{opacity:0;transform:scale(2.2)}}
 .px__scale{width:calc(var(--w) * var(--s,1));height:calc(var(--h) * var(--s,1))}
 .px__scale>.phone,.px__scale>.desk{transform:scale(var(--s,1));transform-origin:0 0}
 .px--wide{grid-template-columns:1fr;max-width:1304px;gap:24px}
@@ -330,7 +338,7 @@ body{font-family:var(--font);color:#e8ecf4;-webkit-font-smoothing:antialiased}
     <h2 class="s4__h disp">¿Qué usuario prefieres?</h2>
     <div class="s4__sub">Elige un nickname y una contraseña</div>
     <div class="fld" id="fnick" style="top:250px"><input id="nick" placeholder="Nickname" aria-label="Nickname" autocomplete="off" maxlength="16"></div>
-    <div class="fld" id="fpass" style="top:320px"><input id="pass" type="password" placeholder="Contraseña" aria-label="Contraseña" autocomplete="off" aria-describedby="hpass"><button type="button" class="eye" id="eye" aria-label="Mostrar contraseña"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></button></div>
+    <div class="fld" id="fpass" style="top:320px"><input id="pass" type="text" class="mask" placeholder="Contraseña" aria-label="Contraseña" autocomplete="off" autocapitalize="off" spellcheck="false" data-lpignore="true" data-1p-ignore data-form-type="other" aria-describedby="hpass"><button type="button" class="eye" id="eye" aria-label="Mostrar contraseña"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></button></div>
     <p class="s4__hint" id="hpass">Debe tener al menos 8 caracteres, 1 mayúscula y 1 número. No puede tener 3 dígitos consecutivos iguales.</p>
     <label class="ck" style="top:432px"><input type="checkbox" id="c18"><i></i>Soy mayor de 18 años</label>
     <label class="ck" style="top:455px"><input type="checkbox" id="cterms"><i></i><span>Acepto las <u>políticas de privacidad</u></span></label>
@@ -347,7 +355,7 @@ body{font-family:var(--font);color:#e8ecf4;-webkit-font-smoothing:antialiased}
    <section class="pscr s6" aria-label="Bono de bienvenida" hidden>
     <img class="s6__logo" src="../assets/img/bplay-proto-logo.webp" alt="bplay">
     <h2 class="s6__h disp">LISTO!</h2>
-    <p class="s6__g disp">Te regalamos $500<br>para conocer<br>todos nuestros juegos<br>exclusivos</p>
+    <p class="s6__g disp">Te regalamos $<span id="cred">500</span><br>para conocer<br>todos nuestros juegos<br>exclusivos</p>
     <button type="button" class="s6__bono" id="bono">Conoce el bono<i><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 1l5 5-5 5"/></svg></i></button>
     <div class="s6__dep disp">También podrás hacer tus depósitos</div>
     <ul class="s6__pay" aria-label="Medios de pago">
@@ -410,7 +418,7 @@ body{font-family:var(--font);color:#e8ecf4;-webkit-font-smoothing:antialiased}
   }
   nick.addEventListener('input',function(){touched.n=true;check()});pass.addEventListener('input',function(){touched.p=true;check()});
   c18.addEventListener('change',check);ct.addEventListener('change',check);
-  $('#eye').addEventListener('click',function(){var s=pass.type==='password';pass.type=s?'text':'password';this.setAttribute('aria-label',s?'Ocultar contraseña':'Mostrar contraseña')});
+  $('#eye').addEventListener('click',function(){var s=!pass.classList.contains('show');pass.classList.toggle('show',s);this.setAttribute('aria-label',s?'Ocultar contraseña':'Mostrar contraseña')});
   btn.addEventListener('click',function(e){if(btn.disabled)return;if(userClick(e))window.PROTO.next()});
   /* 5 · barra que carga mientras pasan los mensajes de juego responsable */
   var MSG=['Recuerda que contamos con el Programa de Autoexclusión que te protege en caso que voluntariamente decidas autoexcluirte de concurrir a salas de juego.','Esta es una plataforma Segura y Legal. Recuerda que para retirar tu premio te pediremos validar tu identidad subiendo algunos documentos.','Juego Seguro, Legal y Divertido. ¡Llegamos para encender el juego!'];
@@ -423,21 +431,23 @@ body{font-family:var(--font);color:#e8ecf4;-webkit-font-smoothing:antialiased}
   }
   /* 6 · monedas que entran y «Jugar» que vuelve al inicio */
   var ct6=0;
-  function bonus(){var c=$('#coins');c.classList.remove('in');$('#s6done').classList.remove('in');clearTimeout(ct6);ct6=setTimeout(function(){c.classList.add('in')},reduce?0:500)}
+  var credRaf=0;
+  function credit(){var n=$('#cred');cancelAnimationFrame(credRaf);if(reduce){n.textContent='500';return}n.textContent='0';var t0=0;(function f(t){if(!t0)t0=t;var p=Math.min(1,(t-t0)/1300);n.textContent=Math.round(500*(1-Math.pow(1-p,3)));if(p<1)credRaf=requestAnimationFrame(f)})(performance.now())}
+  function bonus(){credit();var c=$('#coins');c.classList.remove('in');$('#s6done').classList.remove('in');clearTimeout(ct6);ct6=setTimeout(function(){c.classList.add('in')},reduce?0:500)}
   $('#jugar').addEventListener('click',function(e){userClick(e);window.PROTO_RESET();window.PROTO.go(0)});
   $('#bono').addEventListener('click',function(e){userClick(e);$('#s6done').classList.add('in');$('#s6done').textContent='Bono de $500: se acredita al entrar. El detalle queda en «Promociones».'});
   window.PROTO_RESET=function(){
     st={prov:null,prefs:[]};renderProv();renderPrefs();selTab('pano');$('.s3').scrollTop=0;$('#otra').value='';
-    nick.value='';pass.value='';pass.type='password';c18.checked=false;ct.checked=false;touched={n:false,p:false};check();
+    nick.value='';pass.value='';pass.classList.remove('show');c18.checked=false;ct.checked=false;touched={n:false,p:false};check();
     clearInterval(lt);bar.style.setProperty('--v',0);msg.textContent=MSG[0];$('#coins').classList.remove('in');$('#s6done').classList.remove('in');$('#reg').classList.remove('is-hover');
   };
-  function type(el,txt,ok,wait){return (async function(){for(var i=0;i<txt.length;i++){if(!ok())return;el.value=txt.slice(0,i+1);el.dispatchEvent(new Event('input'));await wait(60)}})()}
-  async function press(el,ok,wait,ms){if(!ok())return;el.click();await wait(ms||500)}
+  function type(el,txt,ok,wait){return (async function(){await window.PROTO.pointer(el,ok);el.readOnly=true;for(var i=0;i<txt.length;i++){if(!ok())break;el.value=txt.slice(0,i+1);el.dispatchEvent(new Event('input'));await wait(60)}el.readOnly=false})()}
+  async function press(el,ok,wait,ms){if(!ok())return;await window.PROTO.pointer((el.closest&&el.closest('label.ck'))||el,ok);if(!ok())return;el.click();await wait(ms||500)}
   window.PROTO_STEPS=[
-   {name:'Inicio',what:'La home de bplay en escritorio: «Jugá donde quieras», los juegos a la vista y dos accesos arriba. El registro empieza en «Registrarse».',demo:async function(ok,wait){await wait(1600);if(ok())$('#reg').classList.add('is-hover');await wait(900);$('#reg').classList.remove('is-hover')}},
+   {name:'Inicio',what:'La home de bplay en escritorio: «Jugá donde quieras», los juegos a la vista y dos accesos arriba. El registro empieza en «Registrarse».',demo:async function(ok,wait){await wait(1300);if(ok())$('#reg').classList.add('is-hover');await window.PROTO.pointer($('#reg'),ok);await wait(500);$('#reg').classList.remove('is-hover')}},
    {name:'¿Desde dónde vas a jugar?',what:'La licencia es por jurisdicción: CABA o Santa Fe. Elegir una continúa. Quien está en otra provincia la deja escrita y se le avisa cuando abra.',demo:async function(ok,wait){await wait(1000);await press($('[data-prov="Santa Fe"]'),ok,wait,1100)}},
-   {name:'Preferencias',what:'Tres pestañas (Slots, Paño, Otros) y casilleros que se marcan de a varios. Lo elegido arma el lobby final; «Seguir» está al final del scroll.',enter:function(){$('.s3').scrollTop=0},demo:async function(ok,wait){await wait(700);await press($('[data-pref="Ruleta en vivo"]'),ok,wait,600);await press($('[data-pref="Baccarat"]'),ok,wait,700);if(ok()){$('.s3').scrollTo({top:200,behavior:reduce?'auto':'smooth'})}await wait(1100)}},
-   {name:'¿Qué usuario prefieres?',what:'Nickname y contraseña con las reglas a la vista; el botón «Ingresar» se enciende recién cuando todo está bien, incluidas la edad y las políticas.',demo:async function(ok,wait){await wait(500);await type(nick,'Didi2022',ok,wait);await wait(300);await type(pass,'Secreta2022',ok,wait);await wait(300);await press(c18,ok,wait,350);await press(ct,ok,wait,1100)}},
+   {name:'Preferencias',what:'Tres pestañas (Slots, Paño, Otros) y casilleros que se marcan de a varios. Lo elegido arma el lobby final; «Seguir» está al final del scroll.',enter:function(){$('.s3').scrollTop=0},demo:async function(ok,wait){await wait(700);await press($('[data-pref="Ruleta en vivo"]'),ok,wait,600);await press($('[data-pref="Baccarat"]'),ok,wait,700);if(ok()){$('.s3').scrollTo({top:200,behavior:reduce?'auto':'smooth'})}await wait(900);await window.PROTO.pointer($('#seguir'),ok);await wait(300)}},
+   {name:'¿Qué usuario prefieres?',what:'Nickname y contraseña con las reglas a la vista; el botón «Ingresar» se enciende recién cuando todo está bien, incluidas la edad y las políticas.',demo:async function(ok,wait){await wait(500);await type(nick,'Didi2022',ok,wait);await wait(300);await type(pass,'Secreta2022',ok,wait);await wait(300);await press(c18,ok,wait,350);await press(ct,ok,wait,700);await window.PROTO.pointer(btn,ok);await wait(400)}},
    {name:'Preparando la sala',what:'La espera no es vacía: mientras la barra carga pasan los mensajes de juego responsable que un operador con licencia tiene que comunicar.',enter:loading,demo:async function(ok,wait){await wait(reduce?1500:4000)}},
    {name:'Listo',what:'El regalo de bienvenida y los medios de depósito llegan al final, cuando la persona ya está adentro. La acción siguiente es «Jugar», no otro formulario.',enter:bonus,hold:4200}
   ];
@@ -464,7 +474,16 @@ body{font-family:var(--font);color:#e8ecf4;-webkit-font-smoothing:antialiased}
     what.textContent=STEPS[i].what; live.textContent=(i+1)+' / '+STEPS.length+' · '+STEPS[i].name;
     if(STEPS[i].enter)STEPS[i].enter(!!fromAuto);
   }
-  function stop(){auto=false;token++;clearTimers();playBtn.textContent=T.play;playBtn.setAttribute('aria-pressed','false')}
+  var stageEl=document.querySelector('.px__stage'),ptr=document.createElement('div');ptr.className='px__ptr';ptr.setAttribute('aria-hidden','true');if(stageEl)stageEl.appendChild(ptr);
+  function hidePtr(){ptr.classList.remove('is-on','is-tap')}
+  function pointer(el,ok){return new Promise(function(res){
+    if(reduce||!el||!stageEl||(ok&&!ok())){res();return}
+    var s=stageEl.getBoundingClientRect(),r=el.getBoundingClientRect(),x=r.left+r.width/2-s.left,y=r.top+r.height/2-s.top;
+    if(!ptr.classList.contains('is-on')){ptr.style.transition='none';ptr.style.left=(x+70)+'px';ptr.style.top=(y+90)+'px';void ptr.offsetWidth;ptr.style.transition='';ptr.classList.add('is-on')}
+    ptr.style.left=x+'px';ptr.style.top=y+'px';
+    wait(700).then(function(){if(ok&&!ok()){res();return}ptr.classList.remove('is-tap');void ptr.offsetWidth;ptr.classList.add('is-tap');return wait(220)}).then(function(){ptr.classList.remove('is-tap');res()})
+  })}
+  function stop(){auto=false;token++;clearTimers();hidePtr();playBtn.textContent=T.play;playBtn.setAttribute('aria-pressed','false')}
   async function play(){
     if(auto){stop();return}
     auto=true;var my=++token;playBtn.textContent=T.pause;playBtn.setAttribute('aria-pressed','true');
@@ -474,14 +493,14 @@ body{font-family:var(--font);color:#e8ecf4;-webkit-font-smoothing:antialiased}
       if(STEPS[i].demo){await STEPS[i].demo(function(){return my===token},wait)}
       else await wait(STEPS[i].hold||2600);
     }
-    if(my===token){stop()}
+    if(my===token){hidePtr();stop()}
   }
   list.addEventListener('click',function(e){var b=e.target.closest('[data-go]');if(b)go(+b.getAttribute('data-go'))});
   document.getElementById('prev').addEventListener('click',function(){go(cur-1)});
   document.getElementById('next').addEventListener('click',function(){go(cur+1)});
   document.getElementById('replay').addEventListener('click',function(){stop();window.PROTO_RESET&&window.PROTO_RESET();go(0)});
   playBtn.addEventListener('click',play);
-  window.PROTO={go:function(i,f){go(i,f===true)},next:function(){go(cur+1)},prev:function(){go(cur-1)},cur:function(){return cur},isAuto:function(){return auto},stopAuto:stop,wait:wait};
+  window.PROTO={go:function(i,f){go(i,f===true)},next:function(){go(cur+1)},prev:function(){go(cur-1)},cur:function(){return cur},isAuto:function(){return auto},stopAuto:stop,wait:wait,pointer:pointer};
   /* escala del teléfono al ancho disponible, sin deformarlo */
   var sc=document.querySelector('.px__scale');
   function fit(){var w=parseFloat(getComputedStyle(sc).getPropertyValue('--w'));var avail=Math.min(document.documentElement.clientWidth-24,w);sc.style.setProperty('--s',Math.min(1,avail/w));
