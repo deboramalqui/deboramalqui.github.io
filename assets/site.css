@@ -426,9 +426,12 @@ body.s-lock{overflow:hidden}
 .s-hero--suite .s-hero__txt>p:not(.s-role){font-size:clamp(1rem,1.8vw,1.125rem);color:var(--d-on-var);max-width:58ch;margin-bottom:18px}
 .s-hero--suite .d-row{justify-content:center}
 .s-hero__hint{font:400 .8125rem/1.5 var(--d-mono);color:var(--d-on-var);margin:30px auto 0;max-width:70ch}
-.s-hero--suite .s-hero__second{font:600 1.0625rem/1.5 var(--d-sans)!important;color:var(--d-on);max-width:56ch;margin:-4px auto 0;text-align:center}
+/* Jerarquía del héroe (29/10): primero la presentación, en negrita; debajo, más liviana, la frase que presenta lo que se ve en la laptop. */
+.s-hero--suite .s-hero__lead{font:600 1.0625rem/1.5 var(--d-sans)!important;color:var(--d-on);max-width:62ch;margin:0 auto;text-align:center}
+.s-hero--suite .s-hero__intro{font:400 1rem/1.5 var(--d-sans)!important;color:var(--d-on-var);max-width:58ch;margin:12px auto 0;text-align:center}
 .s-lap{position:relative;width:min(100%,960px);margin:clamp(22px,3.5vw,36px) auto 0;perspective:1800px;--tx:0deg;--ty:0deg;--scale:1}
-@media(min-width:900px){.s-lap{width:clamp(560px,calc((100vh - 350px) * 1.6),960px)}}
+/* Tamaño de la laptop: entra entera en el primer pantallazo, con aire abajo. site.js mide dónde empieza y fija --lapw; sin JS vale el cálculo por alto. */
+@media(min-width:900px){.s-lap{width:clamp(440px,var(--lapw,calc((100vh - 372px) * 1.54)),960px)}}
 .s-lap__glow{position:absolute;inset:-14% -10% -12%;pointer-events:none;z-index:0;filter:blur(34px);opacity:.9;transition:opacity 1s var(--d-ease);
   background:radial-gradient(55% 50% at 28% 42%,rgba(232,144,204,.26),transparent 62%),radial-gradient(50% 50% at 76% 58%,rgba(128,236,236,.2),transparent 62%),radial-gradient(38% 40% at 56% 18%,rgba(220,208,96,.14),transparent 62%)}
 .s-lap__body{position:relative;z-index:1;transform:rotateX(var(--tx)) rotateY(var(--ty));transform-style:preserve-3d;transition:transform .5s var(--d-ease)}
@@ -457,16 +460,16 @@ body.s-lock{overflow:hidden}
 .s-lap__chips b{font:700 1.125rem/1 var(--d-sans);color:var(--d-dato);letter-spacing:-.01em}
 .s-lap__chips span{font:400 .75rem/1.2 var(--d-mono);color:var(--d-on-var)}
 @media(min-width:1200px){   /* las cifras flotan fuera de la laptop solo cuando hay lugar a los costados */
-  .s-lap{width:clamp(560px,calc((100vh - 350px) * 1.6),820px)}
+  .s-lap{width:clamp(440px,var(--lapw,calc((100vh - 372px) * 1.54)),900px)}
   .s-lap__chips{position:absolute;inset:0;margin:0;display:block;pointer-events:none}
   .s-lap__chips li{position:absolute;pointer-events:auto;flex-direction:column;align-items:flex-start;gap:4px;max-width:200px;padding:12px 16px;border-radius:var(--d-r-lg);animation:s-lap-float 6s ease-in-out infinite;animation-delay:calc(var(--d)*-2s)}
   .s-lap__chips b{white-space:nowrap;font-size:1.375rem}
   [dir="rtl"] .s-lap__chips li{align-items:flex-end}
-  .s-lap__chips li:nth-child(1){right:calc(100% + 14px);top:26%}
-  .s-lap__chips li:nth-child(2){left:calc(100% + 14px);top:12%}
-  .s-lap__chips li:nth-child(3){left:calc(100% + 14px);bottom:16%}
+  .s-lap__chips li:nth-child(1){right:calc(100% + 36px);top:26%}
+  .s-lap__chips li:nth-child(2){left:calc(100% + 36px);top:12%}
+  .s-lap__chips li:nth-child(3){left:calc(100% + 36px);bottom:16%}
 }
-@keyframes s-lap-float{0%,100%{translate:0 0}50%{translate:0 -7px}}
+@keyframes s-lap-float{0%,100%{translate:0 0}50%{translate:0 -5px}}
 /* estado inicial que pone el JS antes de animar */
 .s-lap.is-pre .s-lap__lid{transform:rotateX(-86deg);transition:none}
 .s-lap.is-pre .s-lap__glow{opacity:0;transition:none}
