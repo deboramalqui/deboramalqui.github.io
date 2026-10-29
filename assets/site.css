@@ -1,3 +1,5 @@
+/* Heebo (OFL), solo el bloque hebreo: DiDi Sans no tiene alfabeto hebreo. fonts/Heebo-hebrew.woff2 sale de tools (fontTools) a partir de la fuente variable. */
+@font-face{font-family:"Heebo";src:url("fonts/Heebo-hebrew.woff2") format("woff2");font-weight:100 900;font-display:swap;unicode-range:U+0590-05FF,U+FB1D-FB4F,U+20AA}
 /* Layout del sitio. Los componentes viven en assets/didi-ui.css. */
 html{scroll-behavior:smooth;scroll-padding-top:88px}
 body{margin:0;background:var(--d-surface);color:var(--d-on);font-family:var(--d-sans);min-height:100vh;display:flex;flex-direction:column}
@@ -71,6 +73,7 @@ a.d-tile:hover{background:var(--d-container)}
 .s-diagram svg{display:block;min-width:760px;width:100%;height:auto}
 .s-note-card{margin:20px 0}
 .s-crumbs{margin-top:28px}
+.s-crumbs .d-crumbs a{display:inline-block;padding:12px 0;margin:-12px 0}   /* 44 px de alto para tocar sin cambiar el aspecto */
 /* ---- sobre mí ---- */
 .s-about{max-width:780px}
 .s-about h2{font:600 1.5rem/2rem var(--d-sans);margin:56px 0 14px}
@@ -350,7 +353,7 @@ body.s-lock{overflow:hidden}
 .cl-bars .h{font:600 .6875rem/1.3 var(--d-mono);text-transform:uppercase;letter-spacing:.06em;color:var(--d-on-var)}
 .cl-bar{position:relative;height:22px;background:var(--d-container)}
 .cl-bar i{position:absolute;top:0;bottom:0;inset-inline-start:0;width:calc(var(--p)*1%);background:var(--cl);opacity:.85}
-.cl-bar--a i{background:var(--d-on-var);opacity:.5}
+.cl-bar--a i{background:var(--d-on-var);opacity:.35}
 .cl-bar span{position:relative;z-index:1;display:block;padding:0 8px;font:600 .75rem/22px var(--d-mono)}
 @media(max-width:600px){.cl-bars{grid-template-columns:1fr 1fr}.cl-bars>b{grid-column:1/-1;margin-top:6px}}
 .cl-tools{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;list-style:none;margin:0;padding:0}

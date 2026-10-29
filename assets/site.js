@@ -5,7 +5,15 @@
   var secs=links.map(function(a){return document.getElementById(a.getAttribute('href').slice(1))}).filter(Boolean);
   var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){links.forEach(function(a){a.classList.toggle('is-active',a.getAttribute('href')==='#'+e.target.id)})}})},{rootMargin:'-15% 0px -75% 0px'});
   secs.forEach(function(s){io.observe(s)});
-  document.querySelectorAll('.s-menu a').forEach(function(a){a.addEventListener('click',function(){document.querySelector('.s-menu').removeAttribute('open')})});
+})();
+
+/* Menú móvil (<details>): se cierra al elegir un enlace, con Esc (el foco vuelve al botón) o tocando fuera */
+(function(){
+  var menu=document.querySelector('.s-menu');if(!menu)return;
+  function close(){if(menu.hasAttribute('open'))menu.removeAttribute('open')}
+  menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',close)});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&menu.hasAttribute('open')){close();var s=menu.querySelector('summary');if(s)s.focus()}});
+  document.addEventListener('click',function(e){if(!menu.contains(e.target))close()});
 })();
 
 /* Prototipo clicable de las pantallas: zonas activas, flechas, teclado y espera automática */
