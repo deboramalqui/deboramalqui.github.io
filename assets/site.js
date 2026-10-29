@@ -203,7 +203,9 @@
     function go(){
       clearTimeout(tt);if(off)return;
       if(hold||document.hidden){tt=setTimeout(go,600);return}
-      k=(k+1)%order.length;var b=doc.querySelector('[role="tab"][data-tab="'+order[k]+'"]');if(b)b.click();
+      k=(k+1)%order.length;var b=doc.querySelector('[role="tab"][data-tab="'+order[k]+'"]');
+      scr.classList.remove('is-flash');void scr.offsetWidth;scr.classList.add('is-flash');   /* el destello cruza la pantalla y la pestaña cambia cuando está por la mitad */
+      setTimeout(function(){if(!off&&b)b.click()},300);setTimeout(function(){scr.classList.remove('is-flash')},950);
       tt=setTimeout(go,DWELL);
     }
     function stop(){off=true;clearTimeout(tt)}
