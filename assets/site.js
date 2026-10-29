@@ -214,8 +214,8 @@
   lap.classList.add('is-pre');
   setTimeout(function(){   /* un cuadro después, para que la tapa cerrada se pinte antes de abrirse; con temporizador y no con requestAnimationFrame, que no corre en pestañas en segundo plano */
     lap.classList.add('is-open');
-    setTimeout(function(){lap.classList.add('is-sweep')},1100);
-    setTimeout(function(){lap.classList.add('is-chips');tilt()},1500);
-    setTimeout(function(){if(fine)demo();else cycle()},1700);
-  },90);
+    setTimeout(function(){lap.classList.add('is-sweep')},700);
+    setTimeout(function(){lap.classList.add('is-chips');tilt()},950);
+    setTimeout(function(){if(fine)demo();else cycle()},1100);
+  },60);
 })();
