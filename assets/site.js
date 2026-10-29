@@ -181,3 +181,41 @@
     show(0);
   });
 })();
+
+/* Portada: la suite dentro de una laptop. Al cargar, la tapa se abre, pasa un reflejo, aparecen las cifras y, en escritorio, se carga la demo real
+   adentro (se activa con un botón para que la rueda del mouse no quede atrapada). En celular las pestañas recorren las capturas. Con "reducir movimiento" todo queda quieto. */
+(function(){
+  var lap=document.querySelector('.s-lap');if(!lap)return;
+  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var fine=window.matchMedia&&matchMedia('(min-width:900px) and (pointer:fine)').matches;
+  var imgs=[].slice.call(lap.querySelectorAll('.s-lap__scr>img')),tabs=[].slice.call(lap.querySelectorAll('.s-lap__tabs button')),use=lap.querySelector('.s-lap__use'),scr=lap.querySelector('.s-lap__scr'),timer=0,i=0;
+  function show(k){i=(k+imgs.length)%imgs.length;var cur=imgs[i];if(cur.dataset.src){cur.src=cur.dataset.src;if(cur.dataset.srcset)cur.srcset=cur.dataset.srcset;delete cur.dataset.src;delete cur.dataset.srcset}imgs.forEach(function(im,j){im.classList.toggle('is-on',j===i);im.setAttribute('aria-hidden',j===i?'false':'true')});tabs.forEach(function(t,j){t.setAttribute('aria-selected',j===i?'true':'false');t.tabIndex=j===i?0:-1})}
+  function cycle(){clearTimeout(timer);if(reduce||document.hidden)return;timer=setTimeout(function(){show(i+1);cycle()},3800)}
+  tabs.forEach(function(t,j){t.addEventListener('click',function(){clearTimeout(timer);show(j)});t.addEventListener('keydown',function(e){var n=e.key==='ArrowRight'?j+1:e.key==='ArrowLeft'?j-1:-1;if(n<0||n>=tabs.length)return;e.preventDefault();clearTimeout(timer);show(n);tabs[n].focus()})});
+  document.addEventListener('visibilitychange',function(){if(document.hidden)clearTimeout(timer);else if(!lap.classList.contains('has-demo'))cycle()});
+  function demo(){
+    var url=lap.getAttribute('data-demo');if(!url||lap.querySelector('iframe'))return;
+    var f=document.createElement('iframe');f.src=url;f.title=lap.getAttribute('aria-label')||'Campaign Suite';f.loading='eager';f.setAttribute('referrerpolicy','no-referrer-when-downgrade');
+    f.addEventListener('load',function(){f.classList.add('is-on');lap.classList.add('has-demo');clearTimeout(timer);if(use)use.hidden=false});
+    scr.insertBefore(f,scr.querySelector('.s-lap__tabs'));
+  }
+  if(use){
+    use.addEventListener('click',function(){lap.classList.add('is-live');var f=lap.querySelector('iframe');try{f.contentWindow.focus()}catch(e){}});
+    lap.addEventListener('pointerleave',function(){lap.classList.remove('is-live')});
+  }
+  function tilt(){
+    if(reduce||!fine)return;
+    var hero=lap.closest('.s-hero')||lap;
+    hero.addEventListener('pointermove',function(e){var r=lap.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;lap.style.setProperty('--ty',(x*6).toFixed(2)+'deg');lap.style.setProperty('--tx',(-y*4).toFixed(2)+'deg')});
+    hero.addEventListener('pointerleave',function(){lap.style.setProperty('--ty','0deg');lap.style.setProperty('--tx','0deg')});
+  }
+  show(0);
+  if(reduce){lap.classList.add('is-open','is-chips');if(fine)demo();return}
+  lap.classList.add('is-pre');
+  setTimeout(function(){   /* un cuadro después, para que la tapa cerrada se pinte antes de abrirse; con temporizador y no con requestAnimationFrame, que no corre en pestañas en segundo plano */
+    lap.classList.add('is-open');
+    setTimeout(function(){lap.classList.add('is-sweep')},1100);
+    setTimeout(function(){lap.classList.add('is-chips');tilt()},1500);
+    setTimeout(function(){if(fine)demo();else cycle()},1700);
+  },90);
+})();

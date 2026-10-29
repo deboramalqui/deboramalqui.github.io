@@ -229,7 +229,12 @@ function open(id, fromEl){
   if (location.hash !== '#' + id) history.replaceState(null, '', '#' + id);
   if (!RM){ const h = $('#hint'); setTimeout(() => go(1, true), 380); h.classList.add('on'); setTimeout(() => h.classList.remove('on'), 2600); }
 }
-function close(){ reader.classList.remove('is-open'); document.body.style.overflow = ''; history.replaceState(null, '', location.pathname); if (lastFocus) lastFocus.focus(); }
+/* Dos flujos al cerrar: quien llegó desde Just for fun vuelve a la lista de guías; quien llegó desde la Campaign Suite (?desde=suite) vuelve a la suite. */
+const DESDE = new URLSearchParams(location.search).get('desde');
+if (DESDE === 'suite') { const c = $('#r-close'); if (c) c.textContent = '← Volver a la suite'; }
+function close(){
+  if (DESDE === 'suite') { if (history.length > 1 && document.referrer) history.back(); else location.href = '../index.html'; return; }
+  reader.classList.remove('is-open'); document.body.style.overflow = ''; history.replaceState(null, '', location.pathname); if (lastFocus) lastFocus.focus(); }
 document.querySelectorAll('[data-book]').forEach(el => el.addEventListener('click', () => open(el.dataset.book, el)));
 $('#r-close').onclick = close;
 $('#prev').onclick = () => go(idx-1, true); $('#next').onclick = () => go(idx+1, true);
