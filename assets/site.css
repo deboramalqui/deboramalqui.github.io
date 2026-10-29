@@ -526,3 +526,29 @@ body.s-lock{overflow:hidden}
 .s-brands__chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}
 .s-brands__chips a{display:inline-block;background:var(--d-low);border:1px solid var(--d-outline-var);border-radius:999px;padding:8px 14px;font:600 .875rem/1.25rem var(--d-sans);color:var(--d-on);text-decoration:none;transition:border-color .2s,transform .2s}
 .s-brands__chips a:hover{border-color:var(--d-outline);transform:translateY(-1px)}.s-brands__chips a:focus-visible{outline:none;box-shadow:var(--d-focus)}
+
+/* Caso Riley (29/10): el personaje junto al texto, un día en la vida como línea de tiempo y el recorrido en siete etapas. */
+.rl-hero{display:grid;grid-template-columns:minmax(160px,220px) 1fr;gap:24px;align-items:center;margin:8px 0 28px}
+.rl-hero img{width:100%;height:auto;display:block;filter:drop-shadow(0 18px 30px rgba(0,0,0,.45))}
+.rl-hero__t{font:700 1.375rem/1.25 var(--d-sans);margin:0 0 8px}
+@media(max-width:600px){.rl-hero{grid-template-columns:120px 1fr;gap:14px}}
+.rl-day{list-style:none;margin:20px 0 32px;padding:0;display:grid;gap:10px}
+.s-art .rl-day,.s-art .rl-stages{padding:0;max-width:none}
+.rl-day li{display:grid;grid-template-columns:64px 1fr;gap:12px;background:var(--d-container);border-radius:var(--d-r-md);padding:14px 16px}
+.rl-day time{font:600 .8125rem/1.2 var(--d-mono);color:var(--d-dato);padding-top:3px}
+.rl-day__body b{display:block;font:700 1rem/1.3 var(--d-sans)}
+.rl-day__body p{margin:4px 0 10px;font-size:.9375rem;color:var(--d-on-var)}
+.rl-day__tags{display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.rl-tag{display:block;font:400 .8125rem/1.4 var(--d-sans);padding:8px 10px;border-radius:8px;background:var(--d-low);border-left:3px solid var(--d-dato)}
+.rl-tag i{display:block;font:600 .6875rem/1.2 var(--d-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--d-dato);margin-bottom:2px}
+.rl-tag--a{border-left-color:var(--d-dato-cont)}.rl-tag--a i{color:var(--d-dato-cont)}
+[dir="rtl"] .rl-tag{border-left:0;border-right:3px solid var(--d-dato)}[dir="rtl"] .rl-tag--a{border-right-color:var(--d-dato-cont)}
+@media(max-width:600px){.rl-day li{grid-template-columns:1fr;gap:4px}}
+.rl-stages{list-style:none;margin:20px 0 32px;padding:0;display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.rl-stage{background:var(--d-container);border-top:3px solid var(--d-dato);border-radius:0 0 var(--d-r-md) var(--d-r-md);padding:14px 16px;margin:0}
+.rl-stage b{display:block;font:700 1rem/1.3 var(--d-sans)}
+.rl-stage p{margin:4px 0 10px;font-size:.9375rem;color:var(--d-on-var)}
+.rl-stage__ch{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.rl-stage__ch span{font:400 .6875rem/1 var(--d-mono);letter-spacing:.04em;background:var(--d-low);border-radius:999px;padding:6px 9px}
+.rl-stage__q{margin:0;padding-inline-start:18px;font-size:.875rem;color:var(--d-on)}
+.rl-stage__q li{margin:4px 0}
