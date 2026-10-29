@@ -205,16 +205,17 @@
   }
   function size(){   /* la laptop entera en el primer pantallazo: ancho según el alto que queda debajo del texto y según el ancho que dejan las cifras a los costados */
     if(!matchMedia('(min-width:900px)').matches){lap.style.removeProperty('--lapw');return}
-    var top=lap.getBoundingClientRect().top+window.scrollY,ratio=lap.offsetHeight/lap.offsetWidth||.65;
+    var body=lap.querySelector('.s-lap__body')||lap,top=lap.getBoundingClientRect().top+window.scrollY,ratio=body.offsetHeight/body.offsetWidth||.65;   /* solo tapa y base: las pestañas y cifras de abajo no cuentan */
     var byH=(window.innerHeight-top-28)/ratio,byW=matchMedia('(min-width:1200px)').matches?window.innerWidth-2*(200+36+24):window.innerWidth-48;
     lap.style.setProperty('--lapw',Math.round(Math.min(byH,byW))+'px');
+    requestAnimationFrame(function(){var sc=scr.clientWidth/1100;if(!(sc>0))return;lap.style.setProperty('--vw','1100px');lap.style.setProperty('--vh',Math.round(scr.clientHeight/sc)+'px');lap.style.setProperty('--sc',sc.toFixed(4))});   /* la demo a 1100 px, escalada a la pantalla */
   }
   size();var rs=0;window.addEventListener('resize',function(){clearTimeout(rs);rs=setTimeout(size,120)});
   if(document.fonts&&document.fonts.ready)document.fonts.ready.then(size);
   function tilt(){
     if(reduce||!fine)return;
     var hero=lap.closest('.s-hero')||lap;
-    hero.addEventListener('pointermove',function(e){var r=lap.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;lap.style.setProperty('--ty',(x*2.5).toFixed(2)+'deg');lap.style.setProperty('--tx',(-y*1.5).toFixed(2)+'deg')});
+    hero.addEventListener('pointermove',function(e){var r=lap.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;lap.style.setProperty('--ty',(x*5).toFixed(2)+'deg');lap.style.setProperty('--tx',(-y*3).toFixed(2)+'deg')});
     hero.addEventListener('pointerleave',function(){lap.style.setProperty('--ty','0deg');lap.style.setProperty('--tx','0deg')});
   }
   function touch(){   /* el «chiche» del celular: la pantalla cambia de pestaña al deslizar el dedo y la laptop se inclina con el scroll, como si siguiera la mirada */

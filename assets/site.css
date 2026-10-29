@@ -450,7 +450,7 @@ body.s-lock{overflow:hidden}
 .s-lap__scr{position:relative;aspect-ratio:16/10;overflow:hidden;border-radius:6px;background:#161418;direction:ltr;box-shadow:0 0 0 1px #0A0C10,0 0 0 2px #2E3139}
 .s-lap__scr>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;opacity:0;transition:opacity .6s var(--d-ease);border:0;margin:0}
 .s-lap__scr>img.is-on{opacity:1}
-.s-lap__scr iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#161418;opacity:0;transition:opacity .7s var(--d-ease);pointer-events:none}
+.s-lap__scr iframe{position:absolute;left:0;top:0;width:var(--vw,100%);height:var(--vh,100%);transform:scale(var(--sc,1));transform-origin:0 0;border:0;background:#161418;opacity:0;transition:opacity .7s var(--d-ease);pointer-events:none}   /* la demo se dibuja a 1100 px de ancho y se escala a la pantalla: así nunca cae en su versión celular (29/10) */
 .s-lap__scr iframe.is-on{opacity:1}
 .s-lap.is-live .s-lap__scr iframe{pointer-events:auto}
 .s-lap__scr::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(110deg,transparent 32%,rgba(255,255,255,.34) 50%,transparent 68%);transform:translateX(-130%)}
@@ -519,3 +519,9 @@ body.s-lock{overflow:hidden}
   .s-card__t{padding:8px 10px 2px}.s-card__t b{font-size:.8125rem;line-height:1.25}.s-card__t small{display:none}
   .s-card__m{padding:0 10px 9px;font-size:.625rem;letter-spacing:.02em}
 }
+
+/* Sobre mí (29/10): los grupos y empresas destacados, como fichas con enlace, antes del párrafo que los explica. */
+.s-brands__t{margin:22px 0 8px}
+.s-brands__chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}
+.s-brands__chips a{display:inline-block;background:var(--d-low);border:1px solid var(--d-outline-var);border-radius:999px;padding:8px 14px;font:600 .875rem/1.25rem var(--d-sans);color:var(--d-on);text-decoration:none;transition:border-color .2s,transform .2s}
+.s-brands__chips a:hover{border-color:var(--d-outline);transform:translateY(-1px)}.s-brands__chips a:focus-visible{outline:none;box-shadow:var(--d-focus)}
