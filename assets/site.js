@@ -193,31 +193,10 @@
   function cycle(){clearTimeout(timer);if(reduce||document.hidden)return;timer=setTimeout(function(){show(i+1);cycle()},3800)}
   tabs.forEach(function(t,j){t.addEventListener('click',function(){clearTimeout(timer);show(j)});t.addEventListener('keydown',function(e){var n=e.key==='ArrowRight'?j+1:e.key==='ArrowLeft'?j-1:-1;if(n<0||n>=tabs.length)return;e.preventDefault();clearTimeout(timer);show(n);tabs[n].focus()})});
   document.addEventListener('visibilitychange',function(){if(document.hidden)clearTimeout(timer);else if(!lap.classList.contains('has-demo'))cycle()});
-  /* Recorrido de la demo dentro de la laptop: espera unos segundos, cambia de pestaña (Hoy, Campañas, Chequeos), espera y vuelve a cambiar, como si alguien la estuviera usando.
-     Se pausa con el mouse o el foco encima, se detiene cuando se toca «Usar la demo», y con «reducir movimiento» no corre. La demo es del mismo sitio, así que sus pestañas se pueden tocar desde acá. */
-  function tour(f){
-    if(reduce)return;
-    var doc;try{doc=f.contentDocument}catch(e){return}
-    if(!doc)return;
-    var order=['today','campaigns','checks'],k=0,tt=0,off=false,hold=false,DWELL=2800;
-    function go(){
-      clearTimeout(tt);if(off)return;
-      if(hold||document.hidden){tt=setTimeout(go,600);return}
-      k=(k+1)%order.length;var b=doc.querySelector('[role="tab"][data-tab="'+order[k]+'"]');
-      scr.classList.remove('is-flash');void scr.offsetWidth;scr.classList.add('is-flash');   /* el destello cruza la pantalla y la pestaña cambia cuando está por la mitad */
-      setTimeout(function(){if(!off&&b)b.click()},300);setTimeout(function(){scr.classList.remove('is-flash')},950);
-      tt=setTimeout(go,DWELL);
-    }
-    function stop(){off=true;clearTimeout(tt)}
-    tt=setTimeout(go,DWELL);
-    lap.addEventListener('pointerenter',function(){hold=true});lap.addEventListener('pointerleave',function(){hold=false});
-    lap.addEventListener('focusin',function(){hold=true});lap.addEventListener('focusout',function(){hold=false});
-    if(use)use.addEventListener('click',stop,{once:true});
-  }
   function demo(){
     var url=lap.getAttribute('data-demo');if(!url||lap.querySelector('iframe'))return;
     var f=document.createElement('iframe');f.src=url;f.title=lap.getAttribute('aria-label')||'Campaign Suite';f.loading='eager';f.setAttribute('referrerpolicy','no-referrer-when-downgrade');
-    f.addEventListener('load',function(){f.classList.add('is-on');lap.classList.add('has-demo');clearTimeout(timer);if(use)use.hidden=false;tour(f)});
+    f.addEventListener('load',function(){f.classList.add('is-on');lap.classList.add('has-demo');clearTimeout(timer);if(use)use.hidden=false});
     scr.insertBefore(f,scr.querySelector('.s-lap__tabs'));
   }
   if(use){

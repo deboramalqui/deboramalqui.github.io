@@ -552,8 +552,3 @@ body.s-lock{overflow:hidden}
 .rl-stage__ch span{font:400 .6875rem/1 var(--d-mono);letter-spacing:.04em;background:var(--d-low);border-radius:999px;padding:6px 9px}
 .rl-stage__q{margin:0;padding-inline-start:18px;font-size:.875rem;color:var(--d-on)}
 .rl-stage__q li{margin:4px 0}
-
-/* Destello al cambiar de pestaña en la demo de la laptop (el mismo reflejo que cruza la pantalla al abrirse) */
-.s-lap__scr.is-flash::after{animation:s-lap-flash .9s var(--d-ease) 1}
-@keyframes s-lap-flash{from{transform:translateX(-130%)}to{transform:translateX(130%)}}
-@media (prefers-reduced-motion:reduce){.s-lap__scr.is-flash::after{animation:none}}
