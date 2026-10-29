@@ -217,6 +217,15 @@
     hero.addEventListener('pointermove',function(e){var r=lap.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;lap.style.setProperty('--ty',(x*2.5).toFixed(2)+'deg');lap.style.setProperty('--tx',(-y*1.5).toFixed(2)+'deg')});
     hero.addEventListener('pointerleave',function(){lap.style.setProperty('--ty','0deg');lap.style.setProperty('--tx','0deg')});
   }
+  function touch(){   /* el «chiche» del celular: la pantalla cambia de pestaña al deslizar el dedo y la laptop se inclina con el scroll, como si siguiera la mirada */
+    if(reduce||fine)return;
+    var x0=null,y0=null;
+    scr.addEventListener('touchstart',function(e){x0=e.touches[0].clientX;y0=e.touches[0].clientY},{passive:true});
+    scr.addEventListener('touchend',function(e){if(x0===null)return;var dx=e.changedTouches[0].clientX-x0,dy=e.changedTouches[0].clientY-y0;x0=null;if(Math.abs(dx)>40&&Math.abs(dx)>Math.abs(dy)*1.5){clearTimeout(timer);show(dx<0?i+1:i-1)}},{passive:true});
+    var tick=false;
+    function look(){tick=false;var r=lap.getBoundingClientRect(),c=r.top+r.height/2,d=(window.innerHeight/2-c)/window.innerHeight;lap.style.setProperty('--tx',(Math.max(-9,Math.min(9,d*14))).toFixed(2)+'deg')}
+    window.addEventListener('scroll',function(){if(!tick){tick=true;requestAnimationFrame(look)}},{passive:true});look();
+  }
   show(0);
   if(reduce){lap.classList.add('is-open','is-chips');if(fine)demo();return}
   lap.classList.add('is-pre');
@@ -224,6 +233,6 @@
     lap.classList.add('is-open');
     setTimeout(function(){lap.classList.add('is-sweep')},700);
     setTimeout(function(){lap.classList.add('is-chips');tilt()},950);
-    setTimeout(function(){if(fine)demo();else cycle()},1100);
+    setTimeout(function(){if(fine)demo();else{cycle();touch()}},1100);
   },60);
 })();

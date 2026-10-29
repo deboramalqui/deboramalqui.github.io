@@ -425,10 +425,19 @@ body.s-lock{overflow:hidden}
 .s-hero--suite .s-role,.s-hero--suite .s-hero__txt>p{margin-left:auto;margin-right:auto}
 .s-hero--suite .s-hero__txt>p:not(.s-role){font-size:clamp(1rem,1.8vw,1.125rem);color:var(--d-on-var);max-width:58ch;margin-bottom:18px}
 .s-hero--suite .d-row{justify-content:center}
-.s-hero__hint{font:400 .8125rem/1.5 var(--d-mono);color:var(--d-on-var);margin:30px auto 0;max-width:70ch}
-/* Jerarquía del héroe (29/10): primero la presentación, en negrita; debajo, más liviana, la frase que presenta lo que se ve en la laptop. */
-.s-hero--suite .s-hero__lead{font:600 1.0625rem/1.5 var(--d-sans)!important;color:var(--d-on);max-width:62ch;margin:0 auto;text-align:center}
-.s-hero--suite .s-hero__intro{font:400 1rem/1.5 var(--d-sans)!important;color:var(--d-on-var);max-width:58ch;margin:12px auto 0;text-align:center}
+/* Botón flotante «Escribime» (29/10): fijo abajo a la derecha (a la izquierda en hebreo), en todas las páginas menos Contacto, solo en celular y tablet (<900 px):
+   ahí «Escribime» queda dentro del menú; en escritorio la cabecera fija ya lo muestra. */
+.s-fab{position:fixed;inset-inline-end:max(16px,env(safe-area-inset-right));bottom:max(16px,env(safe-area-inset-bottom));z-index:40;text-decoration:none;align-items:center;height:52px;padding:0 20px 0 22px;font:600 .9375rem/1 var(--d-sans);box-shadow:var(--d-e3);transition:opacity .3s var(--d-ease),transform .3s var(--d-ease)}
+.s-fab svg{width:20px;height:20px}
+.s-fab:hover{transform:translateY(-1px)}.s-fab:focus-visible{outline:none;box-shadow:var(--d-focus)}
+@media(min-width:900px){.s-fab{display:none}}   /* en escritorio la cabecera fija ya tiene «Escribime» */
+@media(max-width:600px){.s-fab{height:48px;padding:0 16px 0 18px;font-size:.875rem}}
+@media(prefers-reduced-motion:reduce){.s-fab{transition:none}}
+@media print{.s-fab{display:none}}
+/* Jerarquía del héroe (29/10, pedido de Débora): primero la presentación, larga y liviana; debajo, en negrita, la frase corta que presenta lo que se ve en la laptop, con «Probalo» como enlace a la demo. */
+.s-hero--suite .s-hero__lead{font:400 1rem/1.55 var(--d-sans)!important;color:var(--d-on-var);max-width:62ch;margin:0 auto;text-align:center}
+.s-hero--suite .s-hero__intro{font:600 1.125rem/1.45 var(--d-sans)!important;color:var(--d-on);max-width:56ch;margin:14px auto 0;text-align:center}
+.s-hero--suite .s-hero__intro .d-link{font-weight:700}
 .s-lap{position:relative;width:min(100%,960px);margin:clamp(22px,3.5vw,36px) auto 0;perspective:1800px;--tx:0deg;--ty:0deg;--scale:1}
 /* Tamaño de la laptop: entra entera en el primer pantallazo, con aire abajo. site.js mide dónde empieza y fija --lapw; sin JS vale el cálculo por alto. */
 @media(min-width:900px){.s-lap{width:clamp(440px,var(--lapw,calc((100vh - 372px) * 1.54)),960px)}}
@@ -445,11 +454,11 @@ body.s-lock{overflow:hidden}
 .s-lap.is-live .s-lap__scr iframe{pointer-events:auto}
 .s-lap__scr::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(110deg,transparent 32%,rgba(255,255,255,.34) 50%,transparent 68%);transform:translateX(-130%)}
 .s-lap.is-sweep .s-lap__scr::after{transition:transform .8s var(--d-ease);transform:translateX(130%)}
-.s-lap__tabs{position:absolute;left:0;right:0;bottom:0;display:flex;gap:6px;justify-content:center;padding:34px 10px 10px;background:linear-gradient(to top,rgba(15,27,45,.92),rgba(15,27,45,0));transition:opacity .4s}
+.s-lap__tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:14px 0 0;position:relative;z-index:2;transition:opacity .4s}   /* debajo de la laptop, no sobre la pantalla (29/10) */
 .s-lap__tabs button{appearance:none;cursor:pointer;font:400 .6875rem/1 var(--d-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--d-on-var);background:rgba(15,27,45,.75);border:1px solid var(--d-outline-var);border-radius:var(--d-r-full);padding:11px 12px;min-height:34px}
 .s-lap__tabs button[aria-selected="true"]{color:var(--d-on-color);background:var(--d-nav);border-color:var(--d-nav)}
 .s-lap__tabs button:focus-visible{outline:none;box-shadow:var(--d-focus)}
-.s-lap.has-demo .s-lap__tabs{opacity:0;pointer-events:none}
+.s-lap.has-demo .s-lap__tabs{display:none}
 .s-lap__use{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);appearance:none;cursor:pointer;font:600 .8125rem/1 var(--d-sans);color:var(--d-on-color);background:var(--d-nav);border:0;border-radius:var(--d-r-full);padding:13px 18px;box-shadow:var(--d-e2);transition:opacity .3s,transform .3s}
 .s-lap__use:focus-visible{outline:none;box-shadow:var(--d-focus)}
 .s-lap.is-live .s-lap__use{opacity:0;pointer-events:none;transform:translate(-50%,8px)}
@@ -469,6 +478,7 @@ body.s-lock{overflow:hidden}
   .s-lap__chips li:nth-child(2){left:calc(100% + 36px);top:12%}
   .s-lap__chips li:nth-child(3){left:calc(100% + 36px);bottom:16%}
 }
+@media(pointer:coarse){.s-lap.is-open .s-lap__body{transition:transform .25s linear}}
 @keyframes s-lap-float{0%,100%{translate:0 0}50%{translate:0 -5px}}
 /* estado inicial que pone el JS antes de animar */
 .s-lap.is-pre .s-lap__lid{transform:rotateX(-86deg);transition:none}
@@ -499,3 +509,9 @@ body.s-lock{overflow:hidden}
 .s-card__t small{display:block;font:400 .875rem/1.4 var(--d-sans);color:var(--d-on-var);margin-top:3px}
 .s-card__m{display:block;padding:0 14px 12px;margin-top:auto;font:400 .6875rem/1.4 var(--d-mono);color:var(--d-on-var);letter-spacing:.04em}
 @media(prefers-reduced-motion:reduce){.s-card,.s-card__pic img{transition:none}.s-card:hover{transform:none}.s-card:hover .s-card__pic img{transform:none}}
+/* Celular (29/10): los casos en dos columnas compactas, con portada, título y año; la bajada se ve al abrir el caso. */
+@media(max-width:600px){
+  .s-cards{grid-template-columns:1fr 1fr;gap:14px;padding:0 6px}
+  .s-card__t{padding:8px 10px 2px}.s-card__t b{font-size:.8125rem;line-height:1.25}.s-card__t small{display:none}
+  .s-card__m{padding:0 10px 9px;font-size:.625rem;letter-spacing:.02em}
+}
