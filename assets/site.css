@@ -456,11 +456,6 @@ body.s-lock{overflow:hidden}
 .s-lap.is-live .s-lap__scr iframe{pointer-events:auto}
 .s-lap__scr::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(110deg,transparent 32%,rgba(255,255,255,.34) 50%,transparent 68%);transform:translateX(-130%)}
 .s-lap.is-sweep .s-lap__scr::after{transition:transform .8s var(--d-ease);transform:translateX(130%)}
-.s-lap__tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:14px 0 0;position:relative;z-index:2;transition:opacity .4s}   /* debajo de la laptop, no sobre la pantalla (29/10) */
-.s-lap__tabs button{appearance:none;cursor:pointer;font:400 .6875rem/1 var(--d-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--d-on-var);background:rgba(15,27,45,.75);border:1px solid var(--d-outline-var);border-radius:var(--d-r-full);padding:11px 12px;min-height:34px}
-.s-lap__tabs button[aria-selected="true"]{color:var(--d-on-color);background:var(--d-nav);border-color:var(--d-nav)}
-.s-lap__tabs button:focus-visible{outline:none;box-shadow:var(--d-focus)}
-.s-lap.has-demo .s-lap__tabs{display:none}
 .s-lap__use{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);appearance:none;cursor:pointer;font:600 .8125rem/1 var(--d-sans);color:var(--d-on-color);background:var(--d-nav);border:0;border-radius:var(--d-r-full);padding:13px 18px;box-shadow:var(--d-e2);transition:opacity .3s,transform .3s}
 .s-lap__use:focus-visible{outline:none;box-shadow:var(--d-focus)}
 .s-lap.is-live .s-lap__use{opacity:0;pointer-events:none;transform:translate(-50%,8px)}
@@ -484,6 +479,12 @@ body.s-lock{overflow:hidden}
   .s-lap__chips li:nth-child(3){left:calc(100% + 36px);bottom:16%}
 }
 @media(pointer:coarse){.s-lap.is-open .s-lap__body{transition:transform .25s linear}}
+.s-lap.is-drive .s-lap__body{transition:none}   /* en escritorio el movimiento lo calcula site.js cuadro a cuadro */
+@media(min-width:900px) and (pointer:fine){   /* profundidad: el resplandor, la sombra y las cifras se corren un poco al revés de la inclinación */
+  .s-lap__glow{transform:translate3d(calc(var(--nx,0) * -22px),calc(var(--ny,0) * -14px),0)}
+  .s-lap__foot{transform:translateX(calc(var(--nx,0) * 12px))}
+  .s-lap__chips{transform:translate3d(calc(var(--nx,0) * -14px),calc(var(--ny,0) * -8px),0)}
+}
 @keyframes s-lap-float{0%,100%{translate:0 0}50%{translate:0 -5px}}
 /* estado inicial que pone el JS antes de animar */
 .s-lap.is-pre .s-lap__lid{transform:rotateX(-86deg);transition:none}
