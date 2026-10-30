@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://deboramalqui.github.io/sitemap.xml
+Sitemap: https://www.malquidebora.com/sitemap.xml
