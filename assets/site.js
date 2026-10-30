@@ -183,7 +183,7 @@
 })();
 
 /* Portada: la suite dentro de una laptop, con UNA sola captura (Hoy). Al cargar, la tapa se abre y aparecen las cifras.
-   Escritorio con mouse: se carga la demo real adentro (se activa con un botón para que la rueda del mouse no quede atrapada), sin destellos; la laptop
+   Escritorio con mouse: sin destellos ni demo adentro (a la demo se entra por «Probalo», 30/10); la laptop
    se mueve sola: sigue al mouse con suavidad, respira cuando nadie la toca y el resplandor, la sombra y las cifras se corren para dar profundidad.
    Celular: pasado un ratito un destello cruza la pantalla y vuelve a verse la misma captura; se repite cada tanto y la laptop se inclina con el scroll.
    Con "reducir movimiento" todo queda quieto y abierto. */
@@ -191,41 +191,27 @@
   var lap=document.querySelector('.s-lap');if(!lap)return;
   var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
   var fine=window.matchMedia&&matchMedia('(min-width:900px) and (pointer:fine)').matches;
-  var use=lap.querySelector('.s-lap__use'),scr=lap.querySelector('.s-lap__scr');
-  var want=false,ready=false;
-  function show(f){f.classList.add('is-on');lap.classList.add('has-demo','is-live');try{f.contentWindow.focus()}catch(e){}}
-  function demo(){   /* la demo real se prepara sin que se vea y solo reemplaza a la captura cuando se la pide con el botón: así la portada no cambia sola */
-    var url=lap.getAttribute('data-demo');if(!url||lap.querySelector('iframe'))return;
-    var f=document.createElement('iframe');f.src=url;f.title=lap.getAttribute('aria-label')||'Campaign Suite';f.loading='eager';f.setAttribute('referrerpolicy','no-referrer-when-downgrade');
-    f.addEventListener('load',function(){ready=true;if(want)show(f)});
-    scr.appendChild(f);
-  }
-  if(use){
-    use.addEventListener('click',function(){var f=lap.querySelector('iframe');if(!f){want=true;demo();return}want=true;if(ready)show(f);else lap.classList.add('is-live')});
-    lap.addEventListener('pointerleave',function(){lap.classList.remove('is-live')});
-    lap.addEventListener('pointerenter',function(){if(fine)demo()},{once:true});
-  }
+  var scr=lap.querySelector('.s-lap__scr');
   function size(){   /* la laptop entera en el primer pantallazo: ancho según el alto que queda debajo del texto y según el ancho que dejan las cifras a los costados */
     if(!matchMedia('(min-width:900px)').matches){lap.style.removeProperty('--lapw');return}
     var body=lap.querySelector('.s-lap__body')||lap,top=lap.getBoundingClientRect().top+window.scrollY,ratio=body.offsetHeight/body.offsetWidth||.65;   /* solo tapa y base: las cifras de abajo no cuentan */
     var byH=(window.innerHeight-top-28)/ratio,byW=matchMedia('(min-width:1200px)').matches?window.innerWidth-2*(200+36+24):window.innerWidth-48;
     lap.style.setProperty('--lapw',Math.round(Math.min(byH,byW))+'px');
-    requestAnimationFrame(function(){var sc=scr.clientWidth/1100;if(!(sc>0))return;lap.style.setProperty('--vw','1100px');lap.style.setProperty('--vh',Math.round(scr.clientHeight/sc)+'px');lap.style.setProperty('--sc',sc.toFixed(4))});   /* la demo a 1100 px, escalada a la pantalla */
   }
   size();var rs=0;window.addEventListener('resize',function(){clearTimeout(rs);rs=setTimeout(size,120)});
   if(document.fonts&&document.fonts.ready)document.fonts.ready.then(size);
-  function motion(){   /* escritorio: la laptop sigue al mouse con suavidad, respira sola y se aplana mientras se usa la demo */
+  function motion(){   /* escritorio: la laptop sigue al mouse con suavidad y respira sola */
     if(reduce||!fine)return;
     var hero=lap.closest('.s-hero')||lap,px=0,py=0,pointer=false,nx=0,ny=0,seen=true,raf=0,t0=performance.now();
     function clamp(v,a,b){return Math.max(a,Math.min(b,v))}
     function set(k,v){lap.style.setProperty(k,v)}
     function frame(now){
       raf=0;if(!seen||document.hidden)return;
-      var live=lap.classList.contains('is-live'),t=(now-t0)/1000,r=lap.getBoundingClientRect();
-      var still=!pointer&&!live,tx=live?0:(pointer?px:0)+(still?Math.sin(t*.55)*.35:0),ty=live?0:(pointer?py:0)+(still?Math.cos(t*.42)*.25:0);
+      var t=(now-t0)/1000,r=lap.getBoundingClientRect();
+      var still=!pointer,tx=(pointer?px:0)+(still?Math.sin(t*.55)*.35:0),ty=(pointer?py:0)+(still?Math.cos(t*.42)*.25:0);
       nx+=(tx-nx)*.075;ny+=(ty-ny)*.075;
       var look=clamp(((window.innerHeight/2-(r.top+r.height/2))/window.innerHeight)*8,-5,5);   /* al bajar con el scroll la tapa se inclina hacia atrás */
-      set('--nx',nx.toFixed(3));set('--ny',ny.toFixed(3));set('--ty',(nx*7).toFixed(2)+'deg');set('--tx',(-ny*4+(live?0:look)).toFixed(2)+'deg');
+      set('--nx',nx.toFixed(3));set('--ny',ny.toFixed(3));set('--ty',(nx*7).toFixed(2)+'deg');set('--tx',(-ny*4+look).toFixed(2)+'deg');
       raf=requestAnimationFrame(frame);
     }
     function go(){if(!raf&&seen&&!document.hidden)raf=requestAnimationFrame(frame)}
@@ -247,11 +233,11 @@
     function look(){tick=false;var r=lap.getBoundingClientRect(),c=r.top+r.height/2,d=(window.innerHeight/2-c)/window.innerHeight;lap.style.setProperty('--tx',(Math.max(-9,Math.min(9,d*14))).toFixed(2)+'deg')}
     window.addEventListener('scroll',function(){if(!tick){tick=true;requestAnimationFrame(look)}},{passive:true});look();
   }
-  if(reduce){lap.classList.add('is-open','is-chips');if(fine&&use)use.hidden=false;return}
+  if(reduce){lap.classList.add('is-open','is-chips');return}
   lap.classList.add('is-pre');
   setTimeout(function(){   /* un cuadro después, para que la tapa cerrada se pinte antes de abrirse; con temporizador y no con requestAnimationFrame, que no corre en pestañas en segundo plano */
     lap.classList.add('is-open');
     setTimeout(function(){lap.classList.add('is-chips');motion()},950);
-    setTimeout(function(){if(fine){if(use)use.hidden=false}else phone()},1100);
+    setTimeout(phone,1100);
   },60);
 })();
