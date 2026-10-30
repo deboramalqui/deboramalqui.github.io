@@ -192,15 +192,18 @@
   var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
   var fine=window.matchMedia&&matchMedia('(min-width:900px) and (pointer:fine)').matches;
   var use=lap.querySelector('.s-lap__use'),scr=lap.querySelector('.s-lap__scr');
-  function demo(){
+  var want=false,ready=false;
+  function show(f){f.classList.add('is-on');lap.classList.add('has-demo','is-live');try{f.contentWindow.focus()}catch(e){}}
+  function demo(){   /* la demo real se prepara sin que se vea y solo reemplaza a la captura cuando se la pide con el botón: así la portada no cambia sola */
     var url=lap.getAttribute('data-demo');if(!url||lap.querySelector('iframe'))return;
     var f=document.createElement('iframe');f.src=url;f.title=lap.getAttribute('aria-label')||'Campaign Suite';f.loading='eager';f.setAttribute('referrerpolicy','no-referrer-when-downgrade');
-    f.addEventListener('load',function(){f.classList.add('is-on');lap.classList.add('has-demo');if(use)use.hidden=false});
+    f.addEventListener('load',function(){ready=true;if(want)show(f)});
     scr.appendChild(f);
   }
   if(use){
-    use.addEventListener('click',function(){lap.classList.add('is-live');var f=lap.querySelector('iframe');try{f.contentWindow.focus()}catch(e){}});
+    use.addEventListener('click',function(){var f=lap.querySelector('iframe');if(!f){want=true;demo();return}want=true;if(ready)show(f);else lap.classList.add('is-live')});
     lap.addEventListener('pointerleave',function(){lap.classList.remove('is-live')});
+    lap.addEventListener('pointerenter',function(){if(fine)demo()},{once:true});
   }
   function size(){   /* la laptop entera en el primer pantallazo: ancho según el alto que queda debajo del texto y según el ancho que dejan las cifras a los costados */
     if(!matchMedia('(min-width:900px)').matches){lap.style.removeProperty('--lapw');return}
@@ -244,11 +247,11 @@
     function look(){tick=false;var r=lap.getBoundingClientRect(),c=r.top+r.height/2,d=(window.innerHeight/2-c)/window.innerHeight;lap.style.setProperty('--tx',(Math.max(-9,Math.min(9,d*14))).toFixed(2)+'deg')}
     window.addEventListener('scroll',function(){if(!tick){tick=true;requestAnimationFrame(look)}},{passive:true});look();
   }
-  if(reduce){lap.classList.add('is-open','is-chips');if(fine)demo();return}
+  if(reduce){lap.classList.add('is-open','is-chips');if(fine&&use)use.hidden=false;return}
   lap.classList.add('is-pre');
   setTimeout(function(){   /* un cuadro después, para que la tapa cerrada se pinte antes de abrirse; con temporizador y no con requestAnimationFrame, que no corre en pestañas en segundo plano */
     lap.classList.add('is-open');
     setTimeout(function(){lap.classList.add('is-chips');motion()},950);
-    setTimeout(function(){if(fine)demo();else phone()},1100);
+    setTimeout(function(){if(fine){if(use)use.hidden=false}else phone()},1100);
   },60);
 })();
