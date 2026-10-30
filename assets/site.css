@@ -423,6 +423,9 @@ body.s-lock{overflow:hidden}
 @media(max-width:1199px){.s-hero--suite{overflow-x:clip}}   /* el brillo y la base de la laptop asoman unos píxeles; a partir de 1200 las cifras salen a los costados y hay lugar */
 .s-hero--suite .s-hero__txt{max-width:720px;margin:0 auto}
 .s-hero--suite h1{margin-bottom:8px;font-size:clamp(2.25rem,5.6vw,3.5rem)}
+.s-hero__alt{display:block;font:500 17px/20px "Heebo",system-ui,sans-serif;letter-spacing:.01em;color:var(--d-on-var);margin:2px 0 0}   /* «דבורה מלכי» chico bajo el nombre en la portada en hebreo (30/10): el bloque sube 14 px y el h1 cede 6, así la laptop no se mueve */
+.s-hero--suite .s-hero__txt:has(.s-hero__alt){margin-top:-14px}
+.s-hero--suite h1:has(+.s-hero__alt){margin-bottom:2px}
 .s-hero--suite .s-role,.s-hero--suite .s-hero__txt>p{margin-left:auto;margin-right:auto}
 .s-hero--suite .s-hero__txt>p:not(.s-role){font-size:clamp(1rem,1.8vw,1.125rem);color:var(--d-on-var);max-width:58ch;margin-bottom:18px}
 .s-hero--suite .d-row{justify-content:center}
