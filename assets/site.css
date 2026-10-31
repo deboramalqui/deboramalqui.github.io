@@ -1,5 +1,5 @@
-/* Heebo (OFL), solo el bloque hebreo: DiDi Sans no tiene alfabeto hebreo. fonts/Heebo-hebrew.woff2 sale de tools (fontTools) a partir de la fuente variable. */
-@font-face{font-family:"Heebo";src:url("fonts/Heebo-hebrew.woff2") format("woff2");font-weight:100 900;font-display:swap;unicode-range:U+0590-05FF,U+FB1D-FB4F,U+20AA}
+/* Heebo (OFL), solo el bloque hebreo: DiDi Sans no tiene alfabeto hebreo. font-display:block (31/10): con los estilos dentro de la página el hebreo se pintaba antes con otra letra y al llegar la Heebo la laptop se corría; la Heebo está precargada y pesa 20 KB. fonts/Heebo-hebrew.woff2 sale de tools (fontTools) a partir de la fuente variable. */
+@font-face{font-family:"Heebo";src:url("fonts/Heebo-hebrew.woff2") format("woff2");font-weight:100 900;font-display:block;unicode-range:U+0590-05FF,U+FB1D-FB4F,U+20AA}
 /* Layout del sitio. Los componentes viven en assets/didi-ui.css. */
 html{scroll-behavior:smooth;scroll-padding-top:88px}
 body{margin:0;background:var(--d-surface);color:var(--d-on);font-family:var(--d-sans);min-height:100vh;display:flex;flex-direction:column}
@@ -205,6 +205,17 @@ button.d-tile{font:inherit;color:inherit;text-align:start;border:0;border-top:2p
 .s-sheet__list h3{margin:var(--d-4) 0 0;padding:var(--d-2) 0;font:500 .75rem/1rem var(--d-mono);letter-spacing:.06em;color:var(--d-dato)}
 .s-sheet__chips{display:flex;flex-wrap:wrap;gap:8px;padding:var(--d-2) 0 var(--d-3)}
 .s-sheet__chips span{background:var(--d-low);border-radius:8px;padding:6px 12px;font:400 .875rem/1.25rem var(--d-sans)}
+/* Colaboraciones (31/10): franja de países debajo del título y Principales con subrayado de color y enlace a su web */
+.s-sheet__paises{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:8px 12px;padding:14px var(--d-5);border-block:1px solid var(--d-outline-var);background:var(--d-low);flex:none}
+.s-sheet__paises span{font:500 .8125rem/1 var(--d-mono);letter-spacing:.14em;color:var(--d-on)}
+.s-sheet__paises span::first-letter{color:var(--c)}
+.s-sheet__paises i{width:5px;height:5px;border-radius:50%;background:var(--d-outline);display:block}
+[dir="rtl"] .s-sheet__paises span{letter-spacing:0;font-size:.875rem}
+@media(max-width:600px){.s-sheet__paises{display:grid;grid-template-columns:repeat(3,auto);justify-content:center;gap:12px 22px}.s-sheet__paises i{display:none}}
+.s-sheet__chips .s-pchip{background:var(--d-low);border-radius:8px;padding:6px 12px;font:400 .875rem/1.25rem var(--d-sans);color:var(--d-on);text-decoration:none;box-shadow:inset 0 -2px 0 var(--c)}
+.s-sheet__chips a.s-pchip{transition:background .2s,box-shadow .2s}
+.s-sheet__chips a.s-pchip:hover{background:color-mix(in srgb,var(--c) 14%,var(--d-low));box-shadow:inset 0 -3px 0 var(--c)}
+.s-sheet__chips a.s-pchip:focus-visible{outline:none;box-shadow:inset 0 -3px 0 var(--c),var(--d-focus)}
 @keyframes s-sheet-in{from{opacity:0;transform:translateY(16px) scale(.98)}to{opacity:1;transform:none}}
 @media(max-width:640px){
   .s-sheet{width:100%;max-width:none;margin:auto 0 0;border-radius:28px 28px 0 0;max-height:86vh}
