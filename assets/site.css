@@ -20,6 +20,8 @@ a{color:inherit}
 .s-hero h1{font:700 clamp(2.5rem,7vw,4rem)/1.02 var(--d-sans);letter-spacing:-.02em;margin:0 0 20px}
 .s-hero p{font:400 clamp(1.0625rem,2.2vw,1.25rem)/1.6 var(--d-sans);max-width:58ch;margin:0 0 28px;color:var(--d-on)}
 .s-tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+.s-tiles--rec{grid-template-columns:repeat(var(--n,3),minmax(0,1fr))}   /* reconocimientos (30/10): una fila con tantas columnas como tarjetas, sin huecos; en celular, una debajo de otra */
+@media(max-width:560px){.s-tiles--rec{grid-template-columns:1fr}}
 a.d-tile{display:block;text-decoration:none;color:inherit}
 a.d-tile:hover{background:var(--d-container)}
 .s-sec{padding:clamp(40px,7vw,80px) 0}
