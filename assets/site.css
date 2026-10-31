@@ -634,3 +634,37 @@ body.s-lock{overflow:hidden}
 @keyframes vt-out{to{opacity:0;transform:translateY(-16px)}}
 @keyframes vt-in{from{opacity:0;transform:translateY(28px)}}
 @media(prefers-reduced-motion:reduce){@view-transition{navigation:none}::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}}
+
+/* Cada caso en su color (31/10, Débora): el mismo de su tarjeta en la portada (campañas rosa, producto celeste, UX amarillo, automatización verde, académicos azul).
+   Lo toman los acentos (línea bajo el título, puntos de las secciones, viñetas, cifras, encabezados de tabla, fichas, pestaña elegida, índice).
+   Los enlaces siguen celestes y los botones rosas: son funciones, no decoración. */
+.s-case{--tone:var(--d-nav)}
+.s-art h1::after{content:"";display:block;width:72px;height:4px;border-radius:2px;background:var(--tone);margin-top:16px}
+.s-art h2::before{content:"";display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--tone);margin-inline-end:12px;vertical-align:.18em}
+.s-case .s-rail .d-raili.is-active{border-left-color:var(--tone);color:var(--d-on)}
+[dir="rtl"] .s-case .s-rail .d-raili.is-active{border-right-color:var(--tone)}
+.s-meta .k{color:var(--tone)}
+.s-art .d-chip-data{background:var(--d-low);color:var(--d-on);box-shadow:inset 0 -2px 0 var(--tone)}
+.s-art .d-link{text-decoration-color:var(--tone)}
+.s-art li::marker{color:var(--tone)}
+.s-art .d-table th{color:var(--tone)}
+.s-art .d-tile{border-top-color:var(--tone)}
+.s-art .d-tile .d-l{color:var(--tone)}
+.s-art .s-flow{--c:var(--tone)}
+.s-art .s-kpi small{color:var(--tone)}
+.s-art .s-kpi__bars i.is-now{background:var(--tone)}
+.s-art .rl-day time,.s-art .rl-tag i{color:var(--tone)}
+.s-art .rl-tag{border-left-color:var(--tone)}
+[dir="rtl"] .s-art .rl-tag{border-right-color:var(--tone)}
+.s-art .rl-stage{border-top-color:var(--tone)}
+.s-art .d-gal__dots i.is-on,.s-art .s-proto__dots i.is-on,.s-art .s-book__dots i.is-on{background:var(--tone)}
+.s-art .s-mon__tabs button[aria-selected="true"]{background:color-mix(in srgb,var(--tone) 24%,var(--d-low));color:var(--d-on)}
+/* Becas y Exposiciones (31/10): una barra y el año en los colores de la D, sin rosa (el rosa queda para el botón «Listo») */
+#rec-becas .s-sheet__list li,#rec-expos .s-sheet__list li{box-shadow:inset 3px 0 0 var(--c);padding-inline-start:14px}
+[dir="rtl"] #rec-becas .s-sheet__list li,[dir="rtl"] #rec-expos .s-sheet__list li{box-shadow:inset -3px 0 0 var(--c)}
+#rec-becas .s-sheet__list .y,#rec-expos .s-sheet__list .y{color:var(--c)}
+#rec-becas .s-sheet__list li:nth-child(4n+1),#rec-expos .s-sheet__list li:nth-child(4n+1){--c:var(--d-nav)}
+#rec-becas .s-sheet__list li:nth-child(4n+2),#rec-expos .s-sheet__list li:nth-child(4n+2){--c:var(--d-atencion)}
+#rec-becas .s-sheet__list li:nth-child(4n+3),#rec-expos .s-sheet__list li:nth-child(4n+3){--c:var(--d-ok)}
+#rec-becas .s-sheet__list li:nth-child(4n+4),#rec-expos .s-sheet__list li:nth-child(4n+4){--c:var(--d-dato)}
+.s-sheet__bar h2:focus{outline:none}   /* al abrir, el foco va al título de la hoja y no al botón «Listo» */
