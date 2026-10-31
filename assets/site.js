@@ -16,6 +16,24 @@
   ['scroll','touchstart','pointerdown','keydown'].forEach(function(t){window.addEventListener(t,go,{once:true,passive:true})});
 })();
 
+/* Transición entre páginas (31/10): solo viaja el título del caso que se abre (o del que se vuelve); los demás títulos se van y llegan con la página. */
+(function(){
+  if(location.pathname.indexOf('/casos/')>-1)return;   // en el caso hay un solo título con nombre: no hay nada que apagar
+  function keep(url){
+    [].forEach.call(document.querySelectorAll('[style*="view-transition-name:t-"]'),function(el){
+      var n=el.getAttribute('data-vt')||el.style.viewTransitionName;el.setAttribute('data-vt',n);
+      el.style.viewTransitionName=url&&new RegExp('/casos/'+n.slice(2)+'(\\.html)?([?#]|$)').test(url)?n:'none';
+    });
+  }
+  function restore(){[].forEach.call(document.querySelectorAll('[data-vt]'),function(el){el.style.viewTransitionName=el.getAttribute('data-vt')})}
+  addEventListener('pageswap',function(e){if(e.viewTransition&&e.activation&&e.activation.entry)keep(e.activation.entry.url)});
+  addEventListener('pagereveal',function(e){
+    if(!e.viewTransition)return;
+    var from=window.navigation&&navigation.activation&&navigation.activation.from;keep(from?from.url:location.href);
+    e.viewTransition.finished.then(restore,restore);
+  });
+})();
+
 /* Trabajos académicos en computadora: la imagen de la fila sigue al cursor, a su derecha, sin salirse de la fila (31/10) */
 (function(){
   if(!window.matchMedia||!matchMedia('(hover:hover) and (min-width:901px)').matches)return;

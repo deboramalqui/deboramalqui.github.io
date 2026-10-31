@@ -623,3 +623,14 @@ body.s-lock{overflow:hidden}
 .rl-stage__ch span{font:400 .6875rem/1 var(--d-mono);letter-spacing:.04em;background:var(--d-low);border-radius:999px;padding:6px 9px}
 .rl-stage__q{margin:0;padding-inline-start:18px;font-size:.875rem;color:var(--d-on)}
 .rl-stage__q li{margin:4px 0}
+
+/* Transición entre páginas (31/10): al ir de la portada a un caso (y al volver), la página nueva sube y el título de la tarjeta viaja hasta el título del caso.
+   Solo CSS (View Transitions entre documentos); donde el navegador no lo soporta, la navegación es la de siempre. Sin movimiento si la persona lo pidió. */
+@view-transition{navigation:auto}
+.s-head{view-transition-name:cabecera}
+::view-transition-group(*){animation-duration:.5s;animation-timing-function:cubic-bezier(.2,0,0,1)}
+::view-transition-old(root){animation:vt-out .28s cubic-bezier(.4,0,1,1) both}
+::view-transition-new(root){animation:vt-in .5s cubic-bezier(0,0,.2,1) .05s both}
+@keyframes vt-out{to{opacity:0;transform:translateY(-16px)}}
+@keyframes vt-in{from{opacity:0;transform:translateY(28px)}}
+@media(prefers-reduced-motion:reduce){@view-transition{navigation:none}::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}}
