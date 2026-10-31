@@ -1,3 +1,29 @@
+/* Después del primer pantallazo (31/10): suma las fuentes que faltan (Medium, SemiBold, ExtraBold, mono) y las imágenes de <noscript class="s-defer">
+   cuando se acercan a la pantalla. Arranca 0,7 s después de la carga o con el primer scroll o toque, lo que pase antes. */
+(function(){
+  var done=false;
+  function go(){
+    if(done)return;done=true;
+    var late=document.getElementById('s-late');if(late)document.head.insertAdjacentHTML('beforeend',late.textContent);
+    var ns=[].slice.call(document.querySelectorAll('noscript.s-defer'));
+    function show(n){if(n.parentNode){n.insertAdjacentHTML('afterend',n.textContent);n.parentNode.removeChild(n)}}
+    if(!('IntersectionObserver' in window)){ns.forEach(show);return}
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){io.unobserve(e.target);show(e.target.__ns)}})},{rootMargin:'900px 0px'});
+    ns.forEach(function(n){var p=n.parentNode;p.__ns=n;io.observe(p)});
+  }
+  function soon(){setTimeout(go,700)}
+  if(document.readyState==='complete')soon();else window.addEventListener('load',soon);
+  ['scroll','touchstart','pointerdown','keydown'].forEach(function(t){window.addEventListener(t,go,{once:true,passive:true})});
+})();
+
+/* Trabajos académicos en computadora: la imagen de la fila sigue al cursor, a su derecha, sin salirse de la fila (31/10) */
+(function(){
+  if(!window.matchMedia||!matchMedia('(hover:hover) and (min-width:901px)').matches)return;
+  [].slice.call(document.querySelectorAll('.s-list .d-item')).forEach(function(it){
+    it.addEventListener('pointermove',function(e){var r=it.getBoundingClientRect();it.style.setProperty('--mx',Math.max(0,Math.min(e.clientX-r.left+28,r.width-280))+'px');it.style.setProperty('--my',(e.clientY-r.top)+'px')});
+  });
+})();
+
 /* Resalta en el riel la sección que se está leyendo. Sin dependencias; sin el script el sitio funciona igual. */
 (function(){
   var links=[].slice.call(document.querySelectorAll('.s-rail .d-raili'));
