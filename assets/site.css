@@ -668,3 +668,10 @@ body.s-lock{overflow:hidden}
 #rec-becas .s-sheet__list li:nth-child(4n+3),#rec-expos .s-sheet__list li:nth-child(4n+3){--c:var(--d-ok)}
 #rec-becas .s-sheet__list li:nth-child(4n+4),#rec-expos .s-sheet__list li:nth-child(4n+4){--c:var(--d-dato)}
 .s-sheet__bar h2:focus{outline:none}   /* al abrir, el foco va al título de la hoja y no al botón «Listo» */
+
+/* Barra de arriba quieta al cargar (1/11): los idiomas en DiDi Sans SemiBold (carga de entrada) y no en la mono (llega después);
+   «עב» con la letra hebrea del sistema; y el botón de contacto con el ancho que ocupa con la letra provisoria, así no empuja a los idiomas cuando llega la definitiva. */
+.s-lang a{font:600 .8125rem/1 var(--d-sans);letter-spacing:.04em}
+.s-lang a[lang="he"]{font-family:"Arial Hebrew","Noto Sans Hebrew",system-ui,sans-serif;letter-spacing:0}
+.s-cta{justify-content:center}
+html[lang="es"] .s-cta{min-width:134px}html[lang="en"] .s-cta{min-width:150px}html[lang="he"] .s-cta{min-width:112px}
