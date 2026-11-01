@@ -6,7 +6,12 @@
     if(done)return;done=true;
     var late=document.getElementById('s-late');if(late)document.head.insertAdjacentHTML('beforeend',late.textContent);
     var ns=[].slice.call(document.querySelectorAll('noscript.s-defer'));
-    function show(n){if(n.parentNode){n.insertAdjacentHTML('afterend',n.textContent);n.parentNode.removeChild(n)}}
+    function show(n){
+      var p=n.parentNode;if(!p)return;
+      n.insertAdjacentHTML('afterend',n.textContent);p.removeChild(n);
+      var im=p.querySelector('img');   // el indicador de carga sigue hasta que la imagen termina de llegar (1/11)
+      if(im&&!im.complete){p.classList.add('is-cargando');var f=function(){p.classList.remove('is-cargando')};im.addEventListener('load',f);im.addEventListener('error',f)}
+    }
     if(!('IntersectionObserver' in window)){ns.forEach(show);return}
     var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){io.unobserve(e.target);show(e.target.__ns)}})},{rootMargin:'900px 0px'});
     ns.forEach(function(n){var p=n.parentNode;p.__ns=n;io.observe(p)});

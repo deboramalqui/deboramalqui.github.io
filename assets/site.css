@@ -675,3 +675,17 @@ body.s-lock{overflow:hidden}
 .s-lang a[lang="he"]{font-family:"Arial Hebrew","Noto Sans Hebrew",system-ui,sans-serif;letter-spacing:0}
 .s-cta{justify-content:center}
 html[lang="es"] .s-cta{min-width:134px}html[lang="en"] .s-cta{min-width:150px}html[lang="he"] .s-cta{min-width:112px}
+
+/* Barra de lectura en los casos (1/11, rama Manual + Débora «todo me gusta»): una línea fina del color del caso al pie de la barra de arriba,
+   que avanza a medida que se baja. Solo CSS (animation-timeline: scroll); donde no hay soporte, o con movimiento reducido, no se ve. */
+.s-read{position:absolute;inset-inline:0;bottom:-1px;height:3px;background:var(--tone,var(--d-nav));transform-origin:left center;transform:scaleX(0);pointer-events:none}
+[dir="rtl"] .s-read{transform-origin:right center}
+@supports (animation-timeline:scroll()){@media(prefers-reduced-motion:no-preference){.s-read{animation:s-read linear both;animation-timeline:scroll(root)}}}
+@keyframes s-read{to{transform:scaleX(1)}}
+/* Indicador de carga (1/11): mientras la imagen diferida no llegó, la forma de DiDí que pasa de D a barra y a píldora, en amarillo («en curso»).
+   Aparece a los 200 ms, para no parpadear si la imagen llega rápido; sigue hasta que la imagen termina de llegar (site.js pone y saca la clase is-cargando). */
+.s-card__pic:has(>noscript.s-defer),.s-thumb:has(>noscript.s-defer),.s-card__pic.is-cargando,.s-thumb.is-cargando{position:relative}
+.s-card__pic:has(>noscript.s-defer)::after,.s-thumb:has(>noscript.s-defer)::after,.s-card__pic.is-cargando::after,.s-thumb.is-cargando::after{--s:22px;content:"";position:absolute;left:50%;top:50%;width:var(--s);height:var(--s);translate:-50% -50%;background:var(--d-atencion);border-radius:0 calc(var(--s)/2) calc(var(--s)/2) 0;opacity:0;animation:d-morph 2.4s ease-in-out .2s infinite,s-aparece .2s linear .2s forwards}
+.s-thumb:has(>noscript.s-defer)::after,.s-thumb.is-cargando::after{--s:12px}
+@keyframes s-aparece{to{opacity:1}}
+@media(prefers-reduced-motion:reduce){.s-card__pic:has(>noscript.s-defer)::after,.s-thumb:has(>noscript.s-defer)::after,.s-card__pic.is-cargando::after,.s-thumb.is-cargando::after{animation:s-aparece .2s linear .2s forwards}}
