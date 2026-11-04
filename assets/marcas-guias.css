@@ -19,6 +19,7 @@
 .mk .hero,.mk .intro{padding-top:8px}
 .mk-sub{display:flex;align-items:center;gap:8px 18px;flex-wrap:wrap;padding:14px 0 6px;border-bottom:1px solid var(--d-outline-var);margin-bottom:8px}
 .mk-sub .k{font:400 .75rem/1.2 var(--d-mono);letter-spacing:.09em;text-transform:uppercase;color:var(--d-on-var)}
+@media(max-width:600px){.mk-sub .k{flex-basis:100%}}   /* 4/11: en celular, siempre dos renglones; a 412 px entraba justo en uno y, al llegar la letra, saltaba de dos a uno y corría la página */
 .mk-sub nav{display:flex;gap:6px}
 .mk-sub nav a{white-space:nowrap;text-decoration:none;color:var(--d-on);font:600 .9375rem/1 var(--d-sans);padding:10px 16px;border-radius:999px;border:1px solid var(--d-outline-var)}
 .mk-sub nav a:hover{border-color:var(--d-nav)}
