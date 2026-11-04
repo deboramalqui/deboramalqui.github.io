@@ -14,6 +14,8 @@
 /* ajustes para vivir dentro del sitio */
 .mk{--bg:#0F1B2D;--bg-2:#0B1424;--panel:#13213A;--panel-2:#172744;--line:#2B3A52;--fg:#E6ECF5;--muted:#AAB7C9;--accent:#70B4F4;--accent-ink:#0F1B2D;--shot-line:#35465F}
 .mk .wrap{max-width:none;padding:0}
+:lang(he) .mk{--sans:var(--d-sans);--mono:var(--d-mono)}
+:lang(he) .mk .hero h1{font-weight:700}   /* la ExtraBold llega tarde y, al cambiar las comas, el título se reacomodaba y corría el índice */   /* 3/11: en hebreo, la misma letra que el resto del sitio (Heebo); antes caía en la del sistema */
 .mk .hero,.mk .intro{padding-top:8px}
 .mk-sub{display:flex;align-items:center;gap:8px 18px;flex-wrap:wrap;padding:14px 0 6px;border-bottom:1px solid var(--d-outline-var);margin-bottom:8px}
 .mk-sub .k{font:400 .75rem/1.2 var(--d-mono);letter-spacing:.09em;text-transform:uppercase;color:var(--d-on-var)}
