@@ -2,7 +2,10 @@
    Escrito dentro de la página, el celular de Lighthouse pintaba la frase de la portada 0,3 s más tarde y bajaba a 99.
    GA4 y Clarity se cargan solo después de «Aceptar»; sin aceptar no se mide nada. Los ID salen de <meta name="didi-ga4"> y <meta name="didi-clarity">.
    Contrato como el de Kol: window.didiMedicion = {estado(), cuandoAcepte(fn), reabrir()} y el evento de documento «didi:medicion» con 'si' o 'no'.
-   Origen de la visita como en Kol: se guarda en el navegador por 30 días y solo con «Aceptar»; la campaña pisa lo anterior y una visita sin campaña no pisa una campaña. */
+   Origen de la visita como en Kol: se guarda en el navegador por 30 días y solo con «Aceptar»; la campaña pisa lo anterior y una visita sin campaña no pisa una campaña.
+   Visitas propias (5/11, versión 2): con ?interno=1 ese navegador no carga ni GA4 ni Clarity (el aviso funciona igual); con ?interno=0 vuelve a medir. La marca traffic_type=internal no sirve:
+   probado en vivo, los datos de gtag('config') (idioma, tipo de página, origen, traffic_type) no viajan en los envíos a GA4. Lo que viaja es lo que lleva cada evento: el idioma va en todos los propios;
+   en las páginas vistas y los eventos automáticos el idioma y el caso se leen de la ruta (/es/, /en/, /he/ y /casos/<caso>.html). */
 (function(){
   var d=document,h=d.documentElement;
   function meta(n){var m=d.querySelector('meta[name="'+n+'"]');return m?m.content:''}
@@ -68,21 +71,19 @@
   }
   function cargar(src){var s=d.createElement('script');s.async=true;s.src=src;d.head.appendChild(s)}
   function empezar(){
-    if(listo)return;listo=true;guardarOrigen();
-    var g=guardado();
+    if(listo)return;
+    if(interno)return;   // visitas propias: nada se carga ni se envía, ni siquiera con «Aceptar»
+    listo=true;guardarOrigen();
     if(GA){
       window.dataLayer=window.dataLayer||[];window.gtag=function(){dataLayer.push(arguments)};
       gtag('js',new Date());
-      var cfg={idioma:lang,tipo_pagina:tipo,user_properties:{idioma_sitio:lang,origen:g?g.etiqueta:'(sin dato)'}};
-      if(caso)cfg.caso=caso;
-      if(interno)cfg.traffic_type='internal';
-      gtag('config',GA,cfg);   // los datos fijos van en config: «set» no viaja (prueba de Medido)
+      gtag('config',GA);   // sin datos fijos: no viajan (probado en vivo, 5/11); cada evento propio lleva su idioma
       cargar('https://www.googletagmanager.com/gtag/js?id='+encodeURIComponent(GA));
     }
     if(CL){
       window.clarity=window.clarity||function(){(clarity.q=clarity.q||[]).push(arguments)};
       clarity('consentv2',{ad_Storage:'denied',analytics_Storage:'granted'});
-      clarity('set','idioma',lang);if(interno)clarity('set','interno','1');
+      clarity('set','idioma',lang);
       cargar('https://www.clarity.ms/tag/'+encodeURIComponent(CL));
     }
     if(caso){

@@ -139,7 +139,7 @@
   var fonts={};
   hosts.forEach(function(h){
     var f=h.getAttribute('data-fonts');
-    if(f&&!fonts[f]){fonts[f]=1;var l=document.createElement('link');l.rel='stylesheet';l.href='https://fonts.googleapis.com/css2?family='+f+'&display=swap';document.head.appendChild(l)}
+    if(f&&!fonts[f]){fonts[f]=1;var l=document.createElement('link');l.rel='stylesheet';l.media='print';l.onload=function(){this.media='all'};l.href='https://fonts.googleapis.com/css2?family='+f+'&display=swap';document.head.appendChild(l)}   // 5/11: sin frenar el primer dibujado (MAC daba 73 en celular)
     var t=h.querySelector('template');if(!t||h.shadowRoot)return;
     var r=h.attachShadow({mode:'open'}),l2=document.createElement('link');l2.rel='stylesheet';l2.href=h.getAttribute('data-css');r.appendChild(l2);r.appendChild(t.content.cloneNode(true));
     h.setAttribute('dir','ltr');
