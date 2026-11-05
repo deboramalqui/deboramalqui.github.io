@@ -689,3 +689,21 @@ html[lang="es"] .s-cta{min-width:134px}html[lang="en"] .s-cta{min-width:150px}ht
 .s-thumb:has(>noscript.s-defer)::after,.s-thumb.is-cargando::after{--s:12px}
 @keyframes s-aparece{to{opacity:1}}
 @media(prefers-reduced-motion:reduce){.s-card__pic:has(>noscript.s-defer)::after,.s-thumb:has(>noscript.s-defer)::after,.ix-surface:has(>noscript.s-defer)::after,.s-card__pic.is-cargando::after,.s-thumb.is-cargando::after,.ix-surface.is-cargando::after{animation:s-aparece .2s linear .2s forwards}}
+
+/* Aviso de cookies (Medición, 1/11): franja fina de borde a borde, con las medidas del aviso de Medido (texto de 13 px, botones chicos con contorno, iguales).
+   Sin JavaScript no aparece (sin JavaScript tampoco se mide). Los botones se ven de 36 px y se tocan en 44 (zona ::before de didi-ui.css). */
+.s-ck{display:none}
+.ck-js:not(.ck-ok) .s-ck{display:flex}
+.ck-js:not(.ck-ok) .s-fab{display:none}   /* el botón flotante vuelve cuando la persona elige */
+.s-ck{position:fixed;z-index:45;inset-inline:0;bottom:0;align-items:center;justify-content:space-between;gap:var(--d-2) var(--d-4);flex-wrap:wrap;
+  padding:var(--d-2) max(16px,env(safe-area-inset-right)) max(8px,env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left));
+  background:var(--d-lowest);border-top:1px solid var(--d-outline-var);color:var(--d-on)}
+.s-ck p{margin:0;font:400 .8125rem/1.35 var(--d-sans)}
+.s-ck__b{display:flex;gap:var(--d-2)}
+.s-ck .d-btn{min-height:36px;padding:0 var(--d-4);font-size:.8125rem}
+@media(pointer:coarse){.s-ck .d-btn{min-height:36px}}
+.s-ck .d-btn:focus-visible{box-shadow:inset 0 0 0 1px var(--d-outline),var(--d-focus)}
+@media print{.s-ck{display:none!important}}
+/* «Cookies» en el pie: vuelve a abrir el aviso; se ve como los enlaces del pie */
+.s-foot__ck{background:none;border:0;padding:0;font:inherit;color:var(--d-on);cursor:pointer;border-bottom:1px solid color-mix(in srgb,var(--d-nav) 50%,transparent)}
+.s-foot__ck:hover{border-bottom-color:var(--d-nav)}.s-foot__ck:focus-visible{outline:none;box-shadow:var(--d-focus)}

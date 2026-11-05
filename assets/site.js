@@ -290,3 +290,13 @@
     setTimeout(phone,1100);
   },60);
 })();
+
+/* Medición (Medición, 1/11/2026): arranque. Si la página tiene <meta name="didi-medicion"> (hay ID de GA4 o Clarity), anota la respuesta del aviso
+   desde el primer toque y, después de la carga, pide assets/medicion.js, que hace todo lo demás. "ck-js" la pone este arranque (al final del cuerpo, no en el head); "ck-ok" la pone el script corto del head si ya respondió. */
+(function(){
+  var d=document,h=d.documentElement,m=d.querySelector('meta[name="didi-medicion"]');if(!m)return;
+  h.classList.add('ck-js');
+  d.addEventListener('click',function(e){var b=!window.didiMedicion&&e.target.closest('[data-ck]');if(b){try{localStorage.setItem('didi_medicion_v1',b.getAttribute('data-ck'))}catch(x){}h.classList.add('ck-ok')}});
+  function cargar(){var s=d.createElement('script');s.src=m.content;d.body.appendChild(s)}
+  if(d.readyState==='complete')setTimeout(cargar,0);else addEventListener('load',function(){setTimeout(cargar,0)});
+})();
