@@ -230,7 +230,7 @@ h1,h2,h3,h4,h5,h6,p{margin:0}
      dark palette follows the M2 dark-theme guidance (#121212 surfaces, desaturated primary). */
   :host{
     --primary:#4ae08a; --on-primary:#00391a; --secondary:#ffd166; --on-secondary:#3a2a00;
-    --bg:#121212; --surface:#121212; --surface-sw:#2a2a2a; --error:#cf6679; --on-error:#000;
+    --bg:#121212; --surface:#121212; --surface-sw:#2a2a2a; --error:#e07a89; --on-error:#000;
     --ink:255,255,255; --divider:rgba(255,255,255,.12); --shadow:0,0,0;
     --snack-act:#4ae08a;
   }

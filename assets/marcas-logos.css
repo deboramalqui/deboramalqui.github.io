@@ -9,6 +9,9 @@
 /* ajustes para vivir dentro del sitio */
 .mk{--bg:#0F1B2D;--bg-2:#0B1424;--panel:#13213A;--panel-2:#172744;--line:#2B3A52;--fg:#E6ECF5;--muted:#AAB7C9;--accent:#70B4F4;--accent-ink:#0F1B2D;--shot-line:#35465F}
 .mk .wrap{max-width:none;padding:0}
+.mk a.tome{color:inherit}   /* el manual DiDí es un enlace en el estante de Guidelines */
+@media (min-width:1100px){.mk .shelf{grid-template-columns:repeat(3,minmax(0,1fr))}}   /* con tres libros: una sola fila en computadora */
+@media (min-width:761px) and (max-width:1099px){.mk .shelf>.tome:last-child:nth-child(odd){grid-column:1/-1;justify-self:center;width:calc(50% - clamp(12px,2.5vw,32px))}}   /* en tableta, el tercero centrado debajo */
 :lang(he) .mk{--sans:var(--d-sans);--mono:var(--d-mono)}
 :lang(he) .mk .hero h1{font-weight:700}   /* la ExtraBold llega tarde y, al cambiar las comas, el título se reacomodaba y corría el índice */   /* 3/11: en hebreo, la misma letra que el resto del sitio (Heebo); antes caía en la del sistema */
 .mk .hero,.mk .intro{padding-top:8px}

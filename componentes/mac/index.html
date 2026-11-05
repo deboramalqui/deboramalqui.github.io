@@ -84,7 +84,8 @@
   .exhib{display:flex;gap:16px;align-items:center;padding:12px;text-decoration:none;color:inherit}
   .exhib .thumb{width:88px;height:88px;flex:none;object-fit:cover;border-radius:44px 44px 2px 2px;background:#ddd}
   .exhib .over{color:var(--clay);font-size:10px}
-  .exhib h4{font:500 18px/24px var(--serif);letter-spacing:0;margin:2px 0}
+  .exhib h4,.exhib h3{   /* 5/11: en «Components» la tarjeta va con h3 (venía de h2; h4 salteaba un nivel) */
+  font:500 18px/24px var(--serif);letter-spacing:0;margin:2px 0}
   .exhib .body2{font-size:13px;line-height:18px}
 
   /* phones: a 375 x 760 screen in a 9px bezel; scaled down by script on narrow viewports, never squashed */
@@ -302,8 +303,8 @@
       </div>
     </div>
     <div class="col exhib-demo">
-      <a class="card e1 exhib sl" href="#"><img class="thumb" src="img/work-ocean.jpg" alt="Painting of dark blue waves" style="object-position:40% 50%"><div><div class="over">Todo el año</div><h4>Colección permanente</h4><div class="body2 med">45 min · todas las edades</div></div></a>
-      <a class="card e1 exhib sl" href="#"><img class="thumb" src="img/work-escalator.jpg" alt="Escalators seen from below, crossing in diagonals"><div><div class="over">Hasta 30/6</div><h4>Territorios en tránsito</h4><div class="body2 med">60 min · desde 8 años</div></div></a>
+      <a class="card e1 exhib sl" href="#"><img class="thumb" src="img/work-ocean.jpg" alt="Painting of dark blue waves" style="object-position:40% 50%"><div><div class="over">Todo el año</div><h3>Colección permanente</h3><div class="body2 med">45 min · todas las edades</div></div></a>
+      <a class="card e1 exhib sl" href="#"><img class="thumb" src="img/work-escalator.jpg" alt="Escalators seen from below, crossing in diagonals"><div><div class="over">Hasta 30/6</div><h3>Territorios en tránsito</h3><div class="body2 med">60 min · desde 8 años</div></div></a>
     </div>
     <div class="col menu-wrap">
       <ul class="menu card e8"><li class="sl">Mis reservas</li><li class="sl is-selected">Nueva reserva</li><li class="sl">Descargas</li><li class="sl">EN / ES</li></ul>

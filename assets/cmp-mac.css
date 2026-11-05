@@ -302,7 +302,8 @@ h1,h2,h3,h4,h5,h6,p{margin:0}
   .exhib{display:flex;gap:16px;align-items:center;padding:12px;text-decoration:none;color:inherit}
   .exhib .thumb{width:88px;height:88px;flex:none;object-fit:cover;border-radius:44px 44px 2px 2px;background:#ddd}
   .exhib .over{color:var(--clay);font-size:10px}
-  .exhib h4{font:500 18px/24px var(--serif);letter-spacing:0;margin:2px 0}
+  .exhib h4,.exhib h3{   /* 5/11: en «Components» la tarjeta va con h3 (venía de h2; h4 salteaba un nivel) */
+  font:500 18px/24px var(--serif);letter-spacing:0;margin:2px 0}
   .exhib .body2{font-size:13px;line-height:18px}
 
   /* phones: a 375 x 760 screen in a 9px bezel; scaled down by script on narrow viewports, never squashed */
