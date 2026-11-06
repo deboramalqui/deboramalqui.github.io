@@ -20,7 +20,7 @@
 <p>Two steps and a promise. First the services (banks, health plans, universities, phone and internet), with a search box and a “don’t see your bank? Request it”; then the categories of interest, as chips. A wait that says what the app is doing, and a home built from what the person chose.</p>
 <p>I prototyped it in Figma, low fidelity and under a provisional name, and tested it with users before drawing anything in high fidelity. Here it is rebuilt with Clash’s identity and programmed: whatever looks like a control works.</p>
 <p>The prototype goes through the whole path: first what the app had in 2021 (the three screens, the sign-up and the code) and, after the code, the onboarding I designed, up to the home.</p>
-<iframe class="s-embed s-embed--proto" src="../../prototipos/clash.html?l=en" title="Prototype of Clash’s onboarding" loading="lazy" style="--h:900px;--hm:1420px"></iframe>
+<iframe class="s-embed s-embed--proto" data-src="../../prototipos/clash.html?l=en" title="Prototype of Clash’s onboarding" loading="lazy" style="--h:900px;--hm:1420px"></iframe>
 <ul class="cl-find"><li><b>Search and “Request it”.</b><span>Nobody is left out because their bank is not on the list: they request it and the app lets them know when it arrives.</span></li><li><b>Check mark and counter.</b><span>Every selection is visible and counted: in the tests people asked for clear feedback and a way to verify what they added.</span></li><li><b>Search and “Explore”.</b><span>Two ways to reach a benefit, searching or browsing, because both came up in the tests.</span></li></ul>
 <h2 id="proceso">The process</h2>
 <p>Ten weeks between April and July 2021, in two diamonds: research and define, prototype and redesign. Everything that follows is the path to the prototype above.</p>
@@ -167,9 +167,13 @@
       var im=p.querySelector('img');   // el indicador de carga sigue hasta que la imagen termina de llegar (1/11)
       if(im&&!im.complete){p.classList.add('is-cargando');var f=function(){p.classList.remove('is-cargando')};im.addEventListener('load',f);im.addEventListener('error',f)}
     }
-    if(!('IntersectionObserver' in window)){ns.forEach(show);return}
+    if(!('IntersectionObserver' in window)){ns.forEach(show);[].forEach.call(document.querySelectorAll('iframe[data-src]'),function(f){f.src=f.getAttribute('data-src')});return}
     var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){io.unobserve(e.target);show(e.target.__ns)}})},{rootMargin:'900px 0px'});
     ns.forEach(function(n){var p=n.parentNode;p.__ns=n;io.observe(p)});
+    // Prototipos (6/11): el iframe ya ocupa su lugar desde el principio y carga recién ahora, cerca de la pantalla (Clash, MAC y Bplay bajaban a 75–83 en celular)
+    var fr=[].slice.call(document.querySelectorAll('iframe[data-src]'));
+    var io2=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){io2.unobserve(e.target);e.target.src=e.target.getAttribute('data-src')}})},{rootMargin:'900px 0px'});
+    fr.forEach(function(f){io2.observe(f)});
   }
   function soon(){setTimeout(go,700)}
   if(document.readyState==='complete')soon();else window.addEventListener('load',soon);

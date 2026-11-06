@@ -20,7 +20,7 @@
 <p>שני שלבים והבטחה אחת. קודם השירותים (בנקים, ביטוחים רפואיים, אוניברסיטאות, טלפוניה ואינטרנט), עם חיפוש ו«לא רואים את הבנק שלכם? בקשו אותו»; אחר כך תחומי העניין, כצ'יפים. המתנה שאומרת מה האפליקציה עושה, ומסך בית שנבנה ממה שהאדם בחר.</p>
 <p>בניתי אב-טיפוס ב-Figma, ברזולוציה נמוכה ובשם זמני, ובדקתי אותו עם משתמשים לפני שציירתי משהו ברזולוציה גבוהה. כאן הוא בנוי מחדש עם הזהות של Clash ומתוכנת: כל מה שנראה כמו כפתור, עובד.</p>
 <p>הפרוטוטייפ עובר את כל הדרך: קודם מה שהיה לאפליקציה ב־2021 (שלושת המסכים, ההרשמה והקוד), ואחרי הקוד, האונבורדינג שעיצבתי, עד עמוד הבית.</p>
-<iframe class="s-embed s-embed--proto" src="../../prototipos/clash.html?l=he" title="אב-טיפוס של האונבורדינג של Clash" loading="lazy" style="--h:900px;--hm:1420px"></iframe>
+<iframe class="s-embed s-embed--proto" data-src="../../prototipos/clash.html?l=he" title="אב-טיפוס של האונבורדינג של Clash" loading="lazy" style="--h:900px;--hm:1420px"></iframe>
 <ul class="cl-find"><li><b>חיפוש ו«בקשו אותו».</b><span>אף אחד לא נשאר בחוץ כי הבנק שלו לא ברשימה: מבקשים אותו והאפליקציה מודיעה כשהוא מגיע.</span></li><li><b>סימון ומונה.</b><span>כל בחירה נראית ונספרת: בבדיקות ביקשו משוב בולט ואפשרות לוודא מה הוסיפו.</span></li><li><b>זכוכית מגדלת ו«לגלות».</b><span>שתי דרכים להגיע להטבה, לחפש או לדפדף, כי שתיהן עלו בבדיקות.</span></li></ul>
 <h2 id="proceso">התהליך</h2>
 <p>עשרה שבועות בין אפריל ליולי 2021, בשני יהלומים: לחקור ולהגדיר, לבנות אב-טיפוס ולעצב מחדש. כל מה שבא אחר כך הוא הדרך לאב-הטיפוס שלמעלה.</p>
@@ -167,9 +167,13 @@
       var im=p.querySelector('img');   // el indicador de carga sigue hasta que la imagen termina de llegar (1/11)
       if(im&&!im.complete){p.classList.add('is-cargando');var f=function(){p.classList.remove('is-cargando')};im.addEventListener('load',f);im.addEventListener('error',f)}
     }
-    if(!('IntersectionObserver' in window)){ns.forEach(show);return}
+    if(!('IntersectionObserver' in window)){ns.forEach(show);[].forEach.call(document.querySelectorAll('iframe[data-src]'),function(f){f.src=f.getAttribute('data-src')});return}
     var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){io.unobserve(e.target);show(e.target.__ns)}})},{rootMargin:'900px 0px'});
     ns.forEach(function(n){var p=n.parentNode;p.__ns=n;io.observe(p)});
+    // Prototipos (6/11): el iframe ya ocupa su lugar desde el principio y carga recién ahora, cerca de la pantalla (Clash, MAC y Bplay bajaban a 75–83 en celular)
+    var fr=[].slice.call(document.querySelectorAll('iframe[data-src]'));
+    var io2=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){io2.unobserve(e.target);e.target.src=e.target.getAttribute('data-src')}})},{rootMargin:'900px 0px'});
+    fr.forEach(function(f){io2.observe(f)});
   }
   function soon(){setTimeout(go,700)}
   if(document.readyState==='complete')soon();else window.addEventListener('load',soon);
