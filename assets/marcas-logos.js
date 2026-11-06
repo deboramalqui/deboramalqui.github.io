@@ -11,9 +11,13 @@
       timers.push(setTimeout(function(){ lis.forEach(function(l){l.classList.remove('is-on')}); }, 10400));
     }
     m.querySelector('.m-replay').addEventListener('click',play);
+    // 6/11, Débora: «que arranque solo en loop». Se repite mientras está a la vista y se frena al salir; con movimiento reducido no arranca solo.
+    var loop=null;
+    function vuelta(){ play(); loop=setTimeout(vuelta, 12000); }
     if(!RM && 'IntersectionObserver' in window){
-      var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ play(); io.disconnect(); } }); },{threshold:.45});
-      io.observe(m);
+      new IntersectionObserver(function(es){ es.forEach(function(e){
+        if(e.isIntersecting){ if(!loop) vuelta(); } else { clearTimeout(loop); loop=null; }
+      }); },{threshold:.45}).observe(m);
     }
   });
 })();

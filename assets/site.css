@@ -707,3 +707,38 @@ html[lang="es"] .s-cta{min-width:134px}html[lang="en"] .s-cta{min-width:150px}ht
 /* «Cookies» en el pie: vuelve a abrir el aviso; se ve como los enlaces del pie */
 .s-foot__ck{background:none;border:0;padding:0;font:inherit;color:var(--d-on);cursor:pointer;border-bottom:1px solid color-mix(in srgb,var(--d-nav) 50%,transparent)}
 .s-foot__ck:hover{border-bottom-color:var(--d-nav)}.s-foot__ck:focus-visible{outline:none;box-shadow:var(--d-focus)}
+
+/* 6/11, Débora: tarjetas de Clash en una sola fila; en el celular, 2 por fila (o 1 si son 5, para no dejar filas incompletas) */
+.cl-1fila{grid-template-columns:repeat(var(--n),minmax(0,1fr))}
+.cl-1fila span{font-family:var(--d-sans)}
+@media(max-width:899px){.cl-1fila{grid-template-columns:repeat(2,minmax(0,1fr))}.cl-tools.cl-1fila{grid-template-columns:1fr}}
+/* «Qué encontré»: una sola tarjeta con los ítems adentro */
+.cl-una{list-style:none;margin:16px 0 0;padding:14px 16px;background:var(--d-container);border-inline-start:3px solid var(--cl);display:grid;gap:14px}
+.cl-una li{margin:0}
+.cl-una b{display:block;font:600 .875rem/1.3 var(--d-sans);margin-bottom:4px}
+.cl-una span{font:400 .8125rem/1.5 var(--d-mono);color:var(--d-on-var)}
+/* Sobre mí: los chips de grupos, iguales a los Principales clientes de Colaboraciones */
+.s-grupos{display:flex;flex-wrap:wrap;gap:8px;padding:0;margin:0 0 14px}
+.s-grupos .s-pchip{display:inline-block}
+.s-grupos .s-pchip{background:var(--d-low);border-radius:8px;padding:6px 12px;font:400 .875rem/1.25rem var(--d-sans);color:var(--d-on);text-decoration:none;box-shadow:inset 0 -2px 0 var(--c);transition:background .2s,box-shadow .2s}
+.s-grupos .s-pchip:hover{background:color-mix(in srgb,var(--c) 14%,var(--d-low));box-shadow:inset 0 -3px 0 var(--c)}
+.s-grupos .s-pchip:focus-visible{outline:none;box-shadow:inset 0 -3px 0 var(--c),var(--d-focus)}
+
+/* Sobre mí, trabajos académicos: una fila por trabajo; lo que destaca va en una insignia de atención al final (en el celular, debajo) */
+.s-trab{list-style:none;margin:0 0 24px;padding:0}
+.s-trab li{display:grid;grid-template-columns:minmax(0,66ch) auto;justify-content:space-between;align-items:start;gap:8px 24px;margin:0;padding:12px 0;border-bottom:1px solid var(--d-outline-var)}
+.s-trab .d-badge-attn{display:inline-flex;align-items:center;height:24px;padding:0 var(--d-3);border-radius:0 var(--d-r-md) var(--d-r-md) 0;background:var(--d-atencion);color:var(--d-on-color);font:500 .75rem/1 var(--d-mono);letter-spacing:.03125rem;white-space:nowrap;margin-top:2px}   /* la insignia de atención del manual, por si el CSS del sitio no la trae */
+[dir="rtl"] .s-trab .d-badge-attn{border-radius:var(--d-r-md) 0 0 var(--d-r-md)}
+@media(max-width:760px){.s-trab li{grid-template-columns:minmax(0,1fr)}.s-trab .d-badge-attn{justify-self:start}}
+
+/* Sobre mí: certificados en miniatura, cada uno dentro de una caja de 100×100 sin deformarse; la caja se desplaza en vertical */
+.s-certs{display:flex;flex-wrap:wrap;gap:10px;max-height:340px;overflow-y:auto;margin:8px 0 28px;padding:2px;scrollbar-width:thin;overscroll-behavior:contain}
+.s-certs:focus-visible{outline:none;box-shadow:var(--d-focus)}
+.s-cert{margin:0;width:100px;height:100px;flex:none;display:flex;align-items:center;justify-content:center;background:var(--d-low);border-radius:8px;cursor:zoom-in}
+.s-cert img{max-width:92px;max-height:92px;width:auto;height:auto;object-fit:contain}
+.s-cert:focus-visible{outline:none;box-shadow:var(--d-focus)}
+
+/* 6/11, Débora: los trabajos del MA a todo el ancho y en dos columnas; la nota o la distinción, aparte, en amarillo apagado y sin caja */
+.s-trab li{grid-template-columns:minmax(0,1fr) minmax(180px,26%);justify-content:stretch;gap:6px 32px}
+.s-trab__d{font:500 .8125rem/1.5 var(--d-mono);letter-spacing:.02em;color:color-mix(in srgb,var(--d-atencion) 70%,var(--d-surface));padding-top:2px}
+@media(max-width:760px){.s-trab li{grid-template-columns:minmax(0,1fr)}}
