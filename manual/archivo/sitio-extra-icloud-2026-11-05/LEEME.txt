@@ -1,0 +1,1 @@
+Duplicados de iCloud que aparecieron en sitio-src/extra/manual/ el 5/11/2026. Son la versión del manual anterior a sacar las secciones privadas: tienen Variables y archivos y Decisiones abiertas. Nunca se publicaron. Se guardan acá, fuera de sitio-src, para que no entren a ningún build. No publicar.

@@ -732,11 +732,13 @@ html[lang="es"] .s-cta{min-width:134px}html[lang="en"] .s-cta{min-width:150px}ht
 @media(max-width:760px){.s-trab li{grid-template-columns:minmax(0,1fr)}.s-trab .d-badge-attn{justify-self:start}}
 
 /* Sobre mí: certificados en miniatura, cada uno dentro de una caja de 100×100 sin deformarse; la caja se desplaza en vertical */
-.s-certs{display:flex;flex-wrap:wrap;gap:10px;max-height:340px;overflow-y:auto;margin:8px 0 28px;padding:2px;scrollbar-width:thin;overscroll-behavior:contain}
+.s-certs{display:flex;flex-wrap:nowrap;gap:10px;overflow-x:auto;overflow-y:hidden;margin:8px 0 28px;padding:2px 2px 10px;scrollbar-width:thin;overscroll-behavior-x:contain;scroll-snap-type:x proximity}   /* 6/11, Débora: una fila con desplazamiento horizontal, del más nuevo al más viejo */
 .s-certs:focus-visible{outline:none;box-shadow:var(--d-focus)}
 .s-cert{margin:0;width:100px;height:100px;flex:none;display:flex;align-items:center;justify-content:center;background:var(--d-low);border-radius:8px;cursor:zoom-in}
 .s-cert img{max-width:92px;max-height:92px;width:auto;height:auto;object-fit:contain}
-.s-cert:focus-visible{outline:none;box-shadow:var(--d-focus)}
+.s-cert{scroll-snap-align:start}
+.s-cert .d-zoombtn{position:absolute;inset:0;width:auto;height:auto;min-width:0;min-height:0;opacity:0;border-radius:8px;margin:0}   /* sin lupa a la vista (Débora: «la interacción es hacer clic»): el botón tapa la caja, transparente, y sigue andando con el teclado */
+.s-cert:has(.d-zoombtn:focus-visible){box-shadow:var(--d-focus)}
 
 /* 6/11, Débora: los trabajos del MA a todo el ancho y en dos columnas; la nota o la distinción, aparte, en amarillo apagado y sin caja */
 .s-trab li{grid-template-columns:minmax(0,1fr) minmax(180px,26%);justify-content:stretch;gap:6px 32px}

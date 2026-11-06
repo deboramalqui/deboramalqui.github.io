@@ -1,0 +1,56 @@
+{
+ "chapters": [
+  [
+   "Cover",
+   1
+  ],
+  [
+   "Capítulo 1: Concepto y voz",
+   3
+  ],
+  [
+   "Capítulo 2: Lockup",
+   6
+  ],
+  [
+   "Capítulo 3: Color",
+   9
+  ],
+  [
+   "Capítulo 4: Tipografía",
+   16
+  ],
+  [
+   "Capítulo 5: Formas",
+   21
+  ],
+  [
+   "Capítulo 6: Espaciado",
+   25
+  ],
+  [
+   "Capítulo 7: Componentes",
+   30
+  ],
+  [
+   "Capítulo 8: Estados y movimiento",
+   37
+  ],
+  [
+   "Capítulo 9: Casos de UI",
+   41
+  ],
+  [
+   "Capítulo A: Qué cambió",
+   56
+  ]
+ ],
+ "hide": [
+  50,
+  51,
+  52,
+  53,
+  54,
+  55
+ ]
+}
