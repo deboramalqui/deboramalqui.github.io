@@ -288,11 +288,35 @@
   }
   if(reduce){lap.classList.add('is-open','is-chips');return}
   lap.classList.add('is-pre');
-  setTimeout(function(){   /* un cuadro después, para que la tapa cerrada se pinte antes de abrirse; con temporizador y no con requestAnimationFrame, que no corre en pestañas en segundo plano */
+  /* 9/11, Débora: «la laptop aparece de repente». Desde que el código va dentro de la página (31/10), la tapa se abría con un temporizador
+     que arrancaba antes de que el navegador mostrara la página: al primer cuadro ya estaba abierta. Ahora se abre después de dos cuadros pintados.
+     Con la pestaña en segundo plano (ahí no corre requestAnimationFrame) espera a que se vea; y por las dudas, se abre igual a los 2,5 s.
+     La imagen de la pantalla nunca se oculta: el LCP no cambia. */
+  function abrir(){
+    if(lap.classList.contains('is-open'))return;
     lap.classList.add('is-open');
     setTimeout(function(){lap.classList.add('is-chips');motion()},950);
     setTimeout(phone,1100);
-  },60);
+  }
+  function trasPintar(){requestAnimationFrame(function(){requestAnimationFrame(function(){setTimeout(abrir,100)})})}
+  if(document.hidden)document.addEventListener('visibilitychange',function v(){if(!document.hidden){document.removeEventListener('visibilitychange',v);trasPintar()}});
+  else trasPintar();
+  setTimeout(abrir,2500);
+})();
+
+/* Imágenes de los casos (9/11, Débora: «aparece de golpe»): mientras bajan muestran su color promedio (lo pone el generador como fondo);
+   al llegar entran con un desenfoque corto y se saca el fondo. Si ya estaban en caché o la persona pidió menos movimiento, aparecen directo.
+   Nunca se ocultan: no atrasa el LCP. */
+(function(){
+  var ims=document.querySelectorAll('main img[style*="background-color"]');if(!ims.length)return;
+  var calma=window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').matches;
+  [].forEach.call(ims,function(im){
+    function sinFondo(){im.style.backgroundColor=''}
+    if(im.complete&&im.naturalWidth){sinFondo();return}
+    if(calma){im.addEventListener('load',sinFondo,{once:true});return}
+    im.classList.add('s-entra');
+    im.addEventListener('load',function(){im.classList.add('is-lista');setTimeout(sinFondo,600)},{once:true});
+  });
 })();
 
 /* Medición (Medición, 1/11/2026): arranque. Si la página tiene <meta name="didi-medicion"> (hay ID de GA4 o Clarity), anota la respuesta del aviso

@@ -497,9 +497,12 @@ body.s-lock{overflow:hidden}
 }
 @keyframes s-lap-float{0%,100%{translate:0 0}50%{translate:0 -5px}}
 /* estado inicial que pone el JS antes de animar */
-.s-lap.is-pre .s-lap__lid{transform:rotateX(-86deg);transition:none}
-.s-lap.is-pre .s-lap__glow{opacity:0;transition:none}
-.s-lap.is-pre .s-lap__chips li{opacity:0;transform:translateY(12px) scale(.96);transition:none;animation:none}
+/* 9/11: el «sin transición» vale solo mientras está cerrada. Antes seguía puesto al abrir, y la tapa, el resplandor y las cifras aparecían de golpe. */
+@media(prefers-reduced-motion:no-preference){   /* con menos movimiento, la laptop aparece abierta desde el principio */
+  .s-lap.is-pre:not(.is-open) .s-lap__lid{transform:rotateX(-86deg);transition:none}
+  .s-lap.is-pre:not(.is-open) .s-lap__glow{opacity:0;transition:none}
+  .s-lap.is-pre:not(.is-chips) .s-lap__chips li{opacity:0;transform:translateY(12px) scale(.96);transition:none;animation:none}
+}
 .s-lap.is-open .s-lap__lid{transform:rotateX(0)}
 .s-lap.is-open .s-lap__glow{opacity:.9}
 .s-lap.is-chips .s-lap__chips li{opacity:1;transform:none}
@@ -734,6 +737,9 @@ html[lang="es"] .s-cta{min-width:134px}html[lang="en"] .s-cta{min-width:150px}ht
 /* Sobre mí: certificados en miniatura, cada uno dentro de una caja de 100×100 sin deformarse; la caja se desplaza en vertical */
 .s-certs{display:flex;flex-wrap:nowrap;gap:10px;overflow-x:auto;overflow-y:hidden;margin:8px 0 28px;padding:2px 2px 10px;scrollbar-width:thin;overscroll-behavior-x:contain;scroll-snap-type:x proximity}   /* 6/11, Débora: una fila con desplazamiento horizontal, del más nuevo al más viejo */
 .s-certs:focus-visible{outline:none;box-shadow:var(--d-focus)}
+/* 9/11, Débora: «el hover no entra bien». El anillo de cada certificado sale 4px hacia afuera y la fila solo dejaba 2: se recortaba. Más aire adentro y el mismo corrimiento afuera, para que nada se mueva. */
+.s-certs{padding:6px 6px 10px;margin:4px -6px 28px;scroll-padding-inline:6px}
+@media (hover:hover){.s-cert:hover{box-shadow:var(--d-focus)}}
 .s-cert{margin:0;width:100px;height:100px;flex:none;display:flex;align-items:center;justify-content:center;background:var(--d-low);border-radius:8px;cursor:zoom-in}
 .s-cert img{max-width:92px;max-height:92px;width:auto;height:auto;object-fit:contain}
 .s-cert{scroll-snap-align:start}
@@ -744,3 +750,12 @@ html[lang="es"] .s-cta{min-width:134px}html[lang="en"] .s-cta{min-width:150px}ht
 .s-trab li{grid-template-columns:minmax(0,1fr) minmax(180px,26%);justify-content:stretch;gap:6px 32px}
 .s-trab__d{font:500 .8125rem/1.5 var(--d-mono);letter-spacing:.02em;color:color-mix(in srgb,var(--d-atencion) 70%,var(--d-surface));padding-top:2px}
 @media(max-width:760px){.s-trab li{grid-template-columns:minmax(0,1fr)}}
+/* 9/11, Débora: las imágenes de los casos entraban de golpe. Mientras bajan se ve su color promedio; al llegar, un desenfoque corto (ver site.js). Sin ocultarlas nunca. */
+.s-entra.is-lista{animation:s-entra .45s var(--d-ease) backwards}
+@keyframes s-entra{from{filter:blur(10px) saturate(.75)}to{filter:none}}
+@media(prefers-reduced-motion:reduce){.s-entra.is-lista{animation:none}}
+/* 9/11, Débora: «todas las lupas dentro de imágenes que desaparezcan, es sabido que al hacer click en una imagen se agranda».
+   El clic en la imagen agranda igual. El botón queda invisible para el teclado: Tab lo enfoca, Enter agranda y el contorno turquesa rodea la imagen
+   (en los certificados, la caja: ver .s-cert más arriba). */
+[data-zoom] .d-zoombtn{opacity:0}
+[data-zoom]:not(.s-cert):has(>.d-zoombtn:focus-visible) img{box-shadow:var(--d-focus)}
