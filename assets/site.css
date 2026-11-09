@@ -747,8 +747,8 @@ html[lang="es"] .s-cta{min-width:134px}html[lang="en"] .s-cta{min-width:150px}ht
 .s-cert:has(.d-zoombtn:focus-visible){box-shadow:var(--d-focus)}
 
 /* 6/11, Débora: los trabajos del MA a todo el ancho y en dos columnas; la nota o la distinción, aparte, en amarillo apagado y sin caja */
-.s-trab li{grid-template-columns:minmax(0,1fr) minmax(180px,26%);justify-content:stretch;gap:6px 32px}
-.s-trab__d{font:500 .8125rem/1.5 var(--d-mono);letter-spacing:.02em;color:color-mix(in srgb,var(--d-atencion) 70%,var(--d-surface));padding-top:2px}
+.s-trab li{grid-template-columns:minmax(0,1fr) 15rem;justify-content:stretch;gap:6px 32px}
+.s-trab__d{font:500 .8125rem/1.5 var(--d-mono);letter-spacing:.02em;color:color-mix(in srgb,var(--d-atencion) 70%,var(--d-surface));padding-top:2px;white-space:nowrap}
 @media(max-width:760px){.s-trab li{grid-template-columns:minmax(0,1fr)}}
 /* 9/11, Débora: las imágenes de los casos entraban de golpe. Mientras bajan se ve su color promedio; al llegar, un desenfoque corto (ver site.js). Sin ocultarlas nunca. */
 .s-entra.is-lista{animation:s-entra .45s var(--d-ease) backwards}
