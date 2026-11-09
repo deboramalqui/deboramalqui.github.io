@@ -487,6 +487,7 @@ body.s-lock{overflow:hidden}
   .s-lap__chips li:nth-child(1){right:calc(100% + 36px);top:26%}
   .s-lap__chips li:nth-child(2){left:calc(100% + 36px);top:12%}
   .s-lap__chips li:nth-child(3){left:calc(100% + 36px);bottom:16%}
+.s-lap__chips li:nth-child(2):last-child{top:auto;bottom:24%}   /* 9/11: con dos cifras, la segunda baja para equilibrar con la de la izquierda */
 }
 @media(pointer:coarse){.s-lap.is-open .s-lap__body{transition:transform .25s linear}}
 .s-lap.is-drive .s-lap__body{transition:none}   /* en escritorio el movimiento lo calcula site.js cuadro a cuadro */
