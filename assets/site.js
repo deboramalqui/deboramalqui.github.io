@@ -307,6 +307,25 @@
   setTimeout(abrir,2500);
 })();
 
+/* 9/11, Branding (opción B, elegida por Débora): el sello sobre la foto fija de un prototipo (.s-over) o de una web (.s-mon__frame) nace en el punto
+   del mouse y lo sigue 14 px abajo y al costado (al otro costado en hebreo), con un 20 % de suavizado por cuadro, sin salir de la foto.
+   Con pantallas táctiles o «reducir movimiento» no se mueve (lo resuelve site.css con is-fixed y las consultas de medios). */
+(function(){
+  var fs=[].slice.call(document.querySelectorAll('.s-over,.s-mon__frame')).filter(function(f){return f.querySelector('.s-sello')});if(!fs.length)return;
+  var fine=window.matchMedia('(hover:hover) and (pointer:fine)'),still=window.matchMedia('(prefers-reduced-motion: reduce)'),rtl=document.documentElement.dir==='rtl';
+  fs.forEach(function(f){
+    var s=f.querySelector('.s-sello'),x=0,y=0,tx=0,ty=0,raf=0;
+    function target(e){
+      var r=f.getBoundingClientRect(),k=r.width/(f.offsetWidth||1)||1,W=f.offsetWidth,Hh=f.offsetHeight,w=s.offsetWidth,h=s.offsetHeight,cx=(e.clientX-r.left)/k,cy=(e.clientY-r.top)/k;
+      tx=rtl?cx-w-14:cx+14;ty=cy+14;tx=Math.max(8,Math.min(W-w-8,tx));ty=Math.max(8,Math.min(Hh-h-8,ty));
+    }
+    function loop(){x+=(tx-x)*.2;y+=(ty-y)*.2;s.style.setProperty('--x',x.toFixed(1)+'px');s.style.setProperty('--y',y.toFixed(1)+'px');raf=(Math.abs(tx-x)>.3||Math.abs(ty-y)>.3)?requestAnimationFrame(loop):0}
+    f.addEventListener('pointerenter',function(e){if(!fine.matches)return;if(still.matches){f.classList.add('is-fixed');return}f.classList.remove('is-fixed');target(e);x=tx;y=ty;loop();f.classList.add('is-on')});
+    f.addEventListener('pointermove',function(e){if(!fine.matches||still.matches)return;target(e);if(!raf)raf=requestAnimationFrame(loop)});
+    f.addEventListener('pointerleave',function(){f.classList.remove('is-on','is-fixed')});
+  });
+})();
+
 /* Imágenes de los casos (9/11, Débora: «aparece de golpe»): mientras bajan muestran su color promedio (lo pone el generador como fondo);
    al llegar entran con un desenfoque corto y se saca el fondo. Si ya estaban en caché o la persona pidió menos movimiento, aparecen directo.
    Nunca se ocultan: no atrasa el LCP. */

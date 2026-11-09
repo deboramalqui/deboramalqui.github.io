@@ -760,3 +760,40 @@ html[lang="es"] .s-cta{min-width:134px}html[lang="en"] .s-cta{min-width:150px}ht
    (en los certificados, la caja: ver .s-cert más arriba). */
 [data-zoom] .d-zoombtn{opacity:0}
 [data-zoom]:not(.s-cert):has(>.d-zoombtn:focus-visible) img{box-shadow:var(--d-focus)}
+
+/* 9/11, Débora: el prototipo de Santo Tomé y la web de franquicias de Kol van como foto fija. Al pasar el mouse aparece el botón encima
+   (con el teclado, al llegar al botón; en pantallas táctiles queda siempre a la vista, en el centro). Así la página se desplaza sin que se mueva nada adentro. */
+.s-over{position:relative;margin:24px auto;width:min(100%,340px)}
+.s-over img{display:block;width:100%;height:auto}
+.s-mon__screen{overflow:hidden}
+/* 9/11, Débora: «ese hover a la imagen que se haga la imagen un poco mas grande, con una sombra atras». El botón queda como está hasta que llegue el diseño de branding. */
+.s-over img,.s-mon__frame{transition:transform .3s var(--d-ease),box-shadow .3s var(--d-ease),filter .3s var(--d-ease)}
+@media (hover:hover){
+  .s-over:hover img,.s-over:focus-within img{transform:scale(1.015);filter:drop-shadow(0 22px 26px rgba(0,0,0,.55))}   /* drop-shadow: sigue las esquinas redondeadas del celular */
+  .s-mon__frame:hover,.s-mon__frame:focus-within{transform:scale(1.01);box-shadow:0 22px 44px -18px rgba(0,0,0,.55)}
+}
+@media (prefers-reduced-motion:reduce){.s-over img,.s-mon__frame{transition:none}}
+
+/* 9/11, Branding, opción B («Sello que sigue al mouse», elegida por Débora): la foto entera es un enlace; el sello es dibujo y sigue al mouse (site.js).
+   Con teclado, en pantallas táctiles y con «reducir movimiento» queda quieto abajo al inicio. Forma de D abierta, que se espeja sola en hebreo. */
+.s-over,.s-mon__frame{cursor:pointer}
+.s-over__k{position:absolute;inset:0;z-index:4;border-radius:30px}
+.s-mon__frame .s-over__k{border-radius:14px}
+.s-over__k:focus-visible{outline:none;box-shadow:var(--d-focus)}
+.s-sello{position:absolute;left:0;top:0;z-index:3;display:inline-flex;align-items:center;gap:8px;height:52px;padding-inline:18px 22px;white-space:nowrap;border-radius:0;border-start-end-radius:999px;border-end-end-radius:999px;background:var(--d-accion);color:var(--d-on-color);font:600 15px/1 var(--d-sans);box-shadow:var(--d-e3);translate:var(--x,0px) var(--y,0px);scale:0;transform-origin:0 0;transition:scale .15s cubic-bezier(.3,0,.8,.15);pointer-events:none}
+[dir=rtl] .s-sello{transform-origin:100% 0}
+[dir=rtl] .s-sello svg{scale:-1 1}
+.s-over.is-on>.s-sello,.s-mon__frame.is-on>.s-sello{scale:1;transition:scale .2s cubic-bezier(.05,.7,.1,1)}
+.s-over{--b-bot:16%}
+.is-fixed>.s-sello,.s-over:has(>.s-over__k:focus-visible):not(.is-on)>.s-sello,.s-mon__frame:has(>.s-over__k:focus-visible):not(.is-on)>.s-sello{translate:none;left:auto;top:auto;inset-inline-start:14px;bottom:var(--b-bot,14px);scale:1;transition:none}
+@media (hover:none),(pointer:coarse){.s-sello{translate:none;left:auto;top:auto;inset-inline-start:14px;bottom:var(--b-bot,14px);scale:1;height:48px;font-size:14px;padding-inline:14px 18px}}
+@media (prefers-reduced-motion:reduce){.s-sello{transition:none}}
+/* En hebreo, explícito: el monitor de Kol va de izquierda a derecha (.s-mon{direction:ltr}) y ahí los valores lógicos no se espejaban */
+[dir=rtl] .s-sello{direction:rtl;border-radius:999px 0 0 999px}
+[dir=rtl] .is-fixed>.s-sello,[dir=rtl] .s-over:has(>.s-over__k:focus-visible):not(.is-on)>.s-sello,[dir=rtl] .s-mon__frame:has(>.s-over__k:focus-visible):not(.is-on)>.s-sello{left:auto;right:14px}
+@media (hover:none),(pointer:coarse){[dir=rtl] .s-sello{left:auto;right:14px}}
+
+/* 9/11: la variante ancha (la demo de la Campaign Suite, una captura de computadora) */
+.s-over--ancho{width:100%;max-width:760px;--b-bot:14px}
+.s-over--ancho img{border-radius:10px}
+.s-over--ancho .s-over__k{border-radius:10px}

@@ -33,7 +33,6 @@ body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;color:#e8ecf4;pad
 <p class="dm__eyebrow" data-t="pick">Elegí un pueblo</p>
 <ul class="dm__pick"><li><button type="button" data-p="santo-tome" aria-pressed="true">Santo Tomé</button></li><li><button type="button" data-p="cayasta" aria-pressed="false">Cayastá</button></li><li><button type="button" data-p="helvecia" aria-pressed="false">Helvecia</button></li><li><button type="button" data-p="san-carlos-centro" aria-pressed="false">San Carlos Centro</button></li></ul>
 <p class="dm__note" data-t="note">La web app, con el nombre «De acá». Santo Tomé y otros tres pueblos de la zona: los cupones son de ejemplo y los teléfonos, ficticios.</p>
-<a class="dm__btn" href="santo-tome.html" target="_blank" rel="noopener" data-t="open">Abrir la demo en otra pestaña</a>
 </div>
 </div>
 <script>
@@ -42,14 +41,14 @@ body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;color:#e8ecf4;pad
          he:{pick:'בחרו עיירה',note:'אפליקציית הווב, בשם «De acá». Santo Tomé ועוד שלוש עיירות באזור: הקופונים הם לדוגמה ומספרי הטלפון בדויים.',open:'לפתיחת הדמו בלשונית חדשה'}};
   var L=(new URLSearchParams(location.search).get('l')||'');
   try{if(!L&&parent!==window)L=(parent.document.documentElement.lang||'').slice(0,2)}catch(e){}
+  try{if(!L&&window.opener)L=(opener.document.documentElement.lang||'').slice(0,2)}catch(e){}   /* 9/11: ahora se abre en una ventana emergente desde el caso */
   if(T[L]){document.documentElement.lang=L;[].forEach.call(document.querySelectorAll('[data-t]'),function(e){e.textContent=T[L][e.getAttribute('data-t')]});
     if(L==='he')document.querySelector('.dm__panel').dir='rtl'}
-  var btn=document.querySelector('.dm__btn'),app=document.getElementById('app'),bs=[].slice.call(document.querySelectorAll('[data-p]'));
+  var app=document.getElementById('app'),bs=[].slice.call(document.querySelectorAll('[data-p]'));
   bs.forEach(function(b){b.addEventListener('click',function(){
     bs.forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')});
-    app.src=b.getAttribute('data-p')+'.html';app.title='De acá: '+b.textContent;btn.href=app.src;   /* Premios 9/11: abre el pueblo elegido, no el envoltorio */
+    app.src=b.getAttribute('data-p')+'.html';app.title='De acá: '+b.textContent;
   })});
-  if(parent===window)btn.hidden=true;
   function fit(){var w=document.documentElement.clientWidth,s=w<=700?Math.min(1,(w-8)/410):1;document.documentElement.style.setProperty('--s',s.toFixed(3))}
   fit();addEventListener('resize',fit);
 })();
