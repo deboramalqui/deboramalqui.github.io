@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>De acá · demo</title>
+<style>
+html,body{margin:0;background:transparent;color-scheme:dark}
+body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;color:#e8ecf4;padding:4px 0 24px}
+/* Dos columnas (Débora, 9/11): el celular ocupa una sola; al lado, el pueblo y qué es la demo. En celular, una debajo de la otra. */
+.dm{display:grid;grid-template-columns:auto minmax(220px,1fr);gap:40px;align-items:center;max-width:880px;margin:0 auto}
+.dm__panel{display:flex;flex-direction:column;gap:16px;min-width:0}
+.dm__eyebrow{font:500 11px/16px inherit;font-family:inherit;letter-spacing:1.6px;text-transform:uppercase;color:#9fb0c8;margin:0}
+.dm__pick{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}
+.dm__pick button{all:unset;box-sizing:border-box;min-height:40px;padding:0 16px;border:1px solid rgba(255,255,255,.28);border-radius:20px;font:500 14px/38px inherit;font-family:inherit;color:#e8ecf4;cursor:pointer}
+.dm__pick button:hover{background:rgba(255,255,255,.08)}
+.dm__pick button:focus-visible,.dm__btn:focus-visible{outline:2px solid #8fb8ff;outline-offset:2px}
+.dm__pick button[aria-pressed=true]{background:#f5f4ee;border-color:#f5f4ee;color:#2f4a37}
+.dm__note{font:400 14px/22px inherit;font-family:inherit;color:#cfd8e6;margin:0}
+.dm__btn{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 16px;border:1px solid rgba(255,255,255,.28);border-radius:20px;color:#e8ecf4;font:500 14px/38px inherit;font-family:inherit;text-decoration:none}
+.dm__btn:hover{background:rgba(255,255,255,.08)}
+.dm__scale{width:calc(410px * var(--s,1));height:calc(864px * var(--s,1))}
+.dm__phone{width:390px;height:844px;margin:10px;border-radius:44px;background:#f5f4ee;box-shadow:0 0 0 10px #1c211b,0 24px 60px rgba(0,0,0,.35);overflow:hidden;transform:scale(var(--s,1));transform-origin:0 0}
+.dm__phone iframe{width:100%;height:100%;border:0;display:block}
+@media(max-width:700px){.dm{grid-template-columns:1fr;gap:20px;justify-items:center}.dm__panel{order:-1;width:100%;padding:0 4px;box-sizing:border-box}}
+[dir=rtl] .dm__btn{align-self:flex-end}
+</style>
+</head>
+<body>
+<div class="dm">
+<div class="dm__scale"><div class="dm__phone"><iframe id="app" src="santo-tome.html" title="De acá: Santo Tomé"></iframe></div></div>
+<div class="dm__panel">
+<p class="dm__eyebrow" data-t="pick">Elegí un pueblo</p>
+<ul class="dm__pick"><li><button type="button" data-p="santo-tome" aria-pressed="true">Santo Tomé</button></li><li><button type="button" data-p="cayasta" aria-pressed="false">Cayastá</button></li><li><button type="button" data-p="helvecia" aria-pressed="false">Helvecia</button></li><li><button type="button" data-p="san-carlos-centro" aria-pressed="false">San Carlos Centro</button></li></ul>
+<p class="dm__note" data-t="note">La web app, con el nombre «De acá». Santo Tomé y otros tres pueblos de la zona: los cupones son de ejemplo y los teléfonos, ficticios.</p>
+<a class="dm__btn" href="santo-tome.html" target="_blank" rel="noopener" data-t="open">Abrir la demo en otra pestaña</a>
+</div>
+</div>
+<script>
+(function(){
+  var T={en:{pick:'Pick a town',note:'The web app, under the name «De acá». Santo Tomé and three other towns in the area: the coupons are examples and the phone numbers are fictional.',open:'Open the demo in a new tab'},
+         he:{pick:'בחרו עיירה',note:'אפליקציית הווב, בשם «De acá». Santo Tomé ועוד שלוש עיירות באזור: הקופונים הם לדוגמה ומספרי הטלפון בדויים.',open:'לפתיחת הדמו בלשונית חדשה'}};
+  var L=(new URLSearchParams(location.search).get('l')||'');
+  try{if(!L&&parent!==window)L=(parent.document.documentElement.lang||'').slice(0,2)}catch(e){}
+  if(T[L]){document.documentElement.lang=L;[].forEach.call(document.querySelectorAll('[data-t]'),function(e){e.textContent=T[L][e.getAttribute('data-t')]});
+    if(L==='he')document.querySelector('.dm__panel').dir='rtl'}
+  var btn=document.querySelector('.dm__btn'),app=document.getElementById('app'),bs=[].slice.call(document.querySelectorAll('[data-p]'));
+  bs.forEach(function(b){b.addEventListener('click',function(){
+    bs.forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')});
+    app.src=b.getAttribute('data-p')+'.html';app.title='De acá: '+b.textContent;btn.href=app.src;   /* Premios 9/11: abre el pueblo elegido, no el envoltorio */
+  })});
+  if(parent===window)btn.hidden=true;
+  function fit(){var w=document.documentElement.clientWidth,s=w<=700?Math.min(1,(w-8)/410):1;document.documentElement.style.setProperty('--s',s.toFixed(3))}
+  fit();addEventListener('resize',fit);
+})();
+</script>
+</body>
+</html>

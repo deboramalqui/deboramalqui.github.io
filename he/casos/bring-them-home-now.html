@@ -152,7 +152,10 @@
     // Prototipos (6/11): el iframe ya ocupa su lugar desde el principio y carga recién ahora, cerca de la pantalla (Clash, MAC y Bplay bajaban a 75–83 en celular)
     var fr=[].slice.call(document.querySelectorAll('iframe[data-src]'));
     var io2=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){io2.unobserve(e.target);e.target.src=e.target.getAttribute('data-src')}})},{rootMargin:'900px 0px'});
-    fr.forEach(function(f){io2.observe(f)});
+    // 9/11: con data-cerca="<px>" el iframe carga recién a esa distancia de la pantalla. La demo de Santo Tomé está arriba en el caso
+    // y con los 900 px de siempre cargaba junto con la página: en celular Lighthouse bajaba de 100 a 98 (0,15 s de bloqueo).
+    fr.forEach(function(f){var m=f.getAttribute('data-cerca');if(!m){io2.observe(f);return}
+      var o=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){o.unobserve(e.target);e.target.src=e.target.getAttribute('data-src')}})},{rootMargin:m+'px 0px'});o.observe(f)});
   }
   function soon(){setTimeout(go,700)}
   if(document.readyState==='complete')soon();else window.addEventListener('load',soon);
