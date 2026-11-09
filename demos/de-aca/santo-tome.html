@@ -107,49 +107,48 @@
     </div></dialog>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
   <script>/* DATOS REALES · Centro Comercial e Industrial de Santo Tomé
-   - Comercios: Socios /usuarios/contactos.csv (+ AACSM_comercios.sql para Kol). Logos: Eventos/8 de marzo/logos 500x500.
+   - Comercios: Socios /usuarios/contactos.csv. Logos: Eventos/8 de marzo/logos 500x500.
    - Beneficios: Base de datos SQL/AACSM_beneficios.sql (registros con texto real). El % y la descripción son los de la base.
      ⚠ La base NO dice de qué comercio es cada beneficio: el vínculo "merchant" de abajo es una suposición por rubro. Corregir acá.
-   - Categorías: Base de datos SQL/AACSM_categorias.sql. Las 3 confirmadas en la webapp real: Kol, Donnet, Anclár. */
+   - Categorías: Base de datos SQL/AACSM_categorias.sql. Confirmadas en la webapp real: Donnet y Anclár. */
 const merchants=[
- {name:'Kol Accesorios',cat:'Accesorios',logo:'kol-accesorios',bg:'#e57914',tel:'3420000101',eslogan:'Si KOL no lo tiene es porque no viene',address:'San Martín 2271',maps:'https://maps.app.goo.gl/EAo1VVsxSBMi7Ras5',instagram:'https://www.instagram.com/kol.accesorios/',web:'https://kolaccesorios.com/'},
- {name:'Agencia Donnet',cat:'Servicios',logo:'agencia-donnet',bg:'#a0272c',tel:'3420000102'},
- {name:'Anclár',cat:'Mujer',logo:'anclar',bg:'#ffffff',tel:'3420000103'},
- {name:'Cometto Inmobiliaria',cat:'Inmobiliaria',logo:'cometto-inmobiliaria',bg:'#f08632',tel:'3420000104'},
- {name:'Dulce Planeta',cat:'Alimentos',logo:'dulce-planeta',bg:'#085889',tel:'3420000105',eslogan:'Autoservicio de golosinas'},
- {name:'Mi Roperito',cat:'Bebes y Niños',logo:'mi-roperito',bg:'#4e9291',fit:'cover',tel:'3420000106'},
- {name:'Mueblería Turchetti',cat:'Mueblerías',logo:'muebleria-turchetti',bg:'#000000',tel:'3420000107'},
- {name:'Papelera El Portal',cat:'Librerías',logo:'papelera-el-portal',bg:'#fe44a7',tel:'3420000108',instagram:'https://www.instagram.com/papeleraelportal/'},
- {name:'Plan de Salud Sanatorio Santa Fe',cat:'Servicios',logo:'plan-de-salud-santa-fe',bg:'#c4e0ee',tel:'3420000109'},
- {name:'Qubo Mágico Pelotero',cat:'Bebes y Niños',logo:'qubo-magico',bg:'#e6e7e9',tel:'3420000110'},
- {name:'Regionales Santo Tomé',cat:'Varios',logo:'regionales-santo-tome',bg:'#f3ffff',tel:'3420000111'},
- {name:'Quitapenas',cat:'Hombre y Mujer',tel:'3420000112'},
- {name:'Ferretería Castelli',cat:'Varios',tel:'3420000113'},
- {name:'Ropita Bien Mona',cat:'Bebes y Niños',tel:'3420000114'},
- {name:'Maralma',cat:'Varios',tel:'3420000115'},
- {name:'TecnoFe Informática',cat:'Electro',tel:'3420000116'},
- {name:'Figan Santo Tomé',cat:'Varios',tel:'3420000117'},
- {name:'Cerrajería MKN',cat:'Servicios',tel:'3420000118'},
- {name:'Ferretería Oliva',cat:'Varios',tel:'3420000119'},
- {name:'Antonia Cosmética Natural',cat:'Estética',tel:'3420000120'},
- {name:'Maxikiosco Gaboto',cat:'Alimentos',tel:'3420000121'},
- {name:'Ritvo Asesoramiento en Seguros',cat:'Servicios',tel:'3420000122'},
- {name:'Leo Joyas',cat:'Joyerías',tel:'3420000123'},
- {name:'La Casa del Papel',cat:'Librerías',tel:'3420000124'},
- {name:'Nutritiva · Almacén saludable',cat:'Alimentos',tel:'3420000125'},
- {name:'Sabores Nobles',cat:'Alimentos',tel:'3420000126'},
- {name:'Bendita Comida',cat:'Gastronomía',tel:'3420000127'},
- {name:'Came-Pan',cat:'Alimentos',tel:'3420000128'},
+ {name:'Agencia Donnet',cat:'Servicios',logo:'agencia-donnet',bg:'#a0272c',tel:'3420000101'},
+ {name:'Anclár',cat:'Mujer',logo:'anclar',bg:'#ffffff',tel:'3420000102'},
+ {name:'Cometto Inmobiliaria',cat:'Inmobiliaria',logo:'cometto-inmobiliaria',bg:'#f08632',tel:'3420000103'},
+ {name:'Dulce Planeta',cat:'Alimentos',logo:'dulce-planeta',bg:'#085889',tel:'3420000104',eslogan:'Autoservicio de golosinas'},
+ {name:'Mi Roperito',cat:'Bebes y Niños',logo:'mi-roperito',bg:'#4e9291',fit:'cover',tel:'3420000105'},
+ {name:'Mueblería Turchetti',cat:'Mueblerías',logo:'muebleria-turchetti',bg:'#000000',tel:'3420000106'},
+ {name:'Papelera El Portal',cat:'Librerías',logo:'papelera-el-portal',bg:'#fe44a7',tel:'3420000107',instagram:'https://www.instagram.com/papeleraelportal/'},
+ {name:'Plan de Salud Sanatorio Santa Fe',cat:'Servicios',logo:'plan-de-salud-santa-fe',bg:'#c4e0ee',tel:'3420000108'},
+ {name:'Qubo Mágico Pelotero',cat:'Bebes y Niños',logo:'qubo-magico',bg:'#e6e7e9',tel:'3420000109'},
+ {name:'Regionales Santo Tomé',cat:'Varios',logo:'regionales-santo-tome',bg:'#f3ffff',tel:'3420000110'},
+ {name:'Quitapenas',cat:'Hombre y Mujer',tel:'3420000111'},
+ {name:'Ferretería Castelli',cat:'Varios',tel:'3420000112'},
+ {name:'Ropita Bien Mona',cat:'Bebes y Niños',tel:'3420000113'},
+ {name:'Maralma',cat:'Varios',tel:'3420000114'},
+ {name:'TecnoFe Informática',cat:'Electro',tel:'3420000115'},
+ {name:'Figan Santo Tomé',cat:'Varios',tel:'3420000116'},
+ {name:'Cerrajería MKN',cat:'Servicios',tel:'3420000117'},
+ {name:'Ferretería Oliva',cat:'Varios',tel:'3420000118'},
+ {name:'Antonia Cosmética Natural',cat:'Estética',tel:'3420000119'},
+ {name:'Maxikiosco Gaboto',cat:'Alimentos',tel:'3420000120'},
+ {name:'Ritvo Asesoramiento en Seguros',cat:'Servicios',tel:'3420000121'},
+ {name:'Leo Joyas',cat:'Joyerías',tel:'3420000122'},
+ {name:'La Casa del Papel',cat:'Librerías',tel:'3420000123'},
+ {name:'Nutritiva · Almacén saludable',cat:'Alimentos',tel:'3420000124'},
+ {name:'Sabores Nobles',cat:'Alimentos',tel:'3420000125'},
+ {name:'Bendita Comida',cat:'Gastronomía',tel:'3420000126'},
+ {name:'Came-Pan',cat:'Alimentos',tel:'3420000127'},
  {name:'Calzados Karla',cat:'Calzado'},
- {name:'La Segunda Seguros',cat:'Servicios',tel:'3420000129'},
- {name:'Mi Momento de Belleza',cat:'Estética',tel:'3420000130'},
- {name:'Rodados Ardana',cat:'Bicicleteria',tel:'3420000131'},
- {name:'Los Fassa · Verdulería y Frutería',cat:'Alimentos',tel:'3420000132'},
- {name:'Rubyta Decohome',cat:'Hogar',tel:'3420000133'},
- {name:'Los Locos Santo Tomé',cat:'Gastronomía',tel:'3420000134'},
- {name:'NABE Cosmética y Capacitación',cat:'Estética',tel:'3420000135'},
- {name:'Taller de Sueños',cat:'Varios',tel:'3420000136'},
- {name:'Panadería y Confitería Imperial',cat:'Alimentos',tel:'3420000137'}
+ {name:'La Segunda Seguros',cat:'Servicios',tel:'3420000128'},
+ {name:'Mi Momento de Belleza',cat:'Estética',tel:'3420000129'},
+ {name:'Rodados Ardana',cat:'Bicicleteria',tel:'3420000130'},
+ {name:'Los Fassa · Verdulería y Frutería',cat:'Alimentos',tel:'3420000131'},
+ {name:'Rubyta Decohome',cat:'Hogar',tel:'3420000132'},
+ {name:'Los Locos Santo Tomé',cat:'Gastronomía',tel:'3420000133'},
+ {name:'NABE Cosmética y Capacitación',cat:'Estética',tel:'3420000134'},
+ {name:'Taller de Sueños',cat:'Varios',tel:'3420000135'},
+ {name:'Panadería y Confitería Imperial',cat:'Alimentos',tel:'3420000136'}
 ];
 /* Beneficios: 4 son reales de la base (real:true). Los demás son de EJEMPLO, pensados según el rubro de cada comercio. */
 const REAL=[
@@ -160,7 +159,6 @@ const REAL=[
 ];
 const EJEMPLO=[ // [comercio, título, valor, detalle]
  ['Came-Pan','Facturas para compartir','2×1','En facturas · de lunes a jueves'],
- ['Kol Accesorios','Fundas y protectores','10% OFF','En fundas y vidrios templados'],
  ['Dulce Planeta','Cajas de cumpleaños','15% OFF','En cajas de golosinas armadas'],
  ['Leo Joyas','Brillá con plata','20% OFF','En joyas de plata 925'],
  ['Los Locos Santo Tomé','Churros para dos','2×1','En porciones de churros'],
