@@ -1,0 +1,45 @@
+# Débora Malqui
+
+> Marketing specialist: Google and Meta campaigns measured in GA4, SEO, GEO and AEO, and AI-built automations. She comes from product design (UX/UI) and classic marketing. This site is her portfolio, in English, Spanish and Hebrew.
+
+## About
+
+- [Home](https://www.malquidebora.com/en/index.html): what she does and the case list
+- [About me](https://www.malquidebora.com/en/sobre-mi.html): studies, experience and languages
+- [Contact](https://www.malquidebora.com/en/contacto.html)
+- [LinkedIn](https://www.linkedin.com/in/deboramalqui/)
+
+## Campaigns, measurement, AI and automation
+
+- [Kol Accesorios](https://www.malquidebora.com/en/casos/kol-accesorios.html): Meta and Google campaigns for an accessories chain: candidates for franchises and stores, store openings and site visits.
+- [Campaign Suite](https://www.malquidebora.com/en/casos/campaign-suite.html): A measurement product of my own for campaigns: the whole team sees what each campaign cost and what it brought in.
+- [Medido](https://www.malquidebora.com/en/casos/medido.html): A second opinion on what a business pays for in marketing: I designed the product, the brand and the website in three languages, and how it is measured with GA4 and Clarity.
+- [Trading systems](https://www.malquidebora.com/en/casos/sistemas-de-trading.html): Three Python systems that watch markets, send email alerts and review themselves after every close.
+- [De acá](https://www.malquidebora.com/en/casos/de-aca.html): A web app to discover a place’s local businesses and activate their deals without installing anything: from Santo Tomé to a product for any town.
+- [Communiqué](https://www.malquidebora.com/en/casos/communique.html): Three brands from a Malta agency: from outdoor to the social post, with one idea that travels through every medium.
+- [Riley](https://www.malquidebora.com/en/casos/riley.html): Ongoing internship at Riley (getriley.ai), Reichman's AI Marketing Pro: market research, a day in an agent's life, twenty questions and the character.
+
+## Product design (UX/UI)
+
+- [Waycare](https://www.malquidebora.com/en/casos/waycare.html): UX/UI internship in 2019: the redesign of a filterable data table for an AI traffic management platform.
+- [Clash](https://www.malquidebora.com/en/casos/clash.html): The onboarding of a benefits app from Rosario: research, personas, a programmed prototype, user tests and A/B.
+- [Bplay](https://www.malquidebora.com/en/casos/bplay-onboarding.html): The sign-up flow of an online casino platform: from the six-screen prototype to the final screens and their components.
+- [MAC, UNL museum](https://www.malquidebora.com/en/casos/mac-museo.html): An app for booking school visits to a museum: research, personas, usability tests, final screens and components.
+- [Affective relationships in 2050](https://www.malquidebora.com/en/casos/relaciones-afectivas-2050.html): Futures design with the ViP method at UNL: a 2050 scenario on AI and relationships, with a product concept and a poster selected at IA@Litoral 2019.
+
+## Coursework, MA in strategic and digital advertising (Ariel University)
+
+- [Adidas Pulse](https://www.malquidebora.com/en/casos/adidas-pulse.html): MA coursework: SEO 2.0 and AI optimization for adidas, with a technical audit, verifiable authority and keywords close to page 1.
+- [i24NEWS in India](https://www.malquidebora.com/en/casos/i24news-india.html): MA coursework: social listening, survey, insight, sub-brand and campaign for i24NEWS’ entry into India.
+- [Skyline Residences](https://www.malquidebora.com/en/casos/skyline-residences.html): MA coursework: a six-month, ₪10 million media plan for a luxury residential complex in Tel Aviv, from audience to evaluation.
+- [CeraVe “Find Your Balance”](https://www.malquidebora.com/en/casos/cerave-find-your-balance.html): MA coursework: a CeraVe mini campaign about teenage girls’ emotional well-being, with four pieces and two indicators.
+- [“Bring Them Home Now”](https://www.malquidebora.com/en/casos/bring-them-home-now.html): MA coursework: an analysis of the visual activism of the “Bring Them Home Now” campaign with five examples and three authors.
+- [“The Engagement Paradox”](https://www.malquidebora.com/en/casos/the-engagement-paradox.html): MA coursework: an essay on algorithmic accountability and user autonomy, analyzed with the Potter Box.
+- [Wix](https://www.malquidebora.com/en/casos/wix-plan-semestral.html): MA coursework: a six-month integrated communication plan for Wix, 70 actions over 24 weeks, from internal comms to press and social.
+- [SEGA](https://www.malquidebora.com/en/casos/sega-sonic-influencers.html): MA coursework: a creator campaign for Sonic Generations Recharged, with ten creators in three tiers, the brief, metrics and social listening.
+
+## Optional
+
+- [Brands](https://www.malquidebora.com/en/marcas/index.html): Four brands: logo, versions, uses, the idea and the path that led there.
+- [Spanish version](https://www.malquidebora.com/es/index.html)
+- [Hebrew version](https://www.malquidebora.com/he/index.html)
