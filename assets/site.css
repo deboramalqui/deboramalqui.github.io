@@ -797,3 +797,15 @@ html[lang="es"] .s-cta{min-width:134px}html[lang="en"] .s-cta{min-width:150px}ht
 .s-over--ancho{width:100%;max-width:760px;--b-bot:14px}
 .s-over--ancho img{border-radius:10px}
 .s-over--ancho .s-over__k{border-radius:10px}
+
+/* 13/11, pedido de Premios con el «sí» de Débora: las tarjetas de «Reconocimientos y colaboraciones» reaccionan como las de los casos: fondo un poco más claro,
+   borde iluminado y un levantón corto (las de casos también se levantan). Lo mismo con el teclado. Sin movimiento si la persona pidió menos movimiento. */
+.s-rtile{transition:transform .3s var(--d-ease),background-color .3s,box-shadow .3s}
+.s-rtile .s-rtile__go{transition:background-color .3s,color .3s}
+@media (hover:hover){
+  .s-rtile:hover{transform:translateY(-3px);background:var(--d-container);box-shadow:inset 0 0 0 1px var(--d-dato),0 22px 44px -26px color-mix(in srgb,var(--d-dato) 70%,transparent)}
+  .s-rtile:hover .s-rtile__go{background:var(--d-dato-cont);color:var(--d-on-dato-cont)}
+}
+.s-rtile:focus-visible{outline:none;background:var(--d-container);box-shadow:var(--d-focus)}
+.s-rtile:focus-visible .s-rtile__go{background:var(--d-dato-cont);color:var(--d-on-dato-cont)}
+@media (prefers-reduced-motion:reduce){.s-rtile,.s-rtile .s-rtile__go{transition:none}.s-rtile:hover{transform:none}}
