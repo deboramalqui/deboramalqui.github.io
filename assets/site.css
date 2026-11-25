@@ -591,10 +591,12 @@ body.s-lock{overflow:hidden}
 }
 @keyframes s-lap-out{to{opacity:.3;scale:.9}}
 /* Sin cambiar la opacidad del texto: a medio camino quedaría con poco contraste (Lighthouse lo marca). Solo se mueve. */
-@keyframes s-rise{from{translate:0 72px;scale:.94}}
+@keyframes s-rise{from{translate:0 var(--s-rise-y,72px);scale:.94}}
 @keyframes s-rise-s{from{translate:0 28px}}
-@keyframes s-slide{from{translate:-10% 0}}
-@keyframes s-slide-r{from{translate:10% 0}}
+@keyframes s-slide{from{translate:calc(var(--s-slide-x,10%) * -1) 0}}
+@keyframes s-slide-r{from{translate:var(--s-slide-x,10%) 0}}
+/* 26/11, pedido de Premios (Land-book): en celular el estado inicial de la animación dejaba el título corrido 36 px (más que los 16 px de margen) y las tarjetas 72 px abajo, tapando la etiqueta que sigue. En pantallas angostas el desplazamiento cabe en el margen y en el hueco (48 px). */
+@media(max-width:768px){.s-h2--xl{--s-slide-x:12px}.s-cards .s-card{--s-rise-y:24px}}
 
 /* Sobre mí (29/10): los grupos y empresas destacados, como fichas con enlace, antes del párrafo que los explica. */
 .s-brands__t{margin:22px 0 8px}
