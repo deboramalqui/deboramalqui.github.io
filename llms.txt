@@ -17,7 +17,7 @@
 - [Trading systems](https://www.malquidebora.com/en/casos/sistemas-de-trading.html): Three Python systems that watch markets, send email alerts and review themselves after every close.
 - [De acá](https://www.malquidebora.com/en/casos/de-aca.html): A web app to discover a place’s local businesses and activate their deals without installing anything: from Santo Tomé to a product for any town.
 - [Communiqué](https://www.malquidebora.com/en/casos/communique.html): Three brands from a Malta agency: from outdoor to the social post, with one idea that travels through every medium.
-- [Riley](https://www.malquidebora.com/en/casos/riley.html): Ongoing internship at Riley (getriley.ai), Reichman's AI Marketing Pro: market research, a day in an agent's life, twenty questions and the character.
+- [Riley](https://www.malquidebora.com/en/casos/riley.html): Final project of the AI Marketing Pro course (Reichman University with Google) for Riley (getriley.ai): market research, the prototype of the new website, a component system, a post builder and a second reading of the site.
 
 ## Product design (UX/UI)
 
